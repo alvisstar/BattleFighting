@@ -22,28 +22,34 @@ public class PlayerControler : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-		KeyboardControl ();
-		HandleAnimation ();
+		bool isKeyTouching = KeyboardControl ();
+		HandleAnimation (isKeyTouching);
 	}
 
 	void FixedUpdate()
 	{
 
 	}
-	void KeyboardControl()
+	bool KeyboardControl()
 	{
+		bool isKeyTouching = false;
+
 		//gem because use generic animation
 		if (Input.GetKey (KeyCode.W)) {
 			directionMove += new Vector3 (0, 0, 1);
+			isKeyTouching = true;
 		}
 		if (Input.GetKey (KeyCode.A)) {
 			directionMove += new Vector3 (-1, 0, 0);
+			isKeyTouching = true;
 		}
 		if (Input.GetKey (KeyCode.S)){
 			directionMove += new Vector3(0,0,-1);
+			isKeyTouching = true;
 		}
 		if (Input.GetKey (KeyCode.D)){
 			directionMove += new Vector3(1,0,0);
+			isKeyTouching = true;
 		}
 
 		//approach 1 move with transform//////////////////////////
@@ -61,12 +67,16 @@ public class PlayerControler : MonoBehaviour {
 		////////////////////////////////////////////////
 		/// 
 		directionMove = new Vector3 (0, 0, 0);
+
+		return isKeyTouching;
 	}
 
-	void HandleAnimation(){		
-		float moveVerticle = Input.GetAxis ("Vertical");
-		float moveHorizontal = Input.GetAxis ("Horizontal");
-		float move = moveVerticle != 0 ? moveVerticle : moveHorizontal;
+	void HandleAnimation(bool isKeyTouching){		
+//		float moveVerticle = Mathf.Abs(Input.GetAxis ("Vertical"));
+//		float moveHorizontal = Mathf.Abs(Input.GetAxis ("Horizontal"));
+//		float move = moveVerticle > moveHorizontal ? moveVerticle : moveHorizontal;
+//		Debug.Log (move);
+		float move = isKeyTouching ? 1 : 0;
 		_animator.SetFloat("Speed", move);
 		
 		if(Input.GetKeyDown(KeyCode.Space))
