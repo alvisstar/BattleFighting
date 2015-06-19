@@ -57,13 +57,13 @@ public class BotControler : MonoBehaviour {
 		}	
 		else
 		{
-			//AttackTarget();
+			AttackTarget();
 		}
 	}
 
 	void AttackTarget()
 	{
-		GetComponent<Animator>().SetTrigger(isDeadHash);
+		GetComponent<Animator>().SetTrigger(isAttackHash);
 		GetComponent<Animator>().SetFloat("Speed", 1);
 	}
 	public void RotateByDirection(Vector3 direction)
