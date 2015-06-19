@@ -51,7 +51,7 @@ public class BotControler : MonoBehaviour {
 		Vector3 direction =  targetObject.transform.position -gameObject.transform.position ;
 		if(direction.magnitude >2)
 		{
-			Move (direction);
+			RotateByDirection (direction);
 			GetComponent<Animator>().SetFloat("Speed", 1);
 			gameObject.GetComponent<Rigidbody> ().velocity = direction * speed * 10;
 		}	
@@ -66,17 +66,17 @@ public class BotControler : MonoBehaviour {
 		GetComponent<Animator>().SetTrigger(isDeadHash);
 		GetComponent<Animator>().SetFloat("Speed", 1);
 	}
-	public void Move(Vector3 move)
+	public void RotateByDirection(Vector3 direction)
 	{		
 		// convert the world relative moveInput vector into a local-relative
 		// turn amount and forward amount required to head in the desired
 		// direction.
-		if (move.magnitude > 1f)
-			move.Normalize ();
-		move = transform.InverseTransformDirection (move);
-		move = Vector3.ProjectOnPlane (move, Vector3.up);
-		m_TurnAmount = Mathf.Atan2 (move.x, move.z);
-		m_ForwardAmount = move.z;
+		if (direction.magnitude > 1f)
+			direction.Normalize ();
+		direction = transform.InverseTransformDirection (direction);
+		direction = Vector3.ProjectOnPlane (direction, Vector3.up);
+		m_TurnAmount = Mathf.Atan2 (direction.x, direction.z);
+		m_ForwardAmount = direction.z;
 		
 		// help the character turn faster (this is in addition to root rotation in the animation)
 		float turnSpeed = Mathf.Lerp(m_StationaryTurnSpeed, m_MovingTurnSpeed, m_ForwardAmount);

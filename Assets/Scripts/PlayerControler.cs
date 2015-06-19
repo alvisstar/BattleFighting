@@ -54,8 +54,7 @@ public class PlayerControler : MonoBehaviour {
 			TouchStick walkStick = this.ctrl.GetStick (0);
 			
 			if (walkStick.Pressed ()) {
-				Debug.Log (walkStick.GetVec3d (true, 0));
-				Move (walkStick.GetVec3d (true, 0));
+				RotateByDirection (walkStick.GetVec3d (true, 0));
 				GetComponent<Rigidbody> ().velocity = walkStick.GetVec3d (true, 0) * speed * 100;
 
 				_isTouchingDPad = true;
@@ -72,8 +71,7 @@ public class PlayerControler : MonoBehaviour {
 			float v = Input.GetAxis("Vertical");
 			// we use world-relative directions in the case of no main camera
 			m_Move = v*Vector3.forward + h*Vector3.right;
-			//Debug.Log (m_Move);
-			Move(m_Move);
+			RotateByDirection(m_Move);
 		}
 	}
 
@@ -83,18 +81,18 @@ public class PlayerControler : MonoBehaviour {
 		if (this.ctrl != null)
 			this.ctrl.DrawControllerGUI();
 	}
-
-	public void Move(Vector3 move)
+	
+	public void RotateByDirection(Vector3 direction)
 	{		
 		// convert the world relative moveInput vector into a local-relative
 		// turn amount and forward amount required to head in the desired
 		// direction.
-		if (move.magnitude > 1f)
-			move.Normalize ();
-		move = transform.InverseTransformDirection (move);
-		move = Vector3.ProjectOnPlane (move, Vector3.up);
-		m_TurnAmount = Mathf.Atan2 (move.x, move.z);
-		m_ForwardAmount = move.z;
+		if (direction.magnitude > 1f)
+			direction.Normalize ();
+		direction = transform.InverseTransformDirection (direction);
+		direction = Vector3.ProjectOnPlane (direction, Vector3.up);
+		m_TurnAmount = Mathf.Atan2 (direction.x, direction.z);
+		m_ForwardAmount = direction.z;
 		
 		// help the character turn faster (this is in addition to root rotation in the animation)
 		float turnSpeed = Mathf.Lerp(m_StationaryTurnSpeed, m_MovingTurnSpeed, m_ForwardAmount);
