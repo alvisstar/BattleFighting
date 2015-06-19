@@ -17,9 +17,13 @@ public class PlayerControler : MonoBehaviour {
 	float m_ForwardAmount;
 	[SerializeField] float m_MovingTurnSpeed = 360;
 	[SerializeField] float m_StationaryTurnSpeed = 180;
+	public TouchController	ctrlPrefab;
+	private TouchController	ctrl;
+	public GUISkin	guiSkin;
 
 	void Start () {
 		_animator = GetComponent<Animator>();
+		ctrl = Instantiate (ctrlPrefab);
 	}
 	public void Init(Vector3 position,bool isMain)
 	{
@@ -41,11 +45,37 @@ public class PlayerControler : MonoBehaviour {
 	}
 	void FixedUpdate()
 	{
+		// processing for keyboard
 		float h = Input.GetAxis("Horizontal");
 		float v = Input.GetAxis("Vertical");
 		// we use world-relative directions in the case of no main camera
 		m_Move = v*Vector3.forward + h*Vector3.right;
 		Move(m_Move);
+
+		// processing for D-Pad
+		if (this.ctrl){	
+			// Get stick and zone references by IDs...			
+			TouchStick walkStick = this.ctrl.GetStick(0);
+			
+			if (walkStick.Pressed()){
+				Move (walkStick.GetVec3d(true, 0));
+				GetComponent<Rigidbody> ().velocity = walkStick.GetVec3d(true, 0) * speed * 100;				
+			}			
+			// Stop when stick is released...
+			
+			else {
+				
+			}
+			// Shoot when right stick is pressed...
+			
+		}
+	}
+
+	void OnGUI()
+	{
+		// Manually draw the controller...		
+		if (this.ctrl != null)
+			this.ctrl.DrawControllerGUI();
 	}
 
 	public void Move(Vector3 move)
@@ -60,11 +90,6 @@ public class PlayerControler : MonoBehaviour {
 		m_TurnAmount = Mathf.Atan2 (move.x, move.z);
 		m_ForwardAmount = move.z;
 		
-		ApplyExtraTurnRotation ();
-	}
-	
-	void ApplyExtraTurnRotation()
-	{
 		// help the character turn faster (this is in addition to root rotation in the animation)
 		float turnSpeed = Mathf.Lerp(m_StationaryTurnSpeed, m_MovingTurnSpeed, m_ForwardAmount);
 		transform.Rotate(0, m_TurnAmount * turnSpeed * Time.deltaTime, 0);
