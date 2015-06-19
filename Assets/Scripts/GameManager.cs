@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour {
 	{
 
 		//int n = Random (5, 6);
-		for (int i =0; i<1; i++) {
+		for (int i =0; i<2; i++) {
 			GameObject opponentChar = (Instantiate(characterPrefabs[1], new Vector3 (-1, 0, 0), Quaternion.identity) as GameObject);
 			BotControler opponentScript = opponentChar.GetComponent<BotControler>();
 			float x = Random.Range(-10.0f,10.0f);
@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour {
 			SpawnWave();
 		}
 		for (int i =0; i< botScripts.Count; i++) {
-			if(botScripts[i].isDie ==true && myChar.GetComponent<PlayerControler>().CheckIsAnimation("TripleKick"))
+			if(botScripts[i].isDie ==true)
 			{
 				Destroy(botScripts[i].gameObject);
 				botScripts.RemoveAt(i);
