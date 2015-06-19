@@ -48,21 +48,15 @@ public class PlayerControler : MonoBehaviour {
 	}
 	void FixedUpdate()
 	{
-		// processing for keyboard
-		float h = Input.GetAxis("Horizontal");
-		float v = Input.GetAxis("Vertical");
-		// we use world-relative directions in the case of no main camera
-		m_Move = v*Vector3.forward + h*Vector3.right;
-		Move(m_Move);
-
 		// processing for D-Pad
-		if (this.ctrl){	
+		if (this.ctrl) {	
 			// Get stick and zone references by IDs...			
-			TouchStick walkStick = this.ctrl.GetStick(0);
+			TouchStick walkStick = this.ctrl.GetStick (0);
 			
-			if (walkStick.Pressed()){
-				Move (walkStick.GetVec3d(true, 0));
-				GetComponent<Rigidbody> ().velocity = walkStick.GetVec3d(true, 0) * speed * 100;
+			if (walkStick.Pressed ()) {
+				Debug.Log (walkStick.GetVec3d (true, 0));
+				Move (walkStick.GetVec3d (true, 0));
+				GetComponent<Rigidbody> ().velocity = walkStick.GetVec3d (true, 0) * speed * 100;
 
 				_isTouchingDPad = true;
 			}			
@@ -72,6 +66,14 @@ public class PlayerControler : MonoBehaviour {
 			}
 			// Shoot when right stick is pressed...
 
+		} else {			
+			// processing for keyboard
+			float h = Input.GetAxis("Horizontal");
+			float v = Input.GetAxis("Vertical");
+			// we use world-relative directions in the case of no main camera
+			m_Move = v*Vector3.forward + h*Vector3.right;
+			//Debug.Log (m_Move);
+			Move(m_Move);
 		}
 	}
 
