@@ -11,6 +11,8 @@ public class PlayerControler : MonoBehaviour {
 	
 	Animator _animator;
 	int attackHash = Animator.StringToHash("Attack");
+	bool _isKeyMovePressing;
+	bool _isTouchingDPad;
 
 	private Vector3 m_Move;
 	float m_TurnAmount;
@@ -32,8 +34,8 @@ public class PlayerControler : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-		bool isKeyTouching = KeyboardControl ();
-		HandleAnimation (isKeyTouching);
+		_isKeyMovePressing = KeyboardControl ();
+		HandleAnimation ();
 	}
 
 	void FixedUpdate()
@@ -52,15 +54,16 @@ public class PlayerControler : MonoBehaviour {
 			
 			if (walkStick.Pressed()){
 				Move (walkStick.GetVec3d(true, 0));
-				GetComponent<Rigidbody> ().velocity = walkStick.GetVec3d(true, 0) * speed * 100;				
+				GetComponent<Rigidbody> ().velocity = walkStick.GetVec3d(true, 0) * speed * 100;
+
+				_isTouchingDPad = true;
 			}			
-			// Stop when stick is released...
-			
+			// Stop when stick is released...			
 			else {
-				
+				_isTouchingDPad = false;		
 			}
 			// Shoot when right stick is pressed...
-			
+
 		}
 	}
 
@@ -117,8 +120,8 @@ public class PlayerControler : MonoBehaviour {
 		return isKeyTouching;
 	}
 
-	void HandleAnimation(bool isKeyTouching){
-		float move = isKeyTouching ? 1 : 0;
+	void HandleAnimation(){
+		float move = _isKeyMovePressing || _isTouchingDPad ? 1 : 0;
 		_animator.SetFloat("Speed", move);
 		
 		if(Input.GetKeyDown(KeyCode.Space))
