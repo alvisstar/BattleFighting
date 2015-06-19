@@ -52,6 +52,7 @@ public class BotControler : MonoBehaviour {
 		if(direction.magnitude >2)
 		{
 			Move (direction);
+			GetComponent<Animator>().SetFloat("Speed", 1);
 			gameObject.GetComponent<Rigidbody> ().velocity = direction * speed * 10;
 		}	
 		else
