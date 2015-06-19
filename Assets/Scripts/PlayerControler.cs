@@ -37,7 +37,14 @@ public class PlayerControler : MonoBehaviour {
 		_isKeyMovePressing = KeyboardControl ();
 		HandleAnimation ();
 	}
-
+	public bool CheckIsAnimation(string name)
+	{
+		//int atakState = Animator.StringToHash(name); 
+		if (_animator.GetCurrentAnimatorStateInfo (0).IsName(name))
+			return true;
+		return false;
+	
+	}
 	void FixedUpdate()
 	{
 		// processing for keyboard
@@ -128,5 +135,6 @@ public class PlayerControler : MonoBehaviour {
 		{
 			_animator.SetTrigger (attackHash);
 		}
+
 	}
 }
