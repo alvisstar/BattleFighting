@@ -56,13 +56,14 @@ public class BotControler : MonoBehaviour {
 		}	
 		else
 		{
-			AttackTarget();
+			//AttackTarget();
 		}
 	}
 
 	void AttackTarget()
 	{
 		GetComponent<Animator>().SetTrigger(isDeadHash);
+		GetComponent<Animator>().SetFloat("Speed", 1);
 	}
 	public void Move(Vector3 move)
 	{		
@@ -83,13 +84,13 @@ public class BotControler : MonoBehaviour {
 
 	void OnCollisionEnter (Collision col)
 	{
-		if(col.gameObject.tag == "Player")
+		if(col.gameObject.tag == "Player" && col.gameObject.GetComponent<PlayerControler>().CheckIsAnimation("TripleKick"))
 		{
 			if (hp <= 0) {
-				isDie = true;
+ 				isDie = true;
 				GetComponent<Animator>().SetTrigger(isDeadHash);
 			} else {
-				hp--;
+ 				hp--;
 				GetComponent<Animator>().SetTrigger(isAttackedHash);
 			}
 
