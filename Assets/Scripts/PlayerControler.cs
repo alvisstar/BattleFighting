@@ -11,6 +11,7 @@ public class PlayerControler : MonoBehaviour {
 	
 	Animator _animator;
 	int attackHash = Animator.StringToHash("Attack");
+	int isAttackedHash = Animator.StringToHash("IsAttacked");
 	bool _isKeyMovePressing;
 	bool _isTouchingDPad;
 
