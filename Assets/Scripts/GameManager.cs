@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour {
 			SpawnWave();
 		}
 		for (int i =0; i< botScripts.Count; i++) {
-			if(botScripts[i].isDie ==true)
+			if(botScripts[i].isDie ==true && myChar.GetComponent<PlayerControler>().CheckIsAnimation("TripleKich"))
 			{
 				Destroy(botScripts[i].gameObject);
 				botScripts.RemoveAt(i);
