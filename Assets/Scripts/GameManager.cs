@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour {
 	public List<GameObject> characterPrefabs = null;
 	int maxWave;
 	public List<BotControler> botScripts ;
+	public GameObject aiBotManager ;
 	// Use this for initialization
 
 	void Start () {
@@ -30,8 +31,8 @@ public class GameManager : MonoBehaviour {
 		for (int i =0; i<2; i++) {
 			GameObject opponentChar = (Instantiate(characterPrefabs[1], new Vector3 (-1, 0, 0), Quaternion.identity) as GameObject);
 			BotControler opponentScript = opponentChar.GetComponent<BotControler>();
-			float x = Random.Range(-10.0f,10.0f);
-			float z =Random.Range(-10.0f,10.0f);
+			float x = Random.Range(-100.0f,100.0f);
+			float z =Random.Range(-100.0f,100.0f);
 			opponentScript.Init(new Vector3 (x, 0, z), false);
 			opponentScript.targetObject = myChar;
 			botScripts.Add(opponentScript);
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour {
 		
 	}
 	void Update () {
+		aiBotManager.GetComponent<AIBotManager> ().UpdateUnit (myChar, botScripts);
 		if (maxWave >= 0 && botScripts.Count==0) {
 		
 			SpawnWave();

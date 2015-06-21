@@ -18,7 +18,7 @@ public class BotControler : MonoBehaviour {
 	float m_TurnAmount;
 	float m_ForwardAmount;
 	private GameObject _targetObject;
-
+	public float timeFromAttack;
 	public GameObject targetObject {
 		get {
 			return _targetObject;
@@ -30,6 +30,7 @@ public class BotControler : MonoBehaviour {
 
 	void Start () {
 		isDie = false;
+
 	}
 
 
@@ -42,29 +43,32 @@ public class BotControler : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		Aim ();
 
 	}
-
-	void Aim()
+	public void Move(Vector3 direction)
 	{
-		Vector3 direction =  targetObject.transform.position -gameObject.transform.position ;
-		if(direction.magnitude >2)
-		{
-			RotateByDirection (direction);
-			GetComponent<Animator>().SetFloat("Speed", 1);
-			gameObject.GetComponent<Rigidbody> ().velocity = direction * speed * 10;
-		}	
-		else
-		{
-			AttackTarget();
-		}
+		RotateByDirection (direction);
+		GetComponent<Animator>().SetFloat("Speed", 1);
+		gameObject.GetComponent<Rigidbody> ().velocity = direction * speed * 10;
+	}
+	public void MoveAround(Vector3 direction)
+	{
+
+		direction= Quaternion.AngleAxis(Time.deltaTime * 20, Vector3.forward) * direction;
+		gameObject.GetComponent<Rigidbody> ().velocity = direction * speed * 10;
 	}
 
-	void AttackTarget()
+	public void Idle()
+	{
+		GetComponent<Animator>().SetFloat("Speed", 0);
+	}
+
+	public void AttackTarget()
 	{
 		GetComponent<Animator>().SetTrigger(isAttackHash);
 		GetComponent<Animator>().SetFloat("Speed", 1);
+
+
 	}
 	public void RotateByDirection(Vector3 direction)
 	{		
@@ -82,7 +86,14 @@ public class BotControler : MonoBehaviour {
 		float turnSpeed = Mathf.Lerp(m_StationaryTurnSpeed, m_MovingTurnSpeed, m_ForwardAmount);
 		transform.Rotate(0, m_TurnAmount * turnSpeed * Time.deltaTime, 0);
 	}
-
+	public bool CheckIsAnimation(string name)
+	{
+		//int atakState = Animator.StringToHash(name); 
+		if (GetComponent<Animator>().GetCurrentAnimatorStateInfo (0).IsName(name))
+			return true;
+		return false;
+		
+	}
 	void OnCollisionEnter (Collision col)
 	{
 		if(col.gameObject.tag == "Player" && col.gameObject.GetComponent<PlayerControler>().CheckIsAnimation("TripleKick"))
