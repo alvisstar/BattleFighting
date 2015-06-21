@@ -29,6 +29,7 @@ public class BotControler : MonoBehaviour {
 	}
 
 	void Start () {
+		speed = 0.05f;
 		isDie = false;
 
 	}
@@ -49,13 +50,13 @@ public class BotControler : MonoBehaviour {
 	{
 		RotateByDirection (direction);
 		GetComponent<Animator>().SetFloat("Speed", 1);
-		gameObject.GetComponent<Rigidbody> ().velocity = direction * speed * 10;
+		gameObject.transform.position += direction * speed ;
 	}
 	public void MoveAround(Vector3 direction)
 	{
 
-		direction= Quaternion.AngleAxis(Time.deltaTime * 20, Vector3.forward) * direction;
-		gameObject.GetComponent<Rigidbody> ().velocity = direction * speed * 10;
+		//direction= Quaternion.AngleAxis(Time.deltaTime * 20, Vector3.forward) * direction;
+		//gameObject.transform.position += direction * speed ;
 	}
 
 	public void Idle()

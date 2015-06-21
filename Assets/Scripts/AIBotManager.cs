@@ -35,8 +35,7 @@ public class AIBotManager : MonoBehaviour {
 		{
 			Vector3 direction =  character.transform.position - botScripts[i].gameObject.transform.position ;
 
-			if(GetNumberBotAttackPlayer()<=maxNumberNearPLayer)
-			{
+
 				if(direction.magnitude >3)
 				{
 					botScripts[i].Move(direction);
@@ -48,12 +47,7 @@ public class AIBotManager : MonoBehaviour {
 				
 				}
 
-			}
-			else
-			{
-				botScripts[i].MoveAround(direction);
 
-			}
 			
 		}
 	}

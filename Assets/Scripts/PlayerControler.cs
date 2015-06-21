@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerControler : MonoBehaviour {
 
-	public float speed = 0.1f;
+	public float speed = 50;
 	private Vector3 directionMove = new Vector3(0,0,0);
 
 	// Use this for initialization
@@ -25,6 +25,7 @@ public class PlayerControler : MonoBehaviour {
 	public GUISkin	guiSkin;
 
 	void Start () {
+		speed = 0.15f;
 		_animator = GetComponent<Animator>();
 		ctrl = Instantiate (ctrlPrefab);
 	}
@@ -37,6 +38,31 @@ public class PlayerControler : MonoBehaviour {
 	void Update () {
 		_isKeyMovePressing = KeyboardControl ();
 		HandleAnimation ();
+		if (this.ctrl) {	
+			// Get stick and zone references by IDs...			
+			TouchStick walkStick = this.ctrl.GetStick (0);
+			
+			if (walkStick.Pressed ()) {
+				RotateByDirection (walkStick.GetVec3d (true, 0));
+				gameObject.transform.position += walkStick.GetVec3d (true, 0)  * speed ;
+				//	GetComponent<Rigidbody> ().velocity = walkStick.GetVec3d (true, 0) * speed * 100;
+				
+				_isTouchingDPad = true;
+			}			
+			// Stop when stick is released...			
+			else {
+				_isTouchingDPad = false;		
+			}
+			// Shoot when right stick is pressed...
+			
+		} else {			
+			// processing for keyboard
+			float h = Input.GetAxis("Horizontal");
+			float v = Input.GetAxis("Vertical");
+			// we use world-relative directions in the case of no main camera
+			m_Move = v*Vector3.forward + h*Vector3.right;
+			RotateByDirection(m_Move);
+		}
 	}
 	public bool CheckIsAnimation(string name)
 	{
@@ -49,30 +75,7 @@ public class PlayerControler : MonoBehaviour {
 	void FixedUpdate()
 	{
 		// processing for D-Pad
-		if (this.ctrl) {	
-			// Get stick and zone references by IDs...			
-			TouchStick walkStick = this.ctrl.GetStick (0);
-			
-			if (walkStick.Pressed ()) {
-				RotateByDirection (walkStick.GetVec3d (true, 0));
-				GetComponent<Rigidbody> ().velocity = walkStick.GetVec3d (true, 0) * speed * 100;
 
-				_isTouchingDPad = true;
-			}			
-			// Stop when stick is released...			
-			else {
-				_isTouchingDPad = false;		
-			}
-			// Shoot when right stick is pressed...
-
-		} else {			
-			// processing for keyboard
-			float h = Input.GetAxis("Horizontal");
-			float v = Input.GetAxis("Vertical");
-			// we use world-relative directions in the case of no main camera
-			m_Move = v*Vector3.forward + h*Vector3.right;
-			RotateByDirection(m_Move);
-		}
 	}
 
 	void OnGUI()
@@ -122,7 +125,8 @@ public class PlayerControler : MonoBehaviour {
 		}
 		//approach 2 move with velocity
 		directionMove.Normalize ();
-		gameObject.GetComponent<Rigidbody> ().velocity = directionMove * speed * 100;
+		//gameObject.GetComponent<Rigidbody> ().velocity = directionMove * speed * 100;
+		gameObject.transform.position += directionMove * speed ;
 		directionMove = new Vector3 (0, 0, 0);
 
 		return isKeyTouching;
