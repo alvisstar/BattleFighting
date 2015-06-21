@@ -139,7 +139,19 @@ public class PlayerControler : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.Space))
 		{
 			_animator.SetTrigger (attackHash);
+			Attack();
 		}
 
+	}
+	void Attack()
+	{
+
+		if (gameObject.GetComponent<Equipment> ()._weapon.name.CompareTo ("Longbow03(Clone)") == 0) {
+			gameObject.GetComponent<Equipment> ()._weapon.GetComponent<LongBowScript> ().characterPosition = gameObject.transform.position;
+			gameObject.GetComponent<Equipment> ()._weapon.GetComponent<LongBowScript> ().characterRotation = gameObject.transform.rotation;
+			gameObject.GetComponent<Equipment> ()._weapon.GetComponent<LongBowScript> ().characterTransform = gameObject.transform;
+			gameObject.GetComponent<Equipment> ()._weapon.GetComponent<LongBowScript> ().Attack ();
+
+		}
 	}
 }

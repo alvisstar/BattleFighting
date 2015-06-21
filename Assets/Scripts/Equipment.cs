@@ -6,13 +6,14 @@ public class Equipment : MonoBehaviour {
 	public GameObject _prefabWeapon = null;
 	public Transform _righthandTransform = null;
 	// Use this for initialization
-	private GameObject _weapon = null;
+	public GameObject _weapon = null;
 
 	void Start () {
 
 	}
 	
 	public void EquipWeapon (GameObject prefabWeapon) {
+		_prefabWeapon = prefabWeapon;
 		if(_weapon != null)
 			Destroy(_weapon);
 		_weapon = Instantiate (prefabWeapon, _righthandTransform.position, _righthandTransform.rotation) as GameObject;

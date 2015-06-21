@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour {
 	{
 
 		//int n = Random (5, 6);
-		for (int i =0; i<2; i++) {
+		for (int i =0; i<0; i++) {
 			GameObject opponentChar = (Instantiate(characterPrefabs[1], new Vector3 (-1, 0, 0), Quaternion.identity) as GameObject);
 			BotControler opponentScript = opponentChar.GetComponent<BotControler>();
 			float x = Random.Range(-100.0f,100.0f);
