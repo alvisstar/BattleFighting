@@ -166,6 +166,11 @@ public class PlayerControler : MonoBehaviour {
 			Destroy( gameObject.GetComponent<Equipment> ()._weapon);
 			
 		}
+		else if (gameObject.GetComponent<Equipment> ()._weapon.name.CompareTo ("Mine(Clone)") == 0) {
+			gameObject.GetComponent<Equipment> ()._weapon.GetComponent<Mine> ().characterTransform = gameObject.transform;
+			gameObject.GetComponent<Equipment> ()._weapon.GetComponent<Mine> ().Attack ();
+			
+		}
 		
 	}
 }
