@@ -38,12 +38,12 @@ public class AIBotManager : MonoBehaviour {
 
 				if(direction.magnitude >3)
 				{
-					botScripts[i].Move(direction);
+					//botScripts[i].Move(direction);
 				}	
 				else
 				{
 
-					botScripts[i].AttackTarget();
+					//botScripts[i].AttackTarget();
 				
 				}
 

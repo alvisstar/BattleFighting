@@ -99,14 +99,18 @@ public class BotControler : MonoBehaviour {
 	{
 		if(col.gameObject.tag == "Player" && col.gameObject.GetComponent<PlayerControler>().CheckIsAnimation("TripleKick"))
 		{
-			if (hp <= 0) {
- 				isDie = true;
-				GetComponent<Animator>().SetTrigger(isDeadHash);
-			} else {
- 				hp--;
-				GetComponent<Animator>().SetTrigger(isAttackedHash);
-			}
+			BeHitted();
 
+		}
+	}
+	public void BeHitted()
+	{
+		if (hp <= 0) {
+			isDie = true;
+			GetComponent<Animator>().SetTrigger(isDeadHash);
+		} else {
+			hp--;
+			GetComponent<Animator>().SetTrigger(isAttackedHash);
 		}
 	}
 	void FixedUpdate()

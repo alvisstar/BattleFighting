@@ -28,11 +28,11 @@ public class GameManager : MonoBehaviour {
 	{
 
 		//int n = Random (5, 6);
-		for (int i =0; i<0; i++) {
+		for (int i =0; i<1; i++) {
 			GameObject opponentChar = (Instantiate(characterPrefabs[1], new Vector3 (-1, 0, 0), Quaternion.identity) as GameObject);
 			BotControler opponentScript = opponentChar.GetComponent<BotControler>();
-			float x = Random.Range(-100.0f,100.0f);
-			float z =Random.Range(-100.0f,100.0f);
+			float x = Random.Range(-10.0f,10.0f);
+			float z =Random.Range(-10.0f,10.0f);
 			opponentScript.Init(new Vector3 (x, 0, z), false);
 			opponentScript.targetObject = myChar;
 			botScripts.Add(opponentScript);
