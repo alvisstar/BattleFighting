@@ -156,6 +156,16 @@ public class PlayerControler : MonoBehaviour {
 			gameObject.GetComponent<Equipment> ()._weapon.GetComponent<Gun> ().Attack ();
 			
 		}
+		else if (gameObject.GetComponent<Equipment> ()._weapon.name.CompareTo ("Bomb(Clone)") == 0) {
+			Equipment script  =gameObject.GetComponent<Equipment> ();
+			GameObject bomb = Instantiate (script._prefabWeapon, script._righthandTransform.position, script._righthandTransform.rotation) as GameObject;
+			bomb.AddComponent<Bomb>();
+			bomb.GetComponent<Bomb>().characterTransform = gameObject.transform;
+			bomb.GetComponent<Bomb>().Init (gameObject.transform);
+			bomb.GetComponent<Bomb>().Attack ();
+			Destroy( gameObject.GetComponent<Equipment> ()._weapon);
+			
+		}
 		
 	}
 }

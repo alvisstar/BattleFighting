@@ -29,7 +29,7 @@ public class BotControler : MonoBehaviour {
 	}
 
 	void Start () {
-		speed = 0.05f;
+		speed = 0.1f;
 		isDie = false;
 
 	}
@@ -50,7 +50,8 @@ public class BotControler : MonoBehaviour {
 	{
 		RotateByDirection (direction);
 		GetComponent<Animator>().SetFloat("Speed", 1);
-		gameObject.transform.position += direction * speed ;
+
+		gameObject.transform.position += direction.normalized * speed ;
 	}
 	public void MoveAround(Vector3 direction)
 	{
