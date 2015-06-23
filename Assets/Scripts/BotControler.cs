@@ -111,11 +111,11 @@ public class BotControler : MonoBehaviour {
 	}
 	void OnCollisionEnter (Collision col)
 	{
-		if(col.gameObject.tag == "Player" && col.gameObject.GetComponent<PlayerControler>().CheckIsAnimation("TripleKick"))
-		{
-			BeHitted();
-
-		}
+		//if(col.gameObject.tag == "Player" && col.gameObject.GetComponent<PlayerControler>().CheckIsAnimation("TripleKick"))
+		//{
+		//	BeHitted();
+		//
+		//}
 	}
 	public void BeHitted()
 	{
@@ -130,5 +130,12 @@ public class BotControler : MonoBehaviour {
 	void FixedUpdate()
 	{
 
+	}
+
+	void OnTriggerEnter(Collider col)
+	{
+		if (col.gameObject.tag == "Hand" && col.GetComponentInParent<PlayerControler>().CheckIsAnimation("TripleKick")) {
+			BeHitted();
+		}
 	}
 }
