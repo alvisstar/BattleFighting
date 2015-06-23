@@ -145,7 +145,9 @@ public class PlayerControler : MonoBehaviour {
 	}
 	void Attack()
 	{
-
+		if (gameObject.GetComponent<Equipment> ()._weapon == null) {
+			return;
+		}
 		if (gameObject.GetComponent<Equipment> ()._weapon.name.CompareTo ("Longbow03(Clone)") == 0) {
 			gameObject.GetComponent<Equipment> ()._weapon.GetComponent<LongBowScript> ().characterTransform = gameObject.transform;
 			gameObject.GetComponent<Equipment> ()._weapon.GetComponent<LongBowScript> ().Attack ();
