@@ -5,6 +5,9 @@ public class Arrow : MonoBehaviour {
 
 	// Use this for initialization
 	Vector3 direction;
+	public GameObject prefabIceBall = null;
+	private GameObject instanceIceBall = null;
+	public GameObject prefabExplosionIceBall = null;
 
 	void Start () {
 
@@ -19,14 +22,20 @@ public class Arrow : MonoBehaviour {
 	public void Init(Vector3 direction)
 	{
 		this.direction = direction;
+		instanceIceBall = Instantiate (prefabIceBall, gameObject.transform.position, gameObject.transform.rotation) as GameObject;
+		instanceIceBall.transform.SetParent (gameObject.transform);
 	}
 
-	void OnTriggerEnter(Collider other) {
-		if(other.gameObject.tag == "Bot" )
+	void OnTriggerEnter(Collider col) {
+		if(col.gameObject.tag == "Bot" )
 		{
-		
+			col.gameObject.GetComponent<BotControler>().BeHitted();
+			ContactPoint contact = col.GetComponent<ContactPoint>();
+			Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
+			Vector3 pos = contact.point;
 
-			other.gameObject.GetComponent<BotControler>().BeHitted();
+			GameObject explosionIceBall = Instantiate(prefabExplosionIceBall,instanceIceBall.transform.position,instanceIceBall.transform.rotation) as GameObject;
+			Destroy(instanceIceBall);
 			Destroy(gameObject);
 		}
 	}
