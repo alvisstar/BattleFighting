@@ -32,7 +32,13 @@ public class BotControler : MonoBehaviour {
 		speed = 0.1f;
 		isDie = false;
 		NotificationCenter.DefaultCenter.AddObserver(this, "OnBombExplode");
+		NotificationCenter.DefaultCenter.AddObserver(this, "OnMineExplode");
 
+	}
+
+	void OnDestroy () {
+		NotificationCenter.DefaultCenter.RemoveObserver(this, "OnBombExplode");
+		NotificationCenter.DefaultCenter.RemoveObserver(this, "OnMineExplode");
 	}
 
 	void OnBombExplode (NotificationCenter.Notification arg)
@@ -48,7 +54,21 @@ public class BotControler : MonoBehaviour {
 				GetComponent<Animator>().SetTrigger(isAttackedHash);
 			}
 	}
-
+	
+	void OnMineExplode (NotificationCenter.Notification arg)
+	{
+		Hashtable hash  = arg.data;
+		Vector3 position =(Vector3) hash["Position"];
+		if((position - gameObject.transform.position).magnitude <3)
+		if (hp <= 0) {
+			isDie = true;
+			GetComponent<Animator>().SetTrigger(isDeadHash);
+		} else {
+			hp--;
+			GetComponent<Animator>().SetTrigger(isAttackedHash);
+		}
+	}
+	
 	public void Init(Vector3 position,bool isMain)
 	{
 		gameObject.transform.position = position;
