@@ -12,7 +12,7 @@ public class Bomb : MonoBehaviour {
 	bool beginExplode;
 	float timeToExplode;
 
-	public GameObject prefabBomp = null;
+	public GameObject prefabExplode = null;
 
 	void Start () {
 		
@@ -27,7 +27,7 @@ public class Bomb : MonoBehaviour {
 			timeToExplode += Time.deltaTime;
 		if (timeToExplode >= 2)
 		{
-			Instantiate(prefabBomp,gameObject.transform.position,Quaternion.identity);
+			Instantiate(prefabExplode,gameObject.transform.position,Quaternion.identity);
 			Hashtable hash = new Hashtable();
 			hash.Add("Position", gameObject.transform.position);
 			NotificationCenter.DefaultCenter.PostNotification(this, "OnBombExplode",hash);
