@@ -16,7 +16,7 @@ public class Arrow : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		gameObject.transform.position += direction;
+		gameObject.GetComponent<Rigidbody>().velocity = direction*40f;
 	}
 
 	public void Init(Vector3 direction)
@@ -25,8 +25,20 @@ public class Arrow : MonoBehaviour {
 		instanceIceBall = Instantiate (prefabIceBall, gameObject.transform.position, gameObject.transform.rotation) as GameObject;
 		instanceIceBall.transform.SetParent (gameObject.transform);
 	}
+	void OnCollisionEnter(Collision col) {
+		if(col.gameObject.tag == "Bot" )
+		{
+			col.gameObject.GetComponent<BotControler>().BeHitted();
 
-	void OnTriggerEnter(Collider col) {
+			//Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
+			Vector3 pos = col.contacts[0].point;
+			
+			GameObject explosionIceBall = Instantiate(prefabExplosionIceBall,pos,instanceIceBall.transform.rotation) as GameObject;
+			Destroy(instanceIceBall);
+			Destroy(gameObject);
+		}
+	}
+	/*void OnTriggerEnter(Collider col) {
 		if(col.gameObject.tag == "Bot" )
 		{
 			col.gameObject.GetComponent<BotControler>().BeHitted();
@@ -38,5 +50,5 @@ public class Arrow : MonoBehaviour {
 			Destroy(instanceIceBall);
 			Destroy(gameObject);
 		}
-	}
+	}}*/
 }
