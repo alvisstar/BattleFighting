@@ -9,7 +9,7 @@ public class Weapon : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		currentTime = delayTime;
 	}
 	
 	// Update is called once per frame

@@ -7,6 +7,8 @@ public class Gun : Weapon {
 	public GameObject bulletPrefabs;
 	public Transform characterTransform;
 	void Start () {
+		numberOfWeapon = 30;
+		delayTime = 0.2f;
 
 	}
 	

@@ -8,7 +8,8 @@ public class LongBowScript : Weapon {
 	public GameObject arrowPrefabs;
 	public Transform characterTransform;
 	void Start () {
-
+		numberOfWeapon = 10;
+		delayTime = 0.5f;
 	}
 
 	public override void OnAttack()
