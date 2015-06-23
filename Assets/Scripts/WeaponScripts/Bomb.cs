@@ -9,21 +9,36 @@ public class Bomb : MonoBehaviour {
 	Vector3 direction;
 	//List<Arrow> _arrows;
 	bool attack = false;
+	bool beginExplode;
+	float timeToExplode;
 	void Start () {
 		
 		//attack = false;
-
+		beginExplode = false;
+		timeToExplode = 0;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		if(attack)
-			gameObject.transform.position += direction*0.1f;
+		if (beginExplode)
+			timeToExplode += Time.deltaTime;
+		if (timeToExplode >= 2)
+		{
+			Hashtable hash = new Hashtable();
+			hash["Position"] = gameObject.transform.position;
+			NotificationCenter.DefaultCenter.PostNotification(this, "OnBombExplode",hash);
+			Destroy (gameObject);
+
+		}
+	
+		//gameObject.transform.position += direction;
 	}
 
 	public void Init(Transform transForm)
 	{
-		direction = transform.forward;
+		direction = characterTransform.forward;
+		direction += new Vector3 (0, 1f	, 0);
+
 		/*characterTransform = transform;
 		gameObject.transform.position = characterTransform.position;
 		gameObject.transform.position += new Vector3 (0, 2,0);
@@ -34,6 +49,18 @@ public class Bomb : MonoBehaviour {
 	public void Attack()
 	{
 		attack = true;
+		gameObject.GetComponent<Rigidbody> ().useGravity = true;
+		gameObject.GetComponent<Rigidbody> ().AddForce(direction*10,ForceMode.Impulse);
 
 	}
+	void OnCollisionEnter (Collision col)
+	{
+		if(col.gameObject.name == "Terrain" )
+		{
+			beginExplode = true;
+		}
+	}
+
+
+
 }
