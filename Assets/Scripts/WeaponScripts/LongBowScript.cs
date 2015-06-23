@@ -9,14 +9,7 @@ public class LongBowScript : MonoBehaviour {
 	public Transform characterTransform;
 	List<Arrow> _arrows;
 	void Start () {
-
 		_arrows = new List<Arrow> ();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-
-	
 	}
 
 	public void Attack()
