@@ -29,8 +29,6 @@ public class Arrow : MonoBehaviour {
 		if(col.gameObject.tag == "Bot" )
 		{
 			col.gameObject.GetComponent<BotControler>().BeHitted();
-
-			//Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
 			Vector3 pos = col.contacts[0].point;
 			
 			GameObject explosionIceBall = Instantiate(prefabExplosionIceBall,pos,instanceIceBall.transform.rotation) as GameObject;
@@ -38,17 +36,4 @@ public class Arrow : MonoBehaviour {
 			Destroy(gameObject);
 		}
 	}
-	/*void OnTriggerEnter(Collider col) {
-		if(col.gameObject.tag == "Bot" )
-		{
-			col.gameObject.GetComponent<BotControler>().BeHitted();
-			ContactPoint contact = col.GetComponent<ContactPoint>();
-			Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
-			Vector3 pos = contact.point;
-
-			GameObject explosionIceBall = Instantiate(prefabExplosionIceBall,instanceIceBall.transform.position,instanceIceBall.transform.rotation) as GameObject;
-			Destroy(instanceIceBall);
-			Destroy(gameObject);
-		}
-	}}*/
 }

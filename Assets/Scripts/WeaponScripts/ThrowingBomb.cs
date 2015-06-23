@@ -35,7 +35,7 @@ public class ThrowingBomb : MonoBehaviour {
 	{
 		direction = directionz;
 		direction += new Vector3 (0, 1f	, 0);
-		gameObject.GetComponent<Rigidbody> ().AddForce(direction*10,ForceMode.Impulse);
+		GetComponent<Rigidbody> ().AddForce(direction*10,ForceMode.Impulse);
 	}
 	
 	void OnCollisionEnter (Collision col)

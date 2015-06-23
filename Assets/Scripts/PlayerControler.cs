@@ -141,29 +141,27 @@ public class PlayerControler : MonoBehaviour {
 			_animator.SetTrigger (attackHash);
 			Attack();
 		}
-
 	}
 	void Attack()
 	{
-		if (gameObject.GetComponent<Equipment> ()._weapon == null) {
+		if (GetComponent<Equipment> ()._weapon == null) {
 			return;
 		}
-		if (gameObject.GetComponent<Equipment> ()._weapon.name.CompareTo ("Longbow03(Clone)") == 0) {
-			gameObject.GetComponent<Equipment> ()._weapon.GetComponent<LongBowScript> ().characterTransform = gameObject.transform;
-			gameObject.GetComponent<Equipment> ()._weapon.GetComponent<LongBowScript> ().Attack ();
+		if (GetComponent<Equipment> ()._weapon.name == "Longbow03(Clone)") {
+			GetComponent<Equipment> ()._weapon.GetComponent<LongBowScript> ().characterTransform = gameObject.transform;
+			GetComponent<Equipment> ()._weapon.GetComponent<LongBowScript> ().Attack ();
 		}
-		else if (gameObject.GetComponent<Equipment> ()._weapon.name.CompareTo ("Gun(Clone)") == 0) {
-			gameObject.GetComponent<Equipment> ()._weapon.GetComponent<Gun> ().characterTransform = gameObject.transform;
-			gameObject.GetComponent<Equipment> ()._weapon.GetComponent<Gun> ().Attack ();			
+		else if (GetComponent<Equipment> ()._weapon.name == "Gun(Clone)") {
+			GetComponent<Equipment> ()._weapon.GetComponent<Gun> ().characterTransform = gameObject.transform;
+			GetComponent<Equipment> ()._weapon.GetComponent<Gun> ().Attack ();			
 		}
-		else if (gameObject.GetComponent<Equipment> ()._weapon.name.CompareTo ("Bomb(Clone)") == 0) {
-			gameObject.GetComponent<Equipment> ()._weapon.GetComponent<Bomb> ().characterTransform = gameObject.transform;
-			gameObject.GetComponent<Equipment> ()._weapon.GetComponent<Bomb> ().Attack ();			
+		else if (GetComponent<Equipment> ()._weapon.name == "Bomb(Clone)") {
+			GetComponent<Equipment> ()._weapon.GetComponent<Bomb> ().characterTransform = gameObject.transform;
+			GetComponent<Equipment> ()._weapon.GetComponent<Bomb> ().Attack ();			
 		}
-		else if (gameObject.GetComponent<Equipment> ()._weapon.name.CompareTo ("Mine(Clone)") == 0) {
-			gameObject.GetComponent<Equipment> ()._weapon.GetComponent<Mine> ().characterTransform = gameObject.transform;
-			gameObject.GetComponent<Equipment> ()._weapon.GetComponent<Mine> ().Attack ();			
-		}
-		
+		else if (GetComponent<Equipment> ()._weapon.name == "Mine(Clone)") {
+			GetComponent<Equipment> ()._weapon.GetComponent<Mine> ().characterTransform = gameObject.transform;
+			GetComponent<Equipment> ()._weapon.GetComponent<Mine> ().Attack ();			
+		}		
 	}
 }
