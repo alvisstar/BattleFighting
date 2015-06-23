@@ -25,7 +25,7 @@ public class Bomb : MonoBehaviour {
 		if (timeToExplode >= 2)
 		{
 			Hashtable hash = new Hashtable();
-			hash["Position"] = gameObject.transform.position;
+			hash.Add("Position", gameObject.transform.position);
 			NotificationCenter.DefaultCenter.PostNotification(this, "OnBombExplode",hash);
 			Destroy (gameObject);
 

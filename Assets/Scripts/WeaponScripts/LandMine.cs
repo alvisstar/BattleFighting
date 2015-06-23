@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 public class LandMine : MonoBehaviour {
 
 	// Use this for initialization
@@ -9,9 +9,9 @@ public class LandMine : MonoBehaviour {
 	public float activeTime = 1;
 
 	void Start () {
-
+       
 	}
-
+    
 	void Update () {
 		if (currentTime < activeTime)
 			currentTime += Time.deltaTime;
