@@ -10,6 +10,8 @@ public class LandMine : MonoBehaviour {
 	public float activeTime = 1;
 	public float explosionTime = 10;
 
+	public GameObject prefabExplode;
+
 	void Start () {
        
 	}
@@ -24,6 +26,8 @@ public class LandMine : MonoBehaviour {
 	}
 
 	void Explose () {
+		Instantiate(prefabExplode,gameObject.transform.position,Quaternion.identity);
+
 		Hashtable hash = new Hashtable();
 		hash["Position"] = gameObject.transform.position;
 		NotificationCenter.DefaultCenter.PostNotification(this, "OnMineExplode",hash);
@@ -40,16 +44,8 @@ public class LandMine : MonoBehaviour {
 			return;
 		}
 
-		if (other.gameObject.tag == "Bot") {
-			Hashtable hash = new Hashtable();
-			hash["Position"] = gameObject.transform.position;
-			NotificationCenter.DefaultCenter.PostNotification(this, "OnMineExplode",hash);
-			Destroy (gameObject);
-		} else if (other.gameObject.tag == "Player") {
-			Hashtable hash = new Hashtable();
-			hash["Position"] = gameObject.transform.position;
-			NotificationCenter.DefaultCenter.PostNotification(this, "OnMineExplode",hash);
-			Destroy (gameObject);
+		if (other.gameObject.tag == "Bot" || other.gameObject.tag == "Player") {
+			Explose();
 		}
 	}
 }
