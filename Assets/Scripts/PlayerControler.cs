@@ -151,29 +151,18 @@ public class PlayerControler : MonoBehaviour {
 		if (gameObject.GetComponent<Equipment> ()._weapon.name.CompareTo ("Longbow03(Clone)") == 0) {
 			gameObject.GetComponent<Equipment> ()._weapon.GetComponent<LongBowScript> ().characterTransform = gameObject.transform;
 			gameObject.GetComponent<Equipment> ()._weapon.GetComponent<LongBowScript> ().Attack ();
-
 		}
 		else if (gameObject.GetComponent<Equipment> ()._weapon.name.CompareTo ("Gun(Clone)") == 0) {
 			gameObject.GetComponent<Equipment> ()._weapon.GetComponent<Gun> ().characterTransform = gameObject.transform;
-			gameObject.GetComponent<Equipment> ()._weapon.GetComponent<Gun> ().Attack ();
-			
+			gameObject.GetComponent<Equipment> ()._weapon.GetComponent<Gun> ().Attack ();			
 		}
 		else if (gameObject.GetComponent<Equipment> ()._weapon.name.CompareTo ("Bomb(Clone)") == 0) {
-			Equipment script  =gameObject.GetComponent<Equipment> ();
-			GameObject bomb = Instantiate (script._prefabWeapon, script._righthandTransform.position, script._righthandTransform.rotation) as GameObject;
-			bomb.AddComponent<Rigidbody>();
-			bomb.GetComponent<Bomb>().characterTransform = gameObject.transform;
-			bomb.GetComponent<Bomb>().Init (gameObject.transform);
-			bomb.GetComponent<Bomb>().Attack ();
-			//gameObject.GetComponent<Equipment> ()._weapon.GetComponent<Bomb> ().characterTransform = gameObject.transform;
-			//gameObject.GetComponent<Equipment> ()._weapon.GetComponent<Bomb> ().Attack ();
-			Destroy( gameObject.GetComponent<Equipment> ()._weapon);
-			
+			gameObject.GetComponent<Equipment> ()._weapon.GetComponent<Bomb> ().characterTransform = gameObject.transform;
+			gameObject.GetComponent<Equipment> ()._weapon.GetComponent<Bomb> ().Attack ();			
 		}
 		else if (gameObject.GetComponent<Equipment> ()._weapon.name.CompareTo ("Mine(Clone)") == 0) {
 			gameObject.GetComponent<Equipment> ()._weapon.GetComponent<Mine> ().characterTransform = gameObject.transform;
-			gameObject.GetComponent<Equipment> ()._weapon.GetComponent<Mine> ().Attack ();
-			
+			gameObject.GetComponent<Equipment> ()._weapon.GetComponent<Mine> ().Attack ();			
 		}
 		
 	}
