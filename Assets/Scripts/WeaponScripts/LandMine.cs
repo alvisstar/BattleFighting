@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 public class LandMine : MonoBehaviour {
 
 	// Use this for initialization
@@ -11,9 +11,9 @@ public class LandMine : MonoBehaviour {
 	public float explosionTime = 10;
 
 	void Start () {
-
+       
 	}
-
+    
 	void Update () {
 		currentTime += Time.deltaTime;
 
