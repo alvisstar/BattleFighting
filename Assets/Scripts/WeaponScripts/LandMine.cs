@@ -6,16 +6,28 @@ public class LandMine : MonoBehaviour {
 	// Use this for initialization
 	Vector3 direction;
 	float currentTime;
+	bool isExplosed;
 	public float activeTime = 1;
+	public float explosionTime = 10;
 
 	void Start () {
        
 	}
     
 	void Update () {
-		if (currentTime < activeTime)
-			currentTime += Time.deltaTime;
+		currentTime += Time.deltaTime;
 
+		if (currentTime > activeTime + explosionTime && !isExplosed) {
+			isExplosed = true;
+			Explose();
+		}
+	}
+
+	void Explose () {
+		Hashtable hash = new Hashtable();
+		hash["Position"] = gameObject.transform.position;
+		NotificationCenter.DefaultCenter.PostNotification(this, "OnMineExplode",hash);
+		Destroy (gameObject);
 	}
 	
 	public void Init(Vector3 direction)
@@ -29,10 +41,14 @@ public class LandMine : MonoBehaviour {
 		}
 
 		if (other.gameObject.tag == "Bot") {
-			other.gameObject.GetComponent<BotControler> ().BeHitted ();
+			Hashtable hash = new Hashtable();
+			hash["Position"] = gameObject.transform.position;
+			NotificationCenter.DefaultCenter.PostNotification(this, "OnMineExplode",hash);
 			Destroy (gameObject);
 		} else if (other.gameObject.tag == "Player") {
-//			other.gameObject.GetComponent<PlayerControler> ().BeHitted ();
+			Hashtable hash = new Hashtable();
+			hash["Position"] = gameObject.transform.position;
+			NotificationCenter.DefaultCenter.PostNotification(this, "OnMineExplode",hash);
 			Destroy (gameObject);
 		}
 	}
