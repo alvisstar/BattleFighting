@@ -4,6 +4,7 @@ using System.Collections;
 public class PlayerControler : MonoBehaviour {
 
 	public float speed = 50;
+	public float hp = 10;
 	private Vector3 directionMove = new Vector3(0,0,0);
 
 	// Use this for initialization
