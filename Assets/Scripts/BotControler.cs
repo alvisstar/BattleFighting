@@ -27,7 +27,7 @@ public class BotControler : MonoBehaviour {
 			_targetObject = value;
 		}
 	}
-
+	public AIBotManager controller;
 	void Start () {
 		speed = 0.1f;
 		isDie = false;
@@ -76,9 +76,49 @@ public class BotControler : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-
+		if (controller) 
+		{      Vector3 relativePos = steer() * Time.deltaTime;
+			RotateByDirection (relativePos);
+			GetComponent<Animator>().SetFloat("Speed", 1);
+			if (relativePos != Vector3.zero)          
+				GetComponent<Rigidbody>().velocity = relativePos;
+			// enforce minimum and maximum speeds for the boids      
+			float speed = GetComponent<Rigidbody>().velocity.magnitude;      
+			if (speed > controller.maxVelocity) {        
+				GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity.normalized *           controller.maxVelocity;      
+			}      
+			else if (speed < controller.minVelocity) {        
+				GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity.normalized *             controller.minVelocity;     
+			}    
+		} 	
 
 	}
+	void FixedUpdate () {
+		
+
+	}
+	private Vector3 steer () {    
+		Vector3 center = controller.flockCenter -         transform.localPosition;  // cohesion
+		Vector3 velocity = controller.flockVelocity -         GetComponent<Rigidbody>().velocity;  // alignment
+		Vector3 follow = controller.target.localPosition -         transform.localPosition;  // follow leader
+		Vector3 separation = Vector3.zero;
+		foreach (BotControler flock in controller.botScripts) {     
+			if (flock != this) {        
+				Vector3 relativePos = transform.localPosition -             flock.transform.localPosition;
+				separation += relativePos / (relativePos.sqrMagnitude);    
+
+			}    
+		}
+		// randomize    
+		Vector3 randomize = new Vector3( (Random.value * 2) - 1,         (Random.value * 2) - 1, (Random.value * 2) - 1);
+		randomize.Normalize();
+		return (controller.centerWeight * center +         
+		        controller.velocityWeight * velocity +         controller.separationWeight * separation +        
+		        controller.followWeight * follow +         controller.randomizeWeight * randomize);  
+	} 
+
+
+
 	public void Move(Vector3 direction)
 	{
 		RotateByDirection (direction);
@@ -147,10 +187,7 @@ public class BotControler : MonoBehaviour {
 			GetComponent<Animator>().SetTrigger(isAttackedHash);
 		}
 	}
-	void FixedUpdate()
-	{
 
-	}
 
 	void OnTriggerEnter(Collider col)
 	{
