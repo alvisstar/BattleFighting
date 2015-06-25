@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour {
 		camera.GetComponent<CameraControler> ().targetObject = myChar;
 		// 6
 		Init ();
+		aiBotManager.GetComponent<AIBotManager> ().Init (myChar,botScripts);
 	}
 
 	void Init()
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour {
 			float x = Random.Range(-10.0f,10.0f);
 			float z =Random.Range(-10.0f,10.0f);
 			opponentScript.Init(new Vector3 (x, 0, z), false);
+			opponentScript.controller = aiBotManager.GetComponent<AIBotManager>();
 			opponentScript.targetObject = myChar;
 			botScripts.Add(opponentScript);
 		}

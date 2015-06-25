@@ -35,7 +35,13 @@ public class AIBotManager : MonoBehaviour {
 		currentNumberNearPLayer = 0;
 
 	}
-	
+	public void Init(GameObject character,List<BotControler> botScripts)
+	{
+		this.character = character;
+		this.botScripts = botScripts;
+		target = character.transform;
+
+	}
 	// Update is called once per frame
 	void FixedUpdate () {
 
@@ -59,14 +65,14 @@ public class AIBotManager : MonoBehaviour {
 
 	public void UpdateUnit(GameObject character,List<BotControler> botScripts )
 	{
-		this.character = character;
+		/*this.character = character;
 		this.botScripts = botScripts;
 		target = character.transform;
 		foreach (BotControler bot in botScripts) 
 		{
 			bot.controller = this;
 			bot.transform.parent = transform;
-		}
+		}*/
 	}
 
 	void Aim()
