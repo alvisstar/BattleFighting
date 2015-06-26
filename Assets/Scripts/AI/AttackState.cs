@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class AttackState : FSMState
-{
+{	protected AIBotManager controller;
 	public AttackState(AIBotManager controller) 
 	{ 
 		controller = controller;
@@ -18,7 +18,7 @@ public class AttackState : FSMState
 	{
 		//Check the distance with the player tank
 		float dist = Vector3.Distance(npc.position, player.position);
-		if (dist >= 50.0f)
+		if (dist >= 2.0f)
 		{
 			//Rotate to the target point
 
@@ -28,7 +28,7 @@ public class AttackState : FSMState
 		else if (dist < 50.0f)
 		{
 			Debug.Log("Switch to Patrol State");
-			npc.GetComponent<BotControler>().PerformTransition(Transition.LostPlayer);
+			//npc.GetComponent<BotControler>().PerformTransition(Transition.LostPlayer);
 		}  
 	}
 	

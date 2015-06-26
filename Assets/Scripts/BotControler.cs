@@ -41,14 +41,15 @@ public class BotControler : AdvancedFSM {
 
 		
 		ChaseState chase = new ChaseState(controller);
-		chase.AddTransition(Transition.LostPlayer, FSMStateID.Patrolling);
+		chase.AddTransition(Transition.InclosurePlayer, FSMStateID.Rounding);
+		chase.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
 		chase.AddTransition(Transition.ReachPlayer, FSMStateID.Attacking);
 		chase.AddTransition(Transition.NoHealth, FSMStateID.Dead);
 		
 		
 		
 		AttackState attack = new AttackState(controller);
-		attack.AddTransition(Transition.LostPlayer, FSMStateID.Patrolling);
+		attack.AddTransition(Transition.InclosurePlayer, FSMStateID.Rounding);
 		attack.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
 		attack.AddTransition(Transition.NoHealth, FSMStateID.Dead);
 		
