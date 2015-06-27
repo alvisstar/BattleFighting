@@ -31,6 +31,9 @@ public class PlayerControler : MonoBehaviour {
 	Animator _animator;
 	int attackHash = Animator.StringToHash("Attack");
 	int isAttackedHash = Animator.StringToHash("IsAttacked");
+	int isDeadHash = Animator.StringToHash("IsDead");
+
+	public bool isDie;
 	bool _isKeyMovePressing;
 	bool _isTouchingDPad;
 
@@ -46,6 +49,8 @@ public class PlayerControler : MonoBehaviour {
 	void Start () {
 		_animator = GetComponent<Animator>();
 		ctrl = Instantiate (ctrlPrefab);
+		isDie = false;
+		hp = 5;
 	}
 	public void Init(Vector3 position,bool isMain)
 	{
@@ -158,6 +163,24 @@ public class PlayerControler : MonoBehaviour {
 		{
 			_animator.SetTrigger (attackHash);
 			Attack();
+		}
+	}
+	void OnTriggerEnter(Collider col)
+	{
+		if (col.gameObject.tag == "Hand" && col.GetComponentInParent<BotControler>().CheckIsAnimation("TripleKick")) {
+			BeHitted();
+		}
+	}
+	IEnumerator WaitOneSecond() { yield return new WaitForSeconds(1); }
+	public void BeHitted()
+	{
+		if (hp <= 0) {
+			GetComponent<Animator>().SetTrigger(isDeadHash);
+			isDie = true;
+
+		} else {
+			hp--;
+			GetComponent<Animator>().SetTrigger(isAttackedHash);
 		}
 	}
 	void Attack()

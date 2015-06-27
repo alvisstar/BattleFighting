@@ -60,6 +60,10 @@ public class GameManager : MonoBehaviour {
 
 			}
 		}
+		if(myChar.GetComponent<PlayerControler>().isDie)
+		{
+			RestartGame();
+		}
 	}
 	
 
