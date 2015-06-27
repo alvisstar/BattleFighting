@@ -1,50 +1,40 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ChaseState : FSMState
-{
+public class RoundingState : FSMState {
 
-	public ChaseState(AIBotManager controller1) 
+	// Use this for initialization
+
+	public RoundingState(AIBotManager controller1) 
 	{ 
 		controller = controller1;
-		stateID = FSMStateID.Chasing;
+		stateID = FSMStateID.Rounding;
 		
 		curRotSpeed = 1.0f;
 		curSpeed = 100.0f;
-		
-		//find next Waypoint position
-	
 	}
 	
 	public override void Reason(Transform player, Transform npc)
 	{
-		//Set the target position as the player position
-		destPos = player.position;
-		
 		//Check the distance with player tank
-		//When the distance is near, transition to attack state
-		float dist = Vector3.Distance(npc.position, destPos);
-
-		if (dist >= 3.0f )
+		//When the distance is near, transition to chase state
+		if (Vector3.Distance(npc.position, player.position) > 3.0f)
 		{
-			if(controller.GetNumberBotChasePlayer() >=2)	
-				npc.GetComponent<BotControler>().PerformTransition(Transition.InclosurePlayer);
-
-
+			//Debug.Log("Switch to Chase State");
+			npc.GetComponent<BotControler>().PerformTransition(Transition.SawPlayer);
 		}
-		else if (dist < 3.0f)
-		{
-			npc.GetComponent<BotControler>().PerformTransition(Transition.ReachPlayer);
-			
-		}
-
-			
+		else
+			if (Vector3.Distance(npc.position, player.position) <=3.0f)
+			{
+				if(controller.GetNumberBotAttackPlayer() < 2)	
+					npc.GetComponent<BotControler>().PerformTransition(Transition.SawPlayer);
+			}
 	}
 	
 	public override void Act(Transform player, Transform npc)
 	{
-		//Rotate to the target point
-		Vector3 relativePos = steer (npc) * Time.deltaTime;
+		//Find another random patrol point if the current point is reached
+		/*Vector3 relativePos = steer (npc) * Time.deltaTime*10;
 		
 		npc.GetComponent<BotControler>().RotateByDirection (relativePos);
 		npc.GetComponent<Animator> ().SetFloat ("Speed", 1);
@@ -56,7 +46,11 @@ public class ChaseState : FSMState
 			npc.GetComponent<Rigidbody> ().velocity = npc.GetComponent<Rigidbody> ().velocity.normalized * controller.maxVelocity;      
 		} else if (speed < controller.minVelocity) {        
 			npc.GetComponent<Rigidbody> ().velocity = npc.GetComponent<Rigidbody> ().velocity.normalized * controller.minVelocity;     
-		}    
+		}    */
+
+		var q = npc.GetComponent<BotControler>().transform.rotation;
+		npc.GetComponent<BotControler>().transform.RotateAround(player.position, Vector3.forward, 20*Time.deltaTime);
+		npc.GetComponent<BotControler>().transform.rotation = q;
 
 	}
 	private Vector3 steer (Transform npc) {    

@@ -13,16 +13,16 @@ using System.Collections.Generic;
 public enum Transition
 {
 	None = 0,
+	InclosurePlayer,
 	SawPlayer,
 	ReachPlayer,
-	LostPlayer,
 	NoHealth,
 }
 
 public enum FSMStateID
 {
 	None = 0,
-	Patrolling,
+	Rounding,
 	Chasing,
 	Attacking,
 	Dead,
