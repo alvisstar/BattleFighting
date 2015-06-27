@@ -61,14 +61,27 @@ public class PlayerControler : MonoBehaviour {
 	void Update () {
 		_isKeyMovePressing = KeyboardControl ();
 		HandleAnimation ();
+
+	}
+	public bool CheckIsAnimation(string name)
+	{
+		//int atakState = Animator.StringToHash(name); 
+		if (_animator.GetCurrentAnimatorStateInfo (0).IsName(name))
+			return true;
+		return false;
+	
+	}
+	void FixedUpdate()
+	{
+		// processing for D-Pad
 		if (this.ctrl) {	
 			// Get stick and zone references by IDs...			
 			TouchStick walkStick = this.ctrl.GetStick (0);
 			
 			if (walkStick.Pressed ()) {
 				RotateByDirection (walkStick.GetVec3d (true, 0));
-				gameObject.transform.position += walkStick.GetVec3d (true, 0)  * currentSpeed ;
-				//	GetComponent<Rigidbody> ().velocity = walkStick.GetVec3d (true, 0) * speed * 100;
+				//gameObject.transform.position += walkStick.GetVec3d (true, 0)  * currentSpeed ;
+				GetComponent<Rigidbody> ().velocity = walkStick.GetVec3d (true, 0) * currentSpeed * 100;
 				
 				_isTouchingDPad = true;
 			}			
@@ -86,18 +99,6 @@ public class PlayerControler : MonoBehaviour {
 			m_Move = v*Vector3.forward + h*Vector3.right;
 			RotateByDirection(m_Move);
 		}
-	}
-	public bool CheckIsAnimation(string name)
-	{
-		//int atakState = Animator.StringToHash(name); 
-		if (_animator.GetCurrentAnimatorStateInfo (0).IsName(name))
-			return true;
-		return false;
-	
-	}
-	void FixedUpdate()
-	{
-		// processing for D-Pad
 
 	}
 

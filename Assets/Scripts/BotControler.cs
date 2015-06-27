@@ -61,7 +61,7 @@ public class BotControler : AdvancedFSM {
 
 		ChaseToAttack chaseToAttack = new ChaseToAttack(controller);
 		chaseToAttack.AddTransition(Transition.TouchPlayer, FSMStateID.Attacking);
-		//chaseToAttack.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
+		chaseToAttack.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
 		chaseToAttack.AddTransition(Transition.NoHealth, FSMStateID.Dead);
 
 		AddFSMState(chase);
