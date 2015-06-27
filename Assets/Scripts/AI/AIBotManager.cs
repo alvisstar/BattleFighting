@@ -114,13 +114,27 @@ public class AIBotManager : MonoBehaviour {
 		return number;
 	}
 
-	int GetNumberBotAttackPlayer()
+	public int GetNumberBotAttackPlayer()
 	{
 		int number = 0;
 		for(int i = 0;i < botScripts.Count;i++)
 		{
 
-			if(botScripts[i].CheckIsAnimation("TripleKick") )
+			if(botScripts[i].CurrentState.ID == FSMStateID.Attacking )
+			{
+				number++;
+			}
+			
+		}
+		return number;
+	}
+	public int GetNumberBotChasePlayer()
+	{
+		int number = 0;
+		for(int i = 0;i < botScripts.Count;i++)
+		{
+			
+			if(botScripts[i].CurrentState.ID == FSMStateID.Chasing )
 			{
 				number++;
 			}
