@@ -18,45 +18,34 @@ public class RoundingState : FSMState {
 	{
 		//Check the distance with player tank
 		//When the distance is near, transition to chase state
-		if (Vector3.Distance(npc.position, player.position) > 3.0f)
+		destPos = player.position;
+		
+		//Check the distance with player tank
+		//When the distance is near, transition to attack state
+		float dist = Vector3.Distance(npc.position, destPos);
+
+		if (dist > 10.0f)
 		{
 			//Debug.Log("Switch to Chase State");
 			npc.GetComponent<BotControler>().PerformTransition(Transition.SawPlayer);
 		}
-		else
-			if (Vector3.Distance(npc.position, player.position) <=3.0f)
-			{
-				if(controller.GetNumberBotAttackPlayer() < 2)	
-					npc.GetComponent<BotControler>().PerformTransition(Transition.SawPlayer);
-			}
+
 	}
 	
 	public override void Act(Transform player, Transform npc)
 	{
 		//Find another random patrol point if the current point is reached
-		/*Vector3 relativePos = steer (npc) * Time.deltaTime*10;
-		
+		Vector3 relativePos = player.position - npc.position ;
 		npc.GetComponent<BotControler>().RotateByDirection (relativePos);
-		npc.GetComponent<Animator> ().SetFloat ("Speed", 1);
-		if (relativePos != Vector3.zero)          
-			npc.GetComponent<Rigidbody> ().velocity = relativePos;
-		// enforce minimum and maximum speeds for the boids      
-		float speed = npc.GetComponent<Rigidbody> ().velocity.magnitude;      
-		if (speed > controller.maxVelocity) {        
-			npc.GetComponent<Rigidbody> ().velocity = npc.GetComponent<Rigidbody> ().velocity.normalized * controller.maxVelocity;      
-		} else if (speed < controller.minVelocity) {        
-			npc.GetComponent<Rigidbody> ().velocity = npc.GetComponent<Rigidbody> ().velocity.normalized * controller.minVelocity;     
-		}    */
-
-		var q = npc.GetComponent<BotControler>().transform.rotation;
-		npc.GetComponent<BotControler>().transform.RotateAround(player.position, Vector3.forward, 20*Time.deltaTime);
-		npc.GetComponent<BotControler>().transform.rotation = q;
+		npc.GetComponent<Animator> ().SetFloat ("Speed", 0);
 
 	}
 	private Vector3 steer (Transform npc) {    
 		Vector3 center = controller.flockCenter -         npc.localPosition;  // cohesion
 		Vector3 velocity = controller.flockVelocity -         npc.GetComponent<Rigidbody>().velocity;  // alignment
-		Vector3 follow = controller.target.localPosition -         npc.localPosition;  // follow leader
+		float random = Random.Range (-5, 5);
+		Vector3 a =controller.target.localPosition + new Vector3(random,0,random);
+		Vector3 follow = a -         npc.localPosition;  // follow leader
 		Vector3 separation = Vector3.zero;
 		foreach (BotControler flock in controller.botScripts) {     
 			if (flock != npc.GetComponent<BotControler>()) {        

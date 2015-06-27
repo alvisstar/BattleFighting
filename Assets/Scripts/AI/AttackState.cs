@@ -18,18 +18,18 @@ public class AttackState : FSMState
 	{
 		//Check the distance with the player tank
 		float dist = Vector3.Distance(npc.position, player.position);
-		if (dist > 3.0f)
+		if (dist > 6.0f)
 		{
 			//Rotate to the target point
 
 			npc.GetComponent<BotControler>().PerformTransition(Transition.SawPlayer);
 		}
 		//Transition to patrol is the tank become too far
-		else if (dist <= 3.0f)
+		/*else if (dist <= 3.0f)
 		{
 			if(controller.GetNumberBotAttackPlayer() >=2)	
 				npc.GetComponent<BotControler>().PerformTransition(Transition.InclosurePlayer);
-		}  
+		}  */
 	}
 	
 	public override void Act(Transform player, Transform npc)

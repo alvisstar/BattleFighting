@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ChaseState : FSMState
-{
+public class ChaseToAttack : FSMState {
 
-	public ChaseState(AIBotManager controller1) 
+	// Use this for initialization
+	public ChaseToAttack(AIBotManager controller1) 
 	{ 
 		controller = controller1;
-		stateID = FSMStateID.Chasing;
+		stateID = FSMStateID.ChaseToAttack;
 		
 		curRotSpeed = 1.0f;
 		curSpeed = 100.0f;
 		
 		//find next Waypoint position
-	
+		
 	}
 	
 	public override void Reason(Transform player, Transform npc)
@@ -24,20 +24,19 @@ public class ChaseState : FSMState
 		//Check the distance with player tank
 		//When the distance is near, transition to attack state
 		float dist = Vector3.Distance(npc.position, destPos);
+		
 
-		if (dist < 6.0f)
+		if (dist < 3.0f)
 		{
-			if(controller.GetNumberBotChasePlayer() >2)	
-			{
-				npc.GetComponent<BotControler>().PerformTransition(Transition.InclosurePlayer);
-				
-			}
-			else
-				npc.GetComponent<BotControler>().PerformTransition(Transition.ReachPlayer);
+			npc.GetComponent<BotControler>().PerformTransition(Transition.TouchPlayer);
 			
 		}
-
-			
+		else
+		{
+			npc.GetComponent<BotControler>().PerformTransition(Transition.SawPlayer);
+		}
+		
+		
 	}
 	
 	public override void Act(Transform player, Transform npc)
@@ -56,7 +55,7 @@ public class ChaseState : FSMState
 		} else if (speed < controller.minVelocity) {        
 			npc.GetComponent<Rigidbody> ().velocity = npc.GetComponent<Rigidbody> ().velocity.normalized * controller.minVelocity;     
 		}    
-
+		
 	}
 	private Vector3 steer (Transform npc) {    
 		Vector3 center = controller.flockCenter -         npc.localPosition;  // cohesion

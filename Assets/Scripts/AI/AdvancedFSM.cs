@@ -15,6 +15,7 @@ public enum Transition
 	None = 0,
 	InclosurePlayer,
 	SawPlayer,
+	TouchPlayer,
 	ReachPlayer,
 	NoHealth,
 }
@@ -24,6 +25,7 @@ public enum FSMStateID
 	None = 0,
 	Rounding,
 	Chasing,
+	ChaseToAttack,
 	Attacking,
 	Dead,
 }
