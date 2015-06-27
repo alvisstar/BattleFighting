@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ChaseState : FSMState
 {
-	protected AIBotManager controller;
+
 	public ChaseState(AIBotManager controller1) 
 	{ 
 		controller = controller1;
@@ -24,19 +24,21 @@ public class ChaseState : FSMState
 		//Check the distance with player tank
 		//When the distance is near, transition to attack state
 		float dist = Vector3.Distance(npc.position, destPos);
-		if (dist <= 2.0f)
+
+		if (dist >= 3.0f )
 		{
-			
+			if(controller.GetNumberBotChasePlayer() >=2)	
+				npc.GetComponent<BotControler>().PerformTransition(Transition.InclosurePlayer);
+
+
+		}
+		else if (dist < 3.0f)
+		{
 			npc.GetComponent<BotControler>().PerformTransition(Transition.ReachPlayer);
-
-
+			
 		}
-		//Go back to patrol is it become too far
-		else if (dist > 2.0f)
-		{
-			npc.GetComponent<BotControler>().PerformTransition(Transition.SawPlayer);
 
-		}
+			
 	}
 	
 	public override void Act(Transform player, Transform npc)

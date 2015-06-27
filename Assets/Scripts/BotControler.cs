@@ -52,11 +52,16 @@ public class BotControler : AdvancedFSM {
 		attack.AddTransition(Transition.InclosurePlayer, FSMStateID.Rounding);
 		attack.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
 		attack.AddTransition(Transition.NoHealth, FSMStateID.Dead);
+
+		RoundingState rounding = new RoundingState(controller);
+		rounding.AddTransition(Transition.ReachPlayer, FSMStateID.Attacking);
+		rounding.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
+		rounding.AddTransition(Transition.NoHealth, FSMStateID.Dead);
 		
 
 		AddFSMState(chase);
 		AddFSMState(attack);
-
+		AddFSMState(rounding);
 	}
 	void OnDestroy () {
 		NotificationCenter.DefaultCenter.RemoveObserver(this, "OnBombExplode");

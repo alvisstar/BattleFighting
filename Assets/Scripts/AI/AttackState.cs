@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class AttackState : FSMState
-{	protected AIBotManager controller;
-	public AttackState(AIBotManager controller) 
+{
+	public AttackState(AIBotManager controller1) 
 	{ 
-		controller = controller;
+		controller = controller1;
 		stateID = FSMStateID.Attacking;
 		curRotSpeed = 1.0f;
 		curSpeed = 100.0f;
@@ -18,29 +18,25 @@ public class AttackState : FSMState
 	{
 		//Check the distance with the player tank
 		float dist = Vector3.Distance(npc.position, player.position);
-		if (dist >= 2.0f)
+		if (dist > 3.0f)
 		{
 			//Rotate to the target point
 
 			npc.GetComponent<BotControler>().PerformTransition(Transition.SawPlayer);
 		}
 		//Transition to patrol is the tank become too far
-		else if (dist < 50.0f)
+		else if (dist <= 3.0f)
 		{
-			Debug.Log("Switch to Patrol State");
-			//npc.GetComponent<BotControler>().PerformTransition(Transition.LostPlayer);
+			if(controller.GetNumberBotAttackPlayer() >=2)	
+				npc.GetComponent<BotControler>().PerformTransition(Transition.InclosurePlayer);
 		}  
 	}
 	
 	public override void Act(Transform player, Transform npc)
 	{
-		//Set the target position as the player position
-		destPos = player.position;
+		Vector3 relativePos = player.position - npc.position ;
 		
-		//Always Turn the turret towards the player
-	
-		
-		//Shoot bullet towards the player
+		npc.GetComponent<BotControler>().RotateByDirection (relativePos);
 		npc.GetComponent<BotControler> ().AttackTarget ();
 	}
 }
