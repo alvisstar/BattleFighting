@@ -12,13 +12,13 @@ public class SpeedUp : MonoBehaviour {
 	void Update () {
 		currentTime += Time.deltaTime;
 		if (currentTime >= timeEffect) {
-			_character.speed /= speedUp;
+			_character.CurrentSpeed = _character.normalSpeed;
 			Destroy(gameObject);
 		}
 	}
 
 	public void Effect(PlayerControler character) {
 		_character = character;
-		_character.speed *= speedUp;
+		_character.CurrentSpeed *= speedUp;
 	}
 }
