@@ -7,6 +7,7 @@ public class PlayerControler : MonoBehaviour {
 	public float normalSpeed = 0.15f;
 	public float maxSpeed = 0.3f;
 	public float minSpeed = 0.075f;
+	private float _force;
 
 	public float CurrentSpeed {
 		get {
@@ -36,7 +37,7 @@ public class PlayerControler : MonoBehaviour {
 	public bool isDie;
 	bool _isKeyMovePressing;
 	bool _isTouchingDPad;
-
+	bool _firstPress;
 	private Vector3 m_Move;
 	float m_TurnAmount;
 	float m_ForwardAmount;
@@ -51,6 +52,8 @@ public class PlayerControler : MonoBehaviour {
 		ctrl = Instantiate (ctrlPrefab);
 		isDie = false;
 		hp = 50;
+		_force = 0;
+		_firstPress = false;
 	}
 	public void Init(Vector3 position,bool isMain)
 	{
@@ -79,15 +82,38 @@ public class PlayerControler : MonoBehaviour {
 			TouchStick walkStick = this.ctrl.GetStick (0);
 			
 			if (walkStick.Pressed ()) {
+				if(!_firstPress)
+				{
+					_firstPress = true;
+					_force =40;
+				}
 				RotateByDirection (walkStick.GetVec3d (true, 0));
 				//gameObject.transform.position += walkStick.GetVec3d (true, 0)  * currentSpeed ;
-				GetComponent<Rigidbody> ().velocity = walkStick.GetVec3d (true, 0) * currentSpeed * 100;
-				
+				GetComponent<Rigidbody> ().velocity = walkStick.GetVec3d (true, 0) * currentSpeed * _force;
+				_force +=1f;
+				if(_force >=80)
+					_force =80;
 				_isTouchingDPad = true;
 			}			
 			// Stop when stick is released...			
 			else {
-				_isTouchingDPad = false;		
+
+				_firstPress = false;
+
+
+				if(_force <=0)
+				{
+					_force =0;
+					_isTouchingDPad = false;	
+				}
+				else
+				{
+					_isTouchingDPad = true;	
+					GetComponent<Rigidbody> ().velocity = transform.forward* currentSpeed * _force;
+					_force -=3;
+					RotateByDirection (walkStick.GetVec3d (true, 0));
+				}
+
 			}
 			// Shoot when right stick is pressed...
 			
