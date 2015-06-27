@@ -3,7 +3,25 @@ using System.Collections;
 
 public class PlayerControler : MonoBehaviour {
 
-	public float speed = 50;
+	private float currentSpeed = 0.15f;
+	public float normalSpeed = 0.15f;
+	public float maxSpeed = 0.3f;
+	public float minSpeed = 0.075f;
+
+	public float CurrentSpeed {
+		get {
+			return currentSpeed;
+		}
+		set {
+			if (value < minSpeed)
+				currentSpeed = minSpeed;
+			else if (value > maxSpeed)
+				currentSpeed = maxSpeed;
+			else
+				currentSpeed = value;
+		}
+	}
+
 	public float hp = 10;
 	private Vector3 directionMove = new Vector3(0,0,0);
 
@@ -26,7 +44,6 @@ public class PlayerControler : MonoBehaviour {
 	public GUISkin	guiSkin;
 
 	void Start () {
-		speed = 0.15f;
 		_animator = GetComponent<Animator>();
 		ctrl = Instantiate (ctrlPrefab);
 	}
@@ -45,7 +62,7 @@ public class PlayerControler : MonoBehaviour {
 			
 			if (walkStick.Pressed ()) {
 				RotateByDirection (walkStick.GetVec3d (true, 0));
-				gameObject.transform.position += walkStick.GetVec3d (true, 0)  * speed ;
+				gameObject.transform.position += walkStick.GetVec3d (true, 0)  * currentSpeed ;
 				//	GetComponent<Rigidbody> ().velocity = walkStick.GetVec3d (true, 0) * speed * 100;
 				
 				_isTouchingDPad = true;
@@ -127,7 +144,7 @@ public class PlayerControler : MonoBehaviour {
 		//approach 2 move with velocity
 		directionMove.Normalize ();
 		//gameObject.GetComponent<Rigidbody> ().velocity = directionMove * speed * 100;
-		gameObject.transform.position += directionMove * speed ;
+		gameObject.transform.position += directionMove * currentSpeed ;
 		directionMove = new Vector3 (0, 0, 0);
 
 		return isKeyTouching;
