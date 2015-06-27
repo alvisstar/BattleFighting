@@ -50,7 +50,7 @@ public class PlayerControler : MonoBehaviour {
 		_animator = GetComponent<Animator>();
 		ctrl = Instantiate (ctrlPrefab);
 		isDie = false;
-		hp = 5;
+		hp = 50;
 	}
 	public void Init(Vector3 position,bool isMain)
 	{
@@ -168,7 +168,8 @@ public class PlayerControler : MonoBehaviour {
 	}
 	void OnTriggerEnter(Collider col)
 	{
-		if (col.gameObject.tag == "Hand" && col.GetComponentInParent<BotControler>().CheckIsAnimation("TripleKick")) {
+		if (col.gameObject.tag == "BotHand" && col.GetComponentInParent<BotControler>().CheckIsAnimation("TripleKick")) {
+			GetComponent<Rigidbody> ().velocity = col.gameObject.transform.forward * currentSpeed *30;
 			BeHitted();
 		}
 	}
@@ -182,6 +183,7 @@ public class PlayerControler : MonoBehaviour {
 		} else {
 			hp--;
 			GetComponent<Animator>().SetTrigger(isAttackedHash);
+
 		}
 	}
 	void Attack()
