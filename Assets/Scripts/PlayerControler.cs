@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
-
+using System.IO;
+using UnityEditor;
 public class PlayerControler : MonoBehaviour {
 
 	private float currentSpeed = 0.15f;
@@ -8,7 +9,7 @@ public class PlayerControler : MonoBehaviour {
 	public float maxSpeed = 0.3f;
 	public float minSpeed = 0.075f;
 	private float _force;
-
+	public TextAsset imageAsset;
 	public float CurrentSpeed {
 		get {
 			return currentSpeed;
@@ -46,14 +47,46 @@ public class PlayerControler : MonoBehaviour {
 	public TouchController	ctrlPrefab;
 	private TouchController	ctrl;
 	public GUISkin	guiSkin;
-
+	TouchStick walkStick ;
+	TouchZone 	zoneFight;
+	TouchZone 	zoneSkill1	;
+	TouchZone 	zoneSkill2	;
 	void Start () {
 		_animator = GetComponent<Animator>();
 		ctrl = Instantiate (ctrlPrefab);
+		walkStick = this.ctrl.GetStick (0);
+		zoneFight		= this.ctrl.GetZone(0);
+		TextAsset tmp = Resources.Load("Button-Punch", typeof(TextAsset)) as TextAsset;
+		zoneFight.GetDisplayTex().LoadImage(tmp.bytes);
+		zoneSkill1	= this.ctrl.GetZone(1);
+		zoneSkill2	= this.ctrl.GetZone(2);
+
 		isDie = false;
 		hp = 50;
 		_force = 0;
 		_firstPress = false;
+
+		NotificationCenter.DefaultCenter.AddObserver(this, "OnWeaponChange");
+	}
+	void OnWeaponChange (NotificationCenter.Notification arg)
+	{
+		Hashtable hash = arg.data;
+		string name = (string)hash ["Type"];
+		if (GetComponent<Equipment> ()._weapon.name == "Longbow03(Clone)") {
+			TextAsset tmp = Resources.Load ("Button-A", typeof(TextAsset)) as TextAsset;
+			zoneFight.GetDisplayTex ().LoadImage (tmp.bytes);
+		} 
+		else if (GetComponent<Equipment> ()._weapon.name == "Gun(Clone)") {
+			TextAsset tmp = Resources.Load ("Button-B", typeof(TextAsset)) as TextAsset;
+			zoneFight.GetDisplayTex ().LoadImage (tmp.bytes);
+		}  
+		else if (GetComponent<Equipment> ()._weapon.name == "Bomb(Clone)") {
+			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
+			zoneFight.GetDisplayTex ().LoadImage (tmp.bytes);
+		}  
+		
+	
+
 	}
 	public void Init(Vector3 position,bool isMain)
 	{
@@ -74,13 +107,14 @@ public class PlayerControler : MonoBehaviour {
 		return false;
 	
 	}
+
 	void FixedUpdate()
 	{
 		// processing for D-Pad
 		if (this.ctrl) {	
 			// Get stick and zone references by IDs...			
-			TouchStick walkStick = this.ctrl.GetStick (0);
-			
+
+
 			if (walkStick.Pressed ()) {
 				if(!_firstPress)
 				{
@@ -115,7 +149,12 @@ public class PlayerControler : MonoBehaviour {
 				}
 
 			}
-			// Shoot when right stick is pressed...
+
+			if (zoneFight.JustUniPressed(true, true))
+			{
+				_animator.SetTrigger (attackHash);
+				Attack();
+			}
 			
 		} else {			
 			// processing for keyboard
@@ -173,6 +212,11 @@ public class PlayerControler : MonoBehaviour {
 			directionMove += new Vector3(1,0,0);
 			isKeyTouching = true;
 		}
+		if(Input.GetKeyDown(KeyCode.Space))
+		{
+			_animator.SetTrigger (attackHash);
+			Attack();
+		}
 		//approach 2 move with velocity
 		directionMove.Normalize ();
 		//gameObject.GetComponent<Rigidbody> ().velocity = directionMove * speed * 100;
@@ -186,11 +230,7 @@ public class PlayerControler : MonoBehaviour {
 		float move = _isKeyMovePressing || _isTouchingDPad ? 1 : 0;
 		_animator.SetFloat("Speed", move);
 		
-		if(Input.GetKeyDown(KeyCode.Space))
-		{
-			_animator.SetTrigger (attackHash);
-			Attack();
-		}
+
 	}
 	void OnTriggerEnter(Collider col)
 	{
