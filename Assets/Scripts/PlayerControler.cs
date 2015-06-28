@@ -290,7 +290,7 @@ public class PlayerControler : MonoBehaviour {
 		}
 		else if (GetComponent<Equipment> ()._weapon.name == "Mine(Clone)") 
 		{
-			GetComponent<Equipment> ()._weapon.GetComponent<Mine> ().characterTransform = gameObject.transform;
+			GetComponent<Equipment> (_isAttack = false;)._weapon.GetComponent<Mine> ().characterTransform = gameObject.transform;
 			GetComponent<Equipment> ()._weapon.GetComponent<Mine> ().Attack ();	
 			_isAttack = false;
 		}		
