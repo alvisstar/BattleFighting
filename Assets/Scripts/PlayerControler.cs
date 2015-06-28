@@ -34,6 +34,7 @@ public class PlayerControler : MonoBehaviour {
 	int attackHash = Animator.StringToHash("Attack");
 	int isAttackedHash = Animator.StringToHash("IsAttacked");
 	int isDeadHash = Animator.StringToHash("IsDead");
+	int isEquipBombHash = Animator.StringToHash("IsEquipBomb");
 
 	public bool isDie;
 	bool _isKeyMovePressing;
@@ -83,6 +84,7 @@ public class PlayerControler : MonoBehaviour {
 		else if (GetComponent<Equipment> ()._weapon.name == "Bomb(Clone)") {
 			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
 			zoneFight.GetDisplayTex ().LoadImage (tmp.bytes);
+			_animator.SetTrigger (isEquipBombHash);
 		}  
 		
 	
