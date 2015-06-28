@@ -18,7 +18,15 @@ labels:
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
+    100000: AxOneHanded01
+    100002: //RootNode
+    400000: AxOneHanded01
+    400002: //RootNode
+    2300000: AxOneHanded01
+    3300000: AxOneHanded01
     4300000: AxOneHanded01
+    7400000: Default Take
+    11100000: //RootNode
   materials:
     importMaterials: 1
     materialName: 3

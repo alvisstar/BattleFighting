@@ -18,7 +18,15 @@ labels:
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
+    100000: SwordOneHanded02
+    100002: //RootNode
+    400000: SwordOneHanded02
+    400002: //RootNode
+    2300000: SwordOneHanded02
+    3300000: SwordOneHanded02
     4300000: SwordOneHanded02
+    7400000: Default Take
+    11100000: //RootNode
   materials:
     importMaterials: 1
     materialName: 3

@@ -38,7 +38,14 @@ labels:
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
+    100000: Box-Alt
+    100002: //RootNode
+    400000: Box-Alt
+    400002: //RootNode
+    2300000: Box-Alt
+    3300000: Box-Alt
     4300000: Box-Alt
+    11100000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0

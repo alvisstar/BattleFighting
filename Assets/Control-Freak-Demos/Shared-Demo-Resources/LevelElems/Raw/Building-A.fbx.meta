@@ -38,7 +38,14 @@ labels:
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
+    100000: Bilding4S-00
+    100002: //RootNode
+    400000: Bilding4S-00
+    400002: //RootNode
+    2300000: Bilding4S-00
+    3300000: Bilding4S-00
     4300000: Bilding4S-00
+    11100000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0

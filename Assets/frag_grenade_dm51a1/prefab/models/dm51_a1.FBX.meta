@@ -3,11 +3,34 @@ guid: 65e4cf44f639d1a408f9a9ce2a310a20
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
+    100000: body
+    100002: cap
+    100004: //RootNode
+    100006: splint
+    100008: spoon
+    100010: spring
+    400000: body
+    400002: cap
+    400004: //RootNode
+    400006: splint
+    400008: spoon
+    400010: spring
+    2300000: body
+    2300002: cap
+    2300004: splint
+    2300006: spoon
+    2300008: spring
+    3300000: body
+    3300002: cap
+    3300004: splint
+    3300006: spoon
+    3300008: spring
     4300000: spring
     4300002: splint
     4300004: cap
     4300006: body
     4300008: spoon
+    11100000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
