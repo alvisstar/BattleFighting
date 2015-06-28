@@ -84,7 +84,7 @@ public class PlayerControler : MonoBehaviour {
 		else if (GetComponent<Equipment> ()._weapon.name == "Bomb(Clone)") {
 			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
 			zoneFight.GetDisplayTex ().LoadImage (tmp.bytes);
-			_animator.SetTrigger (isEquipBombHash);
+			_animator.SetBool("IsEquipBomb", true);
 		}  
 		
 	
@@ -231,7 +231,7 @@ public class PlayerControler : MonoBehaviour {
 	void HandleAnimation(){
 		float move = _isKeyMovePressing || _isTouchingDPad ? 1 : 0;
 		_animator.SetFloat("Speed", move);
-		
+	
 
 	}
 	void OnTriggerEnter(Collider col)
