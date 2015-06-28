@@ -19,5 +19,9 @@ public class Equipment : MonoBehaviour {
 		_weapon = Instantiate (prefabWeapon, _righthandTransform.position, _righthandTransform.rotation) as GameObject;
 		_weapon.transform.Rotate(0,180,0);
 		_weapon.transform.SetParent(_righthandTransform);
+
+		Hashtable hash = new Hashtable();
+		hash.Add("Type", _weapon.name);
+		NotificationCenter.DefaultCenter.PostNotification(this, "OnWeaponChange",hash);
 	}
 }
