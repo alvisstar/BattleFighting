@@ -7,8 +7,12 @@ public class Equipment : MonoBehaviour {
 	public Transform _righthandTransform = null;
 	// Use this for initialization
 	public GameObject _weapon = null;
+
 	bool hasWeapon;
 	int  i =0;
+
+	public Vector3 _initRotation = new Vector3(0,0,90);
+
 	void Start () {
 		hasWeapon = false;
 
@@ -18,6 +22,7 @@ public class Equipment : MonoBehaviour {
 		_prefabWeapon = prefabWeapon;
 		if(_weapon != null)
 			Destroy(_weapon);
+
 		if(_prefabWeapon.name =="None")
 		{
 			gameObject.GetComponent<PlayerControler>()._animator.SetBool("IsEquipSword",false);
@@ -57,7 +62,7 @@ public class Equipment : MonoBehaviour {
 		if(hasWeapon)
 		{
 			i++;
-			if(i>0)
+			if(i>5)
 			{
 			_weapon = Instantiate (_prefabWeapon, _righthandTransform.position, _righthandTransform.rotation) as GameObject;
 
@@ -73,5 +78,6 @@ public class Equipment : MonoBehaviour {
 			}
 		}
 	
+
 	}
 }
