@@ -7,6 +7,11 @@ public class Sword : Weapon {
 
 	public Transform characterTransform;
 	public Transform equipTransform;
+	void Start () {
+		numberOfWeapon = -1;
+
+	}
+
 	public override void OnAttack()
 	{
 

@@ -28,12 +28,18 @@ public class Weapon : MonoBehaviour {
 
 		OnAttack ();
 
-		numberOfWeapon--;
-		if (numberOfWeapon <= 0) {
-			Destroy(gameObject);
-			Hashtable hash = new Hashtable();
-			hash.Add("Type", "None");
-			NotificationCenter.DefaultCenter.PostNotification(this, "OnWeaponChange",hash);
+		if(numberOfWeapon ==-1)
+		{
+			return;
+		}
+		else{
+			numberOfWeapon--;
+			if (numberOfWeapon <= 0) {
+				Destroy(gameObject);
+				Hashtable hash = new Hashtable();
+				hash.Add("Type", "None");
+				NotificationCenter.DefaultCenter.PostNotification(this, "OnWeaponChange",hash);
+			}
 		}
 	}
 
