@@ -34,7 +34,7 @@ public class PlayerControler : MonoBehaviour {
 	int attackHash = Animator.StringToHash("Attack");
 	int isAttackedHash = Animator.StringToHash("IsAttacked");
 	int isDeadHash = Animator.StringToHash("IsDead");
-	int isEquipBombHash = Animator.StringToHash("IsEquipBomb");
+
 	bool _isAttack;
 	public bool isDie;
 	bool _isKeyMovePressing;
@@ -66,7 +66,7 @@ public class PlayerControler : MonoBehaviour {
 		hp = 50;
 		_force = 0;
 		_firstPress = false;
-
+		_animator.SetBool ("IsEquipNone", true);
 		NotificationCenter.DefaultCenter.AddObserver(this, "OnWeaponChange");
 	}
 	void OnWeaponChange (NotificationCenter.Notification arg)
@@ -84,7 +84,14 @@ public class PlayerControler : MonoBehaviour {
 		else if (GetComponent<Equipment> ()._weapon.name == "Bomb(Clone)") {
 			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
 			zoneFight.GetDisplayTex ().LoadImage (tmp.bytes);
-			_animator.SetBool("IsEquipBomb", true);
+			_animator.SetBool("IsEquipBomb",true);
+			_animator.SetBool("IsEquipSword",false);
+		}  
+		else if (GetComponent<Equipment> ()._weapon.name == "Sword(Clone)") {
+			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
+			zoneFight.GetDisplayTex ().LoadImage (tmp.bytes);
+			_animator.SetBool("IsEquipSword",true);
+			_animator.SetBool("IsEquipBomb",false);
 		}  
 		
 	
@@ -292,6 +299,10 @@ public class PlayerControler : MonoBehaviour {
 		{
 			GetComponent<Equipment>()._weapon.GetComponent<Mine> ().characterTransform = gameObject.transform;
 			GetComponent<Equipment> ()._weapon.GetComponent<Mine> ().Attack ();	
+			_isAttack = false;
+		}	
+		else if (GetComponent<Equipment> ()._weapon.name == "Sword(Clone)") 
+		{
 			_isAttack = false;
 		}		
 	}
