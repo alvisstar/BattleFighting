@@ -20,6 +20,7 @@ public class Equipment : MonoBehaviour {
 	
 	public void EquipWeapon (GameObject prefabWeapon) {
 		_prefabWeapon = prefabWeapon;
+
 		if(_weapon != null)
 			Destroy(_weapon);
 
@@ -55,9 +56,7 @@ public class Equipment : MonoBehaviour {
 			gameObject.GetComponent<PlayerControler>()._animator.SetBool("IsEquipGun",false);
 
 		}
-		_weapon = Instantiate (_prefabWeapon, _righthandTransform.position, _righthandTransform.rotation) as GameObject;
-		_weapon.transform.Rotate (new Vector3 (0, 0, 90));
-		_weapon.transform.SetParent(_righthandTransform);
+
 		hasWeapon = true;
 	}
 	void Update()
@@ -67,17 +66,17 @@ public class Equipment : MonoBehaviour {
 			i++;
 			if(i>5)
 			{
-			//_weapon = Instantiate (_prefabWeapon, _righthandTransform.position, _righthandTransform.rotation) as GameObject;
-			//_weapon.transform.Rotate (new Vector3 (0, 0, 90));
-			//_weapon.transform.SetParent(_righthandTransform);
+			_weapon = Instantiate (_prefabWeapon, _righthandTransform.position, _righthandTransform.rotation) as GameObject;
+			
+			_weapon.transform.SetParent(_righthandTransform);
 
 			
 			
-			//Hashtable hash = new Hashtable();
-			//hash.Add("Type", _weapon.name);
-			//NotificationCenter.DefaultCenter.PostNotification(this, "OnWeaponChange",hash);
-			//hasWeapon = false;
-				//i=0;
+			Hashtable hash = new Hashtable();
+			hash.Add("Type", _weapon.name);
+			NotificationCenter.DefaultCenter.PostNotification(this, "OnWeaponChange",hash);
+			hasWeapon = false;
+			i=0;
 			}
 		}
 	
