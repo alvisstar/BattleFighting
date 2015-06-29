@@ -1,5 +1,7 @@
 fileFormatVersion: 2
 guid: 970e8f8a029234b42b1285827e1def7b
+labels:
+- Mobile
 timeCreated: 1435499618
 licenseType: Free
 ModelImporter:
