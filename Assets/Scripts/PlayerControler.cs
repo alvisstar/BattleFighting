@@ -80,18 +80,27 @@ public class PlayerControler : MonoBehaviour {
 		else if (GetComponent<Equipment> ()._weapon.name == "Gun(Clone)") {
 			TextAsset tmp = Resources.Load ("Button-B", typeof(TextAsset)) as TextAsset;
 			zoneFight.GetDisplayTex ().LoadImage (tmp.bytes);
+			_animator.SetBool("IsEquipGun",true);
+			_animator.SetBool("IsEquipBomb",false);
+			_animator.SetBool("IsEquipSword",false);
+			_animator.SetBool("IsEquipNone",false);
+
 		}  
 		else if (GetComponent<Equipment> ()._weapon.name == "Bomb(Clone)") {
 			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
 			zoneFight.GetDisplayTex ().LoadImage (tmp.bytes);
 			_animator.SetBool("IsEquipBomb",true);
 			_animator.SetBool("IsEquipSword",false);
+			_animator.SetBool("IsEquipNone",false);
+			_animator.SetBool("IsEquipGun",false);
 		}  
 		else if (GetComponent<Equipment> ()._weapon.name == "Sword(Clone)") {
 			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
 			zoneFight.GetDisplayTex ().LoadImage (tmp.bytes);
 			_animator.SetBool("IsEquipSword",true);
 			_animator.SetBool("IsEquipBomb",false);
+			_animator.SetBool("IsEquipNone",false);
+			_animator.SetBool("IsEquipGun",false);
 		}  
 		
 	
