@@ -73,32 +73,44 @@ public class PlayerControler : MonoBehaviour {
 	{
 		Hashtable hash = arg.data;
 		string name = (string)hash ["Type"];
-		if (GetComponent<Equipment> ()._weapon.name == "Longbow03(Clone)") {
+		if (name == "Longbow03(Clone)") {
 			TextAsset tmp = Resources.Load ("Button-A", typeof(TextAsset)) as TextAsset;
 			zoneFight.GetDisplayTex ().LoadImage (tmp.bytes);
 		} 
 		else if (name == "None") {
 			TextAsset tmp = Resources.Load ("Button-B", typeof(TextAsset)) as TextAsset;
 			zoneFight.GetDisplayTex ().LoadImage (tmp.bytes);
-
+			_animator.SetBool("IsEquipSword",false);
+			_animator.SetBool("IsEquipBomb",false);
+			_animator.SetBool("IsEquipNone",true);
+			_animator.SetBool("IsEquipGun",false);
 		
 			
 		}  
 		else if (name == "Gun(Clone)") {
 			TextAsset tmp = Resources.Load ("Button-B", typeof(TextAsset)) as TextAsset;
 			zoneFight.GetDisplayTex ().LoadImage (tmp.bytes);
-
-
-		}  
-		else if (name == "Bomb(Clone)") {
-			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
-			zoneFight.GetDisplayTex ().LoadImage (tmp.bytes);
+			_animator.SetBool("IsEquipSword",false);
+			_animator.SetBool("IsEquipBomb",false);
+			_animator.SetBool("IsEquipNone",false);
+			_animator.SetBool("IsEquipGun",true);
 
 		}  
-		else if (name == "Sword(Clone)") {
+		else if (name.CompareTo("Bomb(Clone)")==0) {
 			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
 			zoneFight.GetDisplayTex ().LoadImage (tmp.bytes);
-
+			_animator.SetBool("IsEquipSword",false);
+			_animator.SetBool("IsEquipBomb",true);
+			_animator.SetBool("IsEquipNone",false);
+			_animator.SetBool("IsEquipGun",false);
+		}  
+		else if (name.CompareTo("Sword(Clone)")==0) {
+			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
+			zoneFight.GetDisplayTex ().LoadImage (tmp.bytes);
+			_animator.SetBool("IsEquipSword",true);
+			_animator.SetBool("IsEquipBomb",false);
+			_animator.SetBool("IsEquipNone",false);
+			_animator.SetBool("IsEquipGun",false);
 		}  
 		
 	

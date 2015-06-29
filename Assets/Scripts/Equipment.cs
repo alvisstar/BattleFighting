@@ -24,7 +24,7 @@ public class Equipment : MonoBehaviour {
 		if(_weapon != null)
 			Destroy(_weapon);
 
-		if(_prefabWeapon.name =="None")
+		/*if(_prefabWeapon.name =="None")
 		{
 			gameObject.GetComponent<PlayerControler>()._animator.SetBool("IsEquipSword",false);
 			gameObject.GetComponent<PlayerControler>()._animator.SetBool("IsEquipBomb",false);
@@ -55,31 +55,37 @@ public class Equipment : MonoBehaviour {
 			gameObject.GetComponent<PlayerControler>()._animator.SetBool("IsEquipNone",false);
 			gameObject.GetComponent<PlayerControler>()._animator.SetBool("IsEquipGun",false);
 
-		}
-
+		}*/
+		_weapon = Instantiate (_prefabWeapon, _righthandTransform.position, _righthandTransform.rotation) as GameObject;
+		
+		_weapon.transform.SetParent(_righthandTransform);
+		Hashtable hash = new Hashtable();
+		hash.Add("Type", _weapon.name);
+		NotificationCenter.DefaultCenter.PostNotification(this, "OnWeaponChange",hash);
 		hasWeapon = true;
 	}
-	void Update()
+	/*void Update()
 	{
 		if(hasWeapon)
 		{
 			i++;
 			if(i>5)
 			{
-			_weapon = Instantiate (_prefabWeapon, _righthandTransform.position, _righthandTransform.rotation) as GameObject;
-			
-			_weapon.transform.SetParent(_righthandTransform);
+				_weapon = Instantiate (_prefabWeapon, _righthandTransform.position, _righthandTransform.rotation) as GameObject;
+				
+				_weapon.transform.SetParent(_righthandTransform);
+				Hashtable hash = new Hashtable();
+				hash.Add("Type", _weapon.name);
+				NotificationCenter.DefaultCenter.PostNotification(this, "OnWeaponChange",hash);
 
 			
 			
-			Hashtable hash = new Hashtable();
-			hash.Add("Type", _weapon.name);
-			NotificationCenter.DefaultCenter.PostNotification(this, "OnWeaponChange",hash);
+			
 			hasWeapon = false;
 			i=0;
 			}
 		}
 	
 
-	}
+	}*/
 }
