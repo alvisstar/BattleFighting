@@ -9,9 +9,11 @@ public class Mine : Weapon {
 	
 	public override void OnAttack()
 	{
+		characterTransform.GetComponent<PlayerControler>().SetAnimationAttack();
 		GameObject landMine = Instantiate(minePrefabs, characterTransform.position, characterTransform.rotation) as GameObject;
 		landMine.transform.Rotate(0,180,0);
 		LandMine script = landMine.GetComponent<LandMine> ();
 		script.Init (characterTransform.forward);
+		characterTransform.GetComponent<PlayerControler>().FinishAttack();
 	}
 }

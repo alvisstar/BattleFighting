@@ -84,6 +84,7 @@ public class PlayerControler : MonoBehaviour {
 			_animator.SetBool("IsEquipBomb",false);
 			_animator.SetBool("IsEquipNone",true);
 			_animator.SetBool("IsEquipGun",false);
+
 		
 			
 		}  
@@ -299,6 +300,8 @@ public class PlayerControler : MonoBehaviour {
 	void Attack()
 	{
 		if (GetComponent<Equipment> ()._weapon == null) {
+			SetAnimationAttack();
+			FinishAttack();
 			return;
 		}
 		if (GetComponent<Equipment> ()._weapon.name == "Longbow03(Clone)") 
