@@ -31,6 +31,9 @@ public class Weapon : MonoBehaviour {
 		numberOfWeapon--;
 		if (numberOfWeapon <= 0) {
 			Destroy(gameObject);
+			Hashtable hash = new Hashtable();
+			hash.Add("Type", "None");
+			NotificationCenter.DefaultCenter.PostNotification(this, "OnWeaponChange",hash);
 		}
 	}
 
