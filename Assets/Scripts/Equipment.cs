@@ -7,8 +7,10 @@ public class Equipment : MonoBehaviour {
 	public Transform _righthandTransform = null;
 	// Use this for initialization
 	public GameObject _weapon = null;
-
+	bool hasWeapon;
+	int  i =0;
 	void Start () {
+		hasWeapon = false;
 
 	}
 	
@@ -16,18 +18,60 @@ public class Equipment : MonoBehaviour {
 		_prefabWeapon = prefabWeapon;
 		if(_weapon != null)
 			Destroy(_weapon);
-		gameObject.GetComponent<PlayerControler>()._animator.SetBool("IsEquipSword",true);
-		gameObject.GetComponent<PlayerControler>()._animator.SetBool("IsEquipBomb",false);
-		gameObject.GetComponent<PlayerControler>()._animator.SetBool("IsEquipNone",false);
-		gameObject.GetComponent<PlayerControler>()._animator.SetBool("IsEquipGun",false);
-		_weapon = Instantiate (prefabWeapon, _righthandTransform.position, _righthandTransform.rotation) as GameObject;
-		//_weapon.transform.Rotate(0,90,0);
-		_weapon.transform.SetParent(_righthandTransform);
-		//_weapon.gameObject.GetComponent<PlayerControler>()._animator.
+		if(_prefabWeapon.name =="None")
+		{
+			gameObject.GetComponent<PlayerControler>()._animator.SetBool("IsEquipSword",false);
+			gameObject.GetComponent<PlayerControler>()._animator.SetBool("IsEquipBomb",false);
+			gameObject.GetComponent<PlayerControler>()._animator.SetBool("IsEquipNone",true);
+			gameObject.GetComponent<PlayerControler>()._animator.SetBool("IsEquipGun",false);
 
+		}
+		else if(_prefabWeapon.name =="Gun")
+		{
+			gameObject.GetComponent<PlayerControler>()._animator.SetBool("IsEquipSword",false);
+			gameObject.GetComponent<PlayerControler>()._animator.SetBool("IsEquipBomb",false);
+			gameObject.GetComponent<PlayerControler>()._animator.SetBool("IsEquipNone",false);
+			gameObject.GetComponent<PlayerControler>()._animator.SetBool("IsEquipGun",true);
 
-		Hashtable hash = new Hashtable();
-		hash.Add("Type", _weapon.name);
-		NotificationCenter.DefaultCenter.PostNotification(this, "OnWeaponChange",hash);
+		}
+		else if(_prefabWeapon.name =="Bomb")
+		{
+			gameObject.GetComponent<PlayerControler>()._animator.SetBool("IsEquipSword",false);
+			gameObject.GetComponent<PlayerControler>()._animator.SetBool("IsEquipBomb",true);
+			gameObject.GetComponent<PlayerControler>()._animator.SetBool("IsEquipNone",false);
+			gameObject.GetComponent<PlayerControler>()._animator.SetBool("IsEquipGun",false);
+
+		}
+		else if(_prefabWeapon.name =="Sword")
+		{
+			gameObject.GetComponent<PlayerControler>()._animator.SetBool("IsEquipSword",true);
+			gameObject.GetComponent<PlayerControler>()._animator.SetBool("IsEquipBomb",false);
+			gameObject.GetComponent<PlayerControler>()._animator.SetBool("IsEquipNone",false);
+			gameObject.GetComponent<PlayerControler>()._animator.SetBool("IsEquipGun",false);
+
+		}
+		hasWeapon = true;
+	}
+	void Update()
+	{
+		if(hasWeapon)
+		{
+			i++;
+			if(i>0)
+			{
+			_weapon = Instantiate (_prefabWeapon, _righthandTransform.position, _righthandTransform.rotation) as GameObject;
+
+			_weapon.transform.SetParent(_righthandTransform);
+
+			
+			
+			Hashtable hash = new Hashtable();
+			hash.Add("Type", _weapon.name);
+			NotificationCenter.DefaultCenter.PostNotification(this, "OnWeaponChange",hash);
+			hasWeapon = false;
+				i=0;
+			}
+		}
+	
 	}
 }
