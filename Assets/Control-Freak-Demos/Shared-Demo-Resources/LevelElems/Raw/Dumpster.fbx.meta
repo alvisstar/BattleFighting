@@ -38,7 +38,14 @@ labels:
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
+    100000: //RootNode
+    100002: Dumpster-00
+    400000: //RootNode
+    400002: Dumpster-00
+    2300000: Dumpster-00
+    3300000: Dumpster-00
     4300000: Dumpster-00
+    11100000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0

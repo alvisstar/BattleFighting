@@ -18,7 +18,34 @@ labels:
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
+    100000: BowArmature03
+    100002: End_B
+    100004: End_T
+    100006: Handle_T
+    100008: //RootNode
+    100010: Longbow03
+    100012: Mid_B
+    100014: Mid_T
+    100016: String
+    400000: BowArmature03
+    400002: End_B
+    400004: End_T
+    400006: Handle_T
+    400008: //RootNode
+    400010: Longbow03
+    400012: Mid_B
+    400014: Mid_T
+    400016: String
     4300000: Longbow03
+    7400000: Default Take
+    7400002: LongBowFire
+    7400004: LongBowFullPull
+    7400006: LongBowIdle
+    7400008: LongBowIdleFullPull
+    7400010: LongBowIdleLightPull
+    7400012: LongBowLightPull
+    11100000: //RootNode
+    13700000: Longbow03
   materials:
     importMaterials: 1
     materialName: 3

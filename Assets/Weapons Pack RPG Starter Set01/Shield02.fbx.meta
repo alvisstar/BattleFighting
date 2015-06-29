@@ -18,7 +18,15 @@ labels:
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
+    100000: Shield02
+    100002: //RootNode
+    400000: Shield02
+    400002: //RootNode
+    2300000: Shield02
+    3300000: Shield02
     4300000: Shield02
+    7400000: Default Take
+    11100000: //RootNode
   materials:
     importMaterials: 1
     materialName: 3
