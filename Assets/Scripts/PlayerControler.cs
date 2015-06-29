@@ -80,10 +80,11 @@ public class PlayerControler : MonoBehaviour {
 		else if (name == "None") {
 			TextAsset tmp = Resources.Load ("Button-B", typeof(TextAsset)) as TextAsset;
 			zoneFight.GetDisplayTex ().LoadImage (tmp.bytes);
+			_animator.SetBool("IsEquipNone",true);
 			_animator.SetBool("IsEquipGun",false);
 			_animator.SetBool("IsEquipBomb",false);
 			_animator.SetBool("IsEquipSword",false);
-			_animator.SetBool("IsEquipNone",true);
+		
 			
 		}  
 		else if (name == "Gun(Clone)") {
@@ -106,10 +107,10 @@ public class PlayerControler : MonoBehaviour {
 		else if (name == "Sword(Clone)") {
 			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
 			zoneFight.GetDisplayTex ().LoadImage (tmp.bytes);
-			_animator.SetBool("IsEquipSword",true);
+			/*_animator.SetBool("IsEquipSword",true);
 			_animator.SetBool("IsEquipBomb",false);
 			_animator.SetBool("IsEquipNone",false);
-			_animator.SetBool("IsEquipGun",false);
+			_animator.SetBool("IsEquipGun",false);*/
 		}  
 		
 	

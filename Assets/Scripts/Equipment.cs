@@ -16,9 +16,15 @@ public class Equipment : MonoBehaviour {
 		_prefabWeapon = prefabWeapon;
 		if(_weapon != null)
 			Destroy(_weapon);
+		gameObject.GetComponent<PlayerControler>()._animator.SetBool("IsEquipSword",true);
+		gameObject.GetComponent<PlayerControler>()._animator.SetBool("IsEquipBomb",false);
+		gameObject.GetComponent<PlayerControler>()._animator.SetBool("IsEquipNone",false);
+		gameObject.GetComponent<PlayerControler>()._animator.SetBool("IsEquipGun",false);
 		_weapon = Instantiate (prefabWeapon, _righthandTransform.position, _righthandTransform.rotation) as GameObject;
-		_weapon.transform.Rotate(0,180,0);
+		//_weapon.transform.Rotate(0,90,0);
 		_weapon.transform.SetParent(_righthandTransform);
+		//_weapon.gameObject.GetComponent<PlayerControler>()._animator.
+
 
 		Hashtable hash = new Hashtable();
 		hash.Add("Type", _weapon.name);
