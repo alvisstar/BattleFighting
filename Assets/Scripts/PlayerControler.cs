@@ -87,7 +87,7 @@ public class PlayerControler : MonoBehaviour {
 			_animator.SetBool("IsEquipBomb",false);
 			_animator.SetBool("IsEquipNone",true);
 			_animator.SetBool("IsEquipGun",false);
-
+			_animator.SetBool("IsEquipMine",false);
 		
 			
 		}  
