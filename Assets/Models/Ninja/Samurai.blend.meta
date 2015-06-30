@@ -1,8 +1,6 @@
 fileFormatVersion: 2
-guid: 970e8f8a029234b42b1285827e1def7b
-labels:
-- Mobile
-timeCreated: 1435499618
+guid: e921df87bdcec054d8b52b2864f734cc
+timeCreated: 1435598002
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -90,15 +88,23 @@ ModelImporter:
     7400018: GunHurt
     7400020: GunIdle
     7400022: GunWalk
-    7400024: Hurt
-    7400026: Idle
-    7400028: Skill1
-    7400030: SwordAttackL
-    7400032: SwordAttackR
-    7400034: SwordHurt
-    7400036: SwordIdle
-    7400038: SwordWalk
-    7400040: Walk
+    7400024: HammerAttack
+    7400026: HammerHurt
+    7400028: HammerIdle
+    7400030: HammerWalk
+    7400032: Hurt
+    7400034: Idle
+    7400036: MineAttack
+    7400038: MineHurt
+    7400040: MineIdle
+    7400042: MineWalk
+    7400044: Skill1
+    7400046: SwordAttackL
+    7400048: SwordAttackR
+    7400050: SwordHurt
+    7400052: SwordIdle
+    7400054: SwordWalk
+    7400056: Walk
     9500000: //RootNode
     13700000: Character
   materials:
@@ -125,7 +131,7 @@ ModelImporter:
       name: Default Take
       takeName: Default Take
       firstFrame: 0
-      lastFrame: 21
+      lastFrame: 11
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -413,7 +419,7 @@ ModelImporter:
       name: BombAttack
       takeName: BombAttack
       firstFrame: -1
-      lastFrame: 21
+      lastFrame: 14
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -611,7 +617,7 @@ ModelImporter:
       level: 0
       cycleOffset: 0
       loop: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -707,7 +713,7 @@ ModelImporter:
       level: 0
       cycleOffset: 0
       loop: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -1091,7 +1097,7 @@ ModelImporter:
       level: 0
       cycleOffset: 0
       loop: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -1187,7 +1193,391 @@ ModelImporter:
       level: 0
       cycleOffset: 0
       loop: 0
-      loopTime: 1
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/ArmIK_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/FingerUp_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/FingerUp_L/Finger_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/ThumbUp_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/ThumbUp_L/Thumb_L
+        weight: 1
+      - path: Armature/ArmIK_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/FingerUp_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/FingerUp_R/Finger_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/ThumbUp_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/ThumbUp_R/Thumb_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/Weapon
+        weight: 1
+      - path: Armature/Hip_001
+        weight: 1
+      - path: Armature/Hip_001/Hip
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Head
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_L/Leg_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_R/Leg_R
+        weight: 1
+      - path: Armature/LegIK_L
+        weight: 1
+      - path: Armature/LegIK_L/Foot_L
+        weight: 1
+      - path: Armature/LegIK_R
+        weight: 1
+      - path: Armature/LegIK_R/Foot_R
+        weight: 1
+      - path: Character
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: HammerAttack
+      takeName: HammerAttack
+      firstFrame: -1
+      lastFrame: 10
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/ArmIK_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/FingerUp_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/FingerUp_L/Finger_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/ThumbUp_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/ThumbUp_L/Thumb_L
+        weight: 1
+      - path: Armature/ArmIK_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/FingerUp_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/FingerUp_R/Finger_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/ThumbUp_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/ThumbUp_R/Thumb_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/Weapon
+        weight: 1
+      - path: Armature/Hip_001
+        weight: 1
+      - path: Armature/Hip_001/Hip
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Head
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_L/Leg_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_R/Leg_R
+        weight: 1
+      - path: Armature/LegIK_L
+        weight: 1
+      - path: Armature/LegIK_L/Foot_L
+        weight: 1
+      - path: Armature/LegIK_R
+        weight: 1
+      - path: Armature/LegIK_R/Foot_R
+        weight: 1
+      - path: Character
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: HammerHurt
+      takeName: HammerHurt
+      firstFrame: -1
+      lastFrame: 10
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/ArmIK_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/FingerUp_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/FingerUp_L/Finger_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/ThumbUp_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/ThumbUp_L/Thumb_L
+        weight: 1
+      - path: Armature/ArmIK_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/FingerUp_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/FingerUp_R/Finger_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/ThumbUp_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/ThumbUp_R/Thumb_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/Weapon
+        weight: 1
+      - path: Armature/Hip_001
+        weight: 1
+      - path: Armature/Hip_001/Hip
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Head
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_L/Leg_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_R/Leg_R
+        weight: 1
+      - path: Armature/LegIK_L
+        weight: 1
+      - path: Armature/LegIK_L/Foot_L
+        weight: 1
+      - path: Armature/LegIK_R
+        weight: 1
+      - path: Armature/LegIK_R/Foot_R
+        weight: 1
+      - path: Character
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: HammerIdle
+      takeName: HammerIdle
+      firstFrame: -1
+      lastFrame: 19
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/ArmIK_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/FingerUp_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/FingerUp_L/Finger_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/ThumbUp_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/ThumbUp_L/Thumb_L
+        weight: 1
+      - path: Armature/ArmIK_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/FingerUp_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/FingerUp_R/Finger_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/ThumbUp_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/ThumbUp_R/Thumb_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/Weapon
+        weight: 1
+      - path: Armature/Hip_001
+        weight: 1
+      - path: Armature/Hip_001/Hip
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Head
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_L/Leg_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_R/Leg_R
+        weight: 1
+      - path: Armature/LegIK_L
+        weight: 1
+      - path: Armature/LegIK_L/Foot_L
+        weight: 1
+      - path: Armature/LegIK_R
+        weight: 1
+      - path: Armature/LegIK_R/Foot_R
+        weight: 1
+      - path: Character
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: HammerWalk
+      takeName: HammerWalk
+      firstFrame: -1
+      lastFrame: 11
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -1374,6 +1764,390 @@ ModelImporter:
       takeName: Idle
       firstFrame: -1
       lastFrame: 19
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/ArmIK_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/FingerUp_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/FingerUp_L/Finger_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/ThumbUp_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/ThumbUp_L/Thumb_L
+        weight: 1
+      - path: Armature/ArmIK_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/FingerUp_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/FingerUp_R/Finger_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/ThumbUp_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/ThumbUp_R/Thumb_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/Weapon
+        weight: 1
+      - path: Armature/Hip_001
+        weight: 1
+      - path: Armature/Hip_001/Hip
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Head
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_L/Leg_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_R/Leg_R
+        weight: 1
+      - path: Armature/LegIK_L
+        weight: 1
+      - path: Armature/LegIK_L/Foot_L
+        weight: 1
+      - path: Armature/LegIK_R
+        weight: 1
+      - path: Armature/LegIK_R/Foot_R
+        weight: 1
+      - path: Character
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: MineAttack
+      takeName: MineAttack
+      firstFrame: -1
+      lastFrame: 19
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/ArmIK_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/FingerUp_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/FingerUp_L/Finger_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/ThumbUp_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/ThumbUp_L/Thumb_L
+        weight: 1
+      - path: Armature/ArmIK_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/FingerUp_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/FingerUp_R/Finger_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/ThumbUp_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/ThumbUp_R/Thumb_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/Weapon
+        weight: 1
+      - path: Armature/Hip_001
+        weight: 1
+      - path: Armature/Hip_001/Hip
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Head
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_L/Leg_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_R/Leg_R
+        weight: 1
+      - path: Armature/LegIK_L
+        weight: 1
+      - path: Armature/LegIK_L/Foot_L
+        weight: 1
+      - path: Armature/LegIK_R
+        weight: 1
+      - path: Armature/LegIK_R/Foot_R
+        weight: 1
+      - path: Character
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: MineHurt
+      takeName: MineHurt
+      firstFrame: -1
+      lastFrame: 10
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/ArmIK_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/FingerUp_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/FingerUp_L/Finger_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/ThumbUp_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/ThumbUp_L/Thumb_L
+        weight: 1
+      - path: Armature/ArmIK_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/FingerUp_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/FingerUp_R/Finger_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/ThumbUp_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/ThumbUp_R/Thumb_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/Weapon
+        weight: 1
+      - path: Armature/Hip_001
+        weight: 1
+      - path: Armature/Hip_001/Hip
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Head
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_L/Leg_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_R/Leg_R
+        weight: 1
+      - path: Armature/LegIK_L
+        weight: 1
+      - path: Armature/LegIK_L/Foot_L
+        weight: 1
+      - path: Armature/LegIK_R
+        weight: 1
+      - path: Armature/LegIK_R/Foot_R
+        weight: 1
+      - path: Character
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: MineIdle
+      takeName: MineIdle
+      firstFrame: -1
+      lastFrame: 19
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/ArmIK_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/FingerUp_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/FingerUp_L/Finger_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/ThumbUp_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/ThumbUp_L/Thumb_L
+        weight: 1
+      - path: Armature/ArmIK_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/FingerUp_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/FingerUp_R/Finger_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/ThumbUp_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/ThumbUp_R/Thumb_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/Weapon
+        weight: 1
+      - path: Armature/Hip_001
+        weight: 1
+      - path: Armature/Hip_001/Hip
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Head
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_L/Leg_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_R/Leg_R
+        weight: 1
+      - path: Armature/LegIK_L
+        weight: 1
+      - path: Armature/LegIK_L/Foot_L
+        weight: 1
+      - path: Armature/LegIK_R
+        weight: 1
+      - path: Armature/LegIK_R/Foot_R
+        weight: 1
+      - path: Character
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: MineWalk
+      takeName: MineWalk
+      firstFrame: -1
+      lastFrame: 11
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -2051,7 +2825,7 @@ ModelImporter:
       level: 0
       cycleOffset: 0
       loop: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
