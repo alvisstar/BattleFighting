@@ -384,9 +384,13 @@ public class PlayerControler : MonoBehaviour {
 		}
 		else if (GetComponent<Equipment> ()._weapon.name == "Mine(Clone)") 
 		{
-			GetComponent<Equipment>()._weapon.GetComponent<Mine> ().characterTransform = gameObject.transform;
-			GetComponent<Equipment> ()._weapon.GetComponent<Mine> ().equipTransform = GetComponent<Equipment> ()._weapon.transform;
-			GetComponent<Equipment> ()._weapon.GetComponent<Mine> ().Attack ();	
+			if(GetComponent<Equipment> ()._weapon.GetComponent<Mine> ().CheckAllowAttack())
+			{	
+				SetAnimationAttack();
+				_animator.GetBehaviour<MineAttackBehaviour>().player = this.gameObject;
+			}
+
+
 
 		}	
 		else if (GetComponent<Equipment> ()._weapon.name == "Sword(Clone)") 

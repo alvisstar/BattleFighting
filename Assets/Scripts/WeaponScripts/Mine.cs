@@ -9,15 +9,15 @@ public class Mine : Weapon {
 	public Transform equipTransform;
 	public override void OnAttack()
 	{
-		if(characterTransform.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 0.1)//&& GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("BombAttack"))
+		if( characterTransform.GetComponent<PlayerControler>()._animator.GetCurrentAnimatorStateInfo(0).IsName("MineAttack"))
 		{
-		characterTransform.GetComponent<PlayerControler>().SetAnimationAttack();
+			numberOfWeapon--;
 			GameObject landMine = Instantiate(minePrefabs, equipTransform.position, equipTransform.rotation) as GameObject;
 		//landMine.transform.Rotate(0,180,0);
-		LandMine script = landMine.GetComponent<LandMine> ();
-		equipTransform.rotation = characterTransform.rotation;
-		script.Init (equipTransform.forward);
-		characterTransform.GetComponent<PlayerControler>().FinishAttack();
+			LandMine script = landMine.GetComponent<LandMine> ();
+			equipTransform.rotation = characterTransform.rotation;
+			script.Init (equipTransform.forward);
+
 		}
 	}
 }
