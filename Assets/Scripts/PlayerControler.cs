@@ -25,6 +25,7 @@ public class PlayerControler : MonoBehaviour {
 	}
 
 	public float hp = 10;
+	public float maxHp = 10;
 	private Vector3 directionMove = new Vector3(0,0,0);
 
 	// Use this for initialization
