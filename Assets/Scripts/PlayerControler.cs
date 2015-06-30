@@ -130,7 +130,35 @@ public class PlayerControler : MonoBehaviour {
 		{
 
 			Attack();
-				
+
+		/*	if(_animator.GetCurrentAnimatorStateInfo (0).IsName("ManagerState"))
+				Debug.Log( "ManagerState");	
+			if(_animator.GetCurrentAnimatorStateInfo (0).IsName("BombState"))
+				Debug.Log( "BombState");	
+			if(_animator.GetCurrentAnimatorStateInfo (0).IsName("BombIdle"))
+				Debug.Log( "BombIdle");	
+			if(_animator.GetCurrentAnimatorStateInfo (0).IsName("BombAttack"))
+				Debug.Log( "BombAttack");	
+			if(_animator.GetCurrentAnimatorStateInfo (0).IsName("BombWalk"))
+				Debug.Log( "BombWalk");	
+			if(_animator.GetCurrentAnimatorStateInfo (0).IsName("GunState"))
+				Debug.Log( "GunState");	
+			if(_animator.GetCurrentAnimatorStateInfo (0).IsName("GunIdle"))
+				Debug.Log( "GunIdle");	
+			if(_animator.GetCurrentAnimatorStateInfo (0).IsName("GunWalk"))
+				Debug.Log( "GunWalk");	
+			if(_animator.GetCurrentAnimatorStateInfo (0).IsName("GunAttack"))
+				Debug.Log( "GunAttack");	
+
+			if(_animator.GetCurrentAnimatorStateInfo (0).IsName("SwordState"))
+				Debug.Log( "SwordState");	
+			if(_animator.GetCurrentAnimatorStateInfo (0).IsName("SwordIdle"))
+				Debug.Log( "SwordIdle");	
+			if(_animator.GetCurrentAnimatorStateInfo (0).IsName("SwordWalk"))
+				Debug.Log( "SwordWalk");	
+			if(_animator.GetCurrentAnimatorStateInfo (0).IsName("SwordAttack"))
+				Debug.Log( "SwordAttack");	*/
+
 
 		}
 
@@ -253,6 +281,7 @@ public class PlayerControler : MonoBehaviour {
 		{
 			//_animator.SetTrigger (attackHash);
 			_isAttack = true;
+		
 		}
 		//approach 2 move with velocity
 		directionMove.Normalize ();
@@ -314,7 +343,7 @@ public class PlayerControler : MonoBehaviour {
 		{
 			GetComponent<Equipment> ()._weapon.GetComponent<Gun> ().characterTransform = gameObject.transform;
 			GetComponent<Equipment> ()._weapon.GetComponent<Gun> ().Attack ();	
-
+	
 		}
 		else if (GetComponent<Equipment> ()._weapon.name == "Bomb(Clone)") 
 		{
@@ -323,6 +352,7 @@ public class PlayerControler : MonoBehaviour {
 				GetComponent<Equipment> ()._weapon.GetComponent<Bomb> ().equipTransform = GetComponent<Equipment> ()._weapon.transform;
 
 				GetComponent<Equipment> ()._weapon.GetComponent<Bomb> ().Attack ();	
+
 
 		}
 		else if (GetComponent<Equipment> ()._weapon.name == "Mine(Clone)") 
@@ -334,7 +364,8 @@ public class PlayerControler : MonoBehaviour {
 		else if (GetComponent<Equipment> ()._weapon.name == "Sword(Clone)") 
 		{
 			GetComponent<Equipment>()._weapon.GetComponent<Sword> ().characterTransform = gameObject.transform;
-			GetComponent<Equipment> ()._weapon.GetComponent<Sword> ().Attack ();	
+			GetComponent<Equipment> ()._weapon.GetComponent<Sword> ().Attack ();
+
 		}		
 	}
 }

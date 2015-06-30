@@ -412,7 +412,7 @@ ModelImporter:
     - serializedVersion: 16
       name: BombAttack
       takeName: BombAttack
-      firstFrame: 4.5
+      firstFrame: -1
       lastFrame: 21
       wrapMode: 0
       orientationOffsetY: 0
