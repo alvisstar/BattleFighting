@@ -17,9 +17,9 @@ public class HpBar : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (GetComponent<PlayerControler> ()) {
-			currentHp = GetComponent<PlayerControler> ().hp;
+			currentHp = GetComponent<PlayerControler> ().hp / GetComponent<PlayerControler> ().maxHp;
 		} else if (GetComponent<BotControler> ()) {
-			currentHp = GetComponent<BotControler> ().hp;
+			currentHp = GetComponent<BotControler> ().hp / GetComponent<BotControler> ().maxHp;
 		}
 	}
 	

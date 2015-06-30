@@ -8,6 +8,7 @@ public class BotControler : AdvancedFSM {
 	private Vector3 directionMove = new Vector3(0,0,0);
 	public bool isDie;
 	public float hp = 2;
+	public float maxHp = 2;
 	// Use this for initialization
 	private bool _isMain = false;
 	[SerializeField] float m_MovingTurnSpeed = 360;
