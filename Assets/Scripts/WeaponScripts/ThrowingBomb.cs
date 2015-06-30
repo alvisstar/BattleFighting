@@ -35,7 +35,7 @@ public class ThrowingBomb : MonoBehaviour {
 	{
 		direction = directionz;
 		direction += new Vector3 (0, 1f	, 0);
-		Physics.IgnoreCollision(GetComponent<Collider>(), characterTransform.gameObject.GetComponent<Collider>());
+		//Physics.IgnoreCollision(GetComponent<Collider>(), characterTransform.gameObject.GetComponent<Collider>());
 		GetComponent<Rigidbody> ().AddForce(direction*10,ForceMode.Impulse);
 
 	}
@@ -45,6 +45,8 @@ public class ThrowingBomb : MonoBehaviour {
 		if(col.gameObject.name == "Terrain" )
 		{
 			beginExplode = true;
+			Physics.IgnoreCollision(GetComponent<Collider>(), characterTransform.gameObject.GetComponent<Collider>(),false);
+
 		}
 	}
 }

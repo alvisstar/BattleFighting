@@ -95,7 +95,7 @@ public class PlayerControler : MonoBehaviour {
 			_animator.SetBool("IsEquipBomb",false);
 			_animator.SetBool("IsEquipNone",false);
 			_animator.SetBool("IsEquipGun",true);
-
+			_animator.SetBool("IsEquipMine",false);
 		}  
 		else if (name.CompareTo("Bomb(Clone)")==0) {
 			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
@@ -104,6 +104,7 @@ public class PlayerControler : MonoBehaviour {
 			_animator.SetBool("IsEquipBomb",true);
 			_animator.SetBool("IsEquipNone",false);
 			_animator.SetBool("IsEquipGun",false);
+			_animator.SetBool("IsEquipMine",false);
 		}  
 		else if (name.CompareTo("Sword(Clone)")==0) {
 			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
@@ -112,6 +113,16 @@ public class PlayerControler : MonoBehaviour {
 			_animator.SetBool("IsEquipBomb",false);
 			_animator.SetBool("IsEquipNone",false);
 			_animator.SetBool("IsEquipGun",false);
+			_animator.SetBool("IsEquipMine",false);
+		} 
+		else if (name.CompareTo("Mine(Clone)")==0) {
+			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
+			zoneFight.GetDisplayTex ().LoadImage (tmp.bytes);
+			_animator.SetBool("IsEquipSword",false);
+			_animator.SetBool("IsEquipBomb",false);
+			_animator.SetBool("IsEquipNone",false);
+			_animator.SetBool("IsEquipGun",false);
+			_animator.SetBool("IsEquipMine",true);
 		}  
 		
 	
@@ -358,6 +369,7 @@ public class PlayerControler : MonoBehaviour {
 		else if (GetComponent<Equipment> ()._weapon.name == "Mine(Clone)") 
 		{
 			GetComponent<Equipment>()._weapon.GetComponent<Mine> ().characterTransform = gameObject.transform;
+			GetComponent<Equipment> ()._weapon.GetComponent<Mine> ().equipTransform = GetComponent<Equipment> ()._weapon.transform;
 			GetComponent<Equipment> ()._weapon.GetComponent<Mine> ().Attack ();	
 
 		}	

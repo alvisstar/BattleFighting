@@ -12,8 +12,8 @@ public class Bomb : Weapon {
 		if(characterTransform.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 0.1)//&& GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("BombAttack"))
 		{
 			characterTransform.GetComponent<PlayerControler>().SetAnimationAttack();
-			GameObject throwingBomb = Instantiate(bombPrefabs,equipTransform.position + new Vector3(0, 2.0f, 0), equipTransform.rotation) as GameObject;
-			throwingBomb.transform.Rotate(0,180,0);
+			GameObject throwingBomb = Instantiate(bombPrefabs,equipTransform.position + new Vector3(0, 0.5f, 0), equipTransform.rotation) as GameObject;
+			//throwingBomb.transform.Rotate(0,180,0);
 			throwingBomb.GetComponent<ThrowingBomb> ().characterTransform = characterTransform;
 			ThrowingBomb script = throwingBomb.GetComponent<ThrowingBomb> ();
 			

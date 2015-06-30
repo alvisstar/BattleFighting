@@ -6,14 +6,18 @@ public class Mine : Weapon {
 	// Use this for initialization
 	public GameObject minePrefabs;
 	public Transform characterTransform;
-	
+	public Transform equipTransform;
 	public override void OnAttack()
 	{
+		if(characterTransform.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 0.1)//&& GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("BombAttack"))
+		{
 		characterTransform.GetComponent<PlayerControler>().SetAnimationAttack();
-		GameObject landMine = Instantiate(minePrefabs, characterTransform.position, characterTransform.rotation) as GameObject;
-		landMine.transform.Rotate(0,180,0);
+			GameObject landMine = Instantiate(minePrefabs, equipTransform.position, equipTransform.rotation) as GameObject;
+		//landMine.transform.Rotate(0,180,0);
 		LandMine script = landMine.GetComponent<LandMine> ();
-		script.Init (characterTransform.forward);
+		equipTransform.rotation = characterTransform.rotation;
+		script.Init (equipTransform.forward);
 		characterTransform.GetComponent<PlayerControler>().FinishAttack();
+		}
 	}
 }
