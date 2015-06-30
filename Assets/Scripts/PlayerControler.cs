@@ -35,6 +35,7 @@ public class PlayerControler : MonoBehaviour {
 	int isAttackedHash = Animator.StringToHash("IsAttacked");
 	int isDeadHash = Animator.StringToHash("IsDead");
 
+	bool _isRunningAnimation;
 	bool _isAttack;
 	public bool isDie;
 	bool _isKeyMovePressing;
@@ -62,6 +63,7 @@ public class PlayerControler : MonoBehaviour {
 		zoneSkill1	= this.ctrl.GetZone(1);
 		zoneSkill2	= this.ctrl.GetZone(2);
 		_isAttack = false;
+		_isRunningAnimation = false;
 		isDie = false;
 		hp = 50;
 		_force = 0;
@@ -142,14 +144,17 @@ public class PlayerControler : MonoBehaviour {
 
 			Attack();
 
-		/*	if(_animator.GetCurrentAnimatorStateInfo (0).IsName("ManagerState"))
+			if(_animator.GetCurrentAnimatorStateInfo (0).IsName("ManagerState"))
 				Debug.Log( "ManagerState");	
 			if(_animator.GetCurrentAnimatorStateInfo (0).IsName("BombState"))
 				Debug.Log( "BombState");	
 			if(_animator.GetCurrentAnimatorStateInfo (0).IsName("BombIdle"))
 				Debug.Log( "BombIdle");	
 			if(_animator.GetCurrentAnimatorStateInfo (0).IsName("BombAttack"))
+			{
 				Debug.Log( "BombAttack");	
+				//GetComponent<Equipment> ()._weapon.GetComponent<Bomb> ().Attack ();	
+			}
 			if(_animator.GetCurrentAnimatorStateInfo (0).IsName("BombWalk"))
 				Debug.Log( "BombWalk");	
 			if(_animator.GetCurrentAnimatorStateInfo (0).IsName("GunState"))
@@ -168,7 +173,7 @@ public class PlayerControler : MonoBehaviour {
 			if(_animator.GetCurrentAnimatorStateInfo (0).IsName("SwordWalk"))
 				Debug.Log( "SwordWalk");	
 			if(_animator.GetCurrentAnimatorStateInfo (0).IsName("SwordAttack"))
-				Debug.Log( "SwordAttack");	*/
+				Debug.Log( "SwordAttack");	
 
 
 		}
@@ -306,7 +311,7 @@ public class PlayerControler : MonoBehaviour {
 	void HandleAnimation(){
 		float move = _isKeyMovePressing || _isTouchingDPad ? 1 : 0;
 		_animator.SetFloat("Speed", move);
-	
+
 
 	}
 	void OnTriggerEnter(Collider col)
@@ -331,11 +336,20 @@ public class PlayerControler : MonoBehaviour {
 	}
 	public void SetAnimationAttack()
 	{
-		_animator.SetTrigger (attackHash);
+		if(!_isRunningAnimation)
+		{
+			_animator.SetTrigger (attackHash);
+			_isRunningAnimation = true;
+		}
 	}
 	public void FinishAttack()
 	{
 		_isAttack = false;
+		_isRunningAnimation = false;
+	}
+	public bool GetIsAttack()
+	{
+		return _isAttack;
 	}
 	void Attack()
 	{
@@ -358,11 +372,12 @@ public class PlayerControler : MonoBehaviour {
 		}
 		else if (GetComponent<Equipment> ()._weapon.name == "Bomb(Clone)") 
 		{
-
-				GetComponent<Equipment> ()._weapon.GetComponent<Bomb> ().characterTransform = gameObject.transform;
-				GetComponent<Equipment> ()._weapon.GetComponent<Bomb> ().equipTransform = GetComponent<Equipment> ()._weapon.transform;
-
-				GetComponent<Equipment> ()._weapon.GetComponent<Bomb> ().Attack ();	
+			if(GetComponent<Equipment> ()._weapon.GetComponent<Bomb> ().CheckAllowAttack())
+			{			
+				SetAnimationAttack();
+				_animator.GetBehaviour<BombAttackBehaviour>().player = this.gameObject;
+					
+			}
 
 
 		}
@@ -380,4 +395,5 @@ public class PlayerControler : MonoBehaviour {
 
 		}		
 	}
+
 }

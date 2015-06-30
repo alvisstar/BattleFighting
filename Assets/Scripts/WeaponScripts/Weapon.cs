@@ -17,7 +17,15 @@ public class Weapon : MonoBehaviour {
 		currentTime += Time.deltaTime;
 	}
 
-	
+	public bool CheckAllowAttack()
+	{
+		if (currentTime < delayTime) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
 	public void Attack()
 	{
 		if (currentTime < delayTime) {
@@ -33,7 +41,7 @@ public class Weapon : MonoBehaviour {
 			return;
 		}
 		else{
-			numberOfWeapon--;
+		
 			if (numberOfWeapon <= 0) {
 				Destroy(gameObject);
 				Hashtable hash = new Hashtable();
