@@ -55,6 +55,9 @@ public class PlayerControler : MonoBehaviour {
 	TouchZone 	zoneFight;
 	TouchZone 	zoneSkill1	;
 	TouchZone 	zoneSkill2	;
+
+	public GameObject hpBarPrefab;
+
 	void Start () {
 		_animator = GetComponent<Animator>();
 		ctrl = Instantiate (ctrlPrefab);
@@ -72,6 +75,9 @@ public class PlayerControler : MonoBehaviour {
 		_firstPress = false;
 		_animator.SetBool ("IsEquipNone", true);
 		NotificationCenter.DefaultCenter.AddObserver(this, "OnWeaponChange");
+
+		GameObject hpBarObject = Instantiate (hpBarPrefab);
+		hpBarObject.GetComponent<HpBar> ().owner = gameObject;
 	}
 	void OnWeaponChange (NotificationCenter.Notification arg)
 	{

@@ -29,13 +29,16 @@ public class BotControler : AdvancedFSM {
 		}
 	}
 	public AIBotManager controller;
+	public GameObject hpBarPrefab;
 	void Start () {
 		speed = 0.1f;
 		isDie = false;
 		NotificationCenter.DefaultCenter.AddObserver(this, "OnBombExplode");
 		NotificationCenter.DefaultCenter.AddObserver(this, "OnMineExplode");
 		ConstructFSM ();
-
+		
+		GameObject hpBarObject = Instantiate (hpBarPrefab);
+		hpBarObject.GetComponent<HpBar> ().owner = gameObject;
 	}
 	private void ConstructFSM()
 	{

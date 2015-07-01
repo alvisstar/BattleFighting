@@ -4,10 +4,11 @@ using System.Collections;
 public class HpBar : MonoBehaviour {
 	
 	public float currentHp = 1;
-	Vector2 pos = new Vector2(0,0);
-	Vector2 size = new Vector2(150,15);
-	public Texture2D progressBarEmpty;
-	public Texture2D progressBarFull;
+//	Vector2 pos = new Vector2(0,0);
+//	Vector2 size = new Vector2(150,15);
+//	public Texture2D progressBarEmpty;
+//	public Texture2D progressBarFull;
+	public GameObject owner;
 
 	// Use this for initialization
 	void Start () {
@@ -16,11 +17,12 @@ public class HpBar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (GetComponent<PlayerControler> ()) {
-			currentHp = GetComponent<PlayerControler> ().hp / GetComponent<PlayerControler> ().maxHp;
-		} else if (GetComponent<BotControler> ()) {
-			currentHp = GetComponent<BotControler> ().hp / GetComponent<BotControler> ().maxHp;
-		}
+//		if (GetComponent<PlayerControler> ()) {
+//			currentHp = GetComponent<PlayerControler> ().hp / GetComponent<PlayerControler> ().maxHp;
+//		} else if (GetComponent<BotControler> ()) {
+//			currentHp = GetComponent<BotControler> ().hp / GetComponent<BotControler> ().maxHp;
+//		}
+		transform.position = owner.transform.position + new Vector3(0,3.2f,0);
 	}
 	
 	void OnGUI()

@@ -30,5 +30,7 @@ public class CameraControler : MonoBehaviour {
 		gameObject.transform.position = Vector3.Lerp(_positionTemp,new Vector3(targetObject.transform.position.x, _positionTemp.y ,targetObject.transform.position.z - DistanceObject),Time.deltaTime*10);	
 		//_positionTemp.z =  targetObject.transform.position.z - DistanceObject;
 		//gameObject.transform.position = _positionTemp;	
+
+		//transform.LookAt (Vector3.zero);
 	}
 }
