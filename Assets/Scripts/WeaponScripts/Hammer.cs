@@ -23,4 +23,13 @@ public class Hammer : Weapon {
 		
 		
 	}
+	void OnTriggerEnter (Collider other) {
+
+		
+		if (other.gameObject.tag == "Bot" || other.gameObject.tag == "Player") {
+
+			other.gameObject.GetComponent<Rigidbody> ().velocity = other.gameObject.transform.forward  *30;				
+
+		}
+	}
 }
