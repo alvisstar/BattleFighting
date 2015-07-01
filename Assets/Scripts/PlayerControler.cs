@@ -367,8 +367,12 @@ public class PlayerControler : MonoBehaviour {
 		}
 		else if (GetComponent<Equipment> ()._weapon.name == "Gun(Clone)") 
 		{
-			GetComponent<Equipment> ()._weapon.GetComponent<Gun> ().characterTransform = gameObject.transform;
-			GetComponent<Equipment> ()._weapon.GetComponent<Gun> ().Attack ();	
+			if(GetComponent<Equipment> ()._weapon.GetComponent<Gun> ().CheckAllowAttack())
+			{			
+				SetAnimationAttack();
+				_animator.GetBehaviour<GunAttackBehaviour>().player = this.gameObject;
+				
+			}
 	
 		}
 		else if (GetComponent<Equipment> ()._weapon.name == "Bomb(Clone)") 
