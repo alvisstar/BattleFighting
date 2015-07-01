@@ -48,4 +48,13 @@ public class LandMine : MonoBehaviour {
 			Explose();
 		}
 	}
+	void OnTriggerEnter (Collider other) {
+		if (currentTime < activeTime) {
+			return;
+		}
+		
+		if (other.gameObject.tag == "Bot" || other.gameObject.tag == "Player") {
+			Explose();
+		}
+	}
 }
