@@ -12,11 +12,11 @@ public class Mine : Weapon {
 		if( characterTransform.GetComponent<PlayerControler>()._animator.GetCurrentAnimatorStateInfo(0).IsName("MineAttack"))
 		{
 			numberOfWeapon--;
-			GameObject landMine = Instantiate(minePrefabs, equipTransform.position, equipTransform.rotation) as GameObject;
-			landMine.transform.Rotate(0,0,270	);
+			GameObject landMine = Instantiate(minePrefabs, new Vector3(equipTransform.position.x,0,equipTransform.position.z), equipTransform.rotation) as GameObject;
+			landMine.transform.Rotate(0,0,0	);
 			LandMine script = landMine.GetComponent<LandMine> ();
-			equipTransform.rotation = characterTransform.rotation;
-			script.Init (equipTransform.forward);
+			//equipTransform.rotation = characterTransform.rotation;
+			script.Init (characterTransform.forward);
 
 		}
 	}

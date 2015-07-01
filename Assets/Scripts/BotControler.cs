@@ -93,7 +93,7 @@ public class BotControler : AdvancedFSM {
 	{
 		Hashtable hash  = arg.data;
 		Vector3 position =(Vector3) hash["Position"];
-		if((position - gameObject.transform.position).magnitude <3)
+		if((position - gameObject.transform.position).magnitude <5)
 		if (hp <= 0) {
 			isDie = true;
 			GetComponent<Animator>().SetTrigger(isDeadHash);
