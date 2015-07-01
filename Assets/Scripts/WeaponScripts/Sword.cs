@@ -7,17 +7,19 @@ public class Sword : Weapon {
 
 	public Transform characterTransform;
 	public Transform equipTransform;
+	public Xft.XWeaponTrail trail;
 	void Start () {
 		numberOfWeapon = -1;
+
+		trail.Deactivate ();
+		//trail.Init ();
 
 	}
 
 	public override void OnAttack()
 	{
 
-			characterTransform.GetComponent<PlayerControler>().SetAnimationAttack();
 			
-			characterTransform.GetComponent<PlayerControler>().FinishAttack();
 			
 			
 
