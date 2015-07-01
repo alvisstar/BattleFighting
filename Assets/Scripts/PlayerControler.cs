@@ -88,6 +88,7 @@ public class PlayerControler : MonoBehaviour {
 			_animator.SetBool("IsEquipNone",true);
 			_animator.SetBool("IsEquipGun",false);
 			_animator.SetBool("IsEquipMine",false);
+			_animator.SetBool("IsEquipHammer",false);
 		
 			
 		}  
@@ -99,6 +100,7 @@ public class PlayerControler : MonoBehaviour {
 			_animator.SetBool("IsEquipNone",false);
 			_animator.SetBool("IsEquipGun",true);
 			_animator.SetBool("IsEquipMine",false);
+			_animator.SetBool("IsEquipHammer",false);
 		}  
 		else if (name.CompareTo("Bomb(Clone)")==0) {
 			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
@@ -108,6 +110,7 @@ public class PlayerControler : MonoBehaviour {
 			_animator.SetBool("IsEquipNone",false);
 			_animator.SetBool("IsEquipGun",false);
 			_animator.SetBool("IsEquipMine",false);
+			_animator.SetBool("IsEquipHammer",false);
 		}  
 		else if (name.CompareTo("Sword(Clone)")==0) {
 			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
@@ -117,6 +120,7 @@ public class PlayerControler : MonoBehaviour {
 			_animator.SetBool("IsEquipNone",false);
 			_animator.SetBool("IsEquipGun",false);
 			_animator.SetBool("IsEquipMine",false);
+			_animator.SetBool("IsEquipHammer",false);
 		} 
 		else if (name.CompareTo("Mine(Clone)")==0) {
 			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
@@ -126,6 +130,17 @@ public class PlayerControler : MonoBehaviour {
 			_animator.SetBool("IsEquipNone",false);
 			_animator.SetBool("IsEquipGun",false);
 			_animator.SetBool("IsEquipMine",true);
+			_animator.SetBool("IsEquipHammer",false);
+		}  
+		else if (name.CompareTo("Hammer(Clone)")==0) {
+			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
+			zoneFight.GetDisplayTex ().LoadImage (tmp.bytes);
+			_animator.SetBool("IsEquipSword",false);
+			_animator.SetBool("IsEquipBomb",false);
+			_animator.SetBool("IsEquipNone",false);
+			_animator.SetBool("IsEquipGun",false);
+			_animator.SetBool("IsEquipMine",false);
+			_animator.SetBool("IsEquipHammer",true);
 		}  
 		
 	
@@ -402,6 +417,12 @@ public class PlayerControler : MonoBehaviour {
 			GetComponent<Equipment>()._weapon.GetComponent<Sword> ().characterTransform = gameObject.transform;
 			GetComponent<Equipment> ()._weapon.GetComponent<Sword> ().Attack ();
 
+		}	
+		else if (GetComponent<Equipment> ()._weapon.name == "Hammer(Clone)") 
+		{
+			GetComponent<Equipment>()._weapon.GetComponent<Hammer> ().characterTransform = gameObject.transform;
+			GetComponent<Equipment> ()._weapon.GetComponent<Hammer> ().Attack ();
+			
 		}		
 	}
 
