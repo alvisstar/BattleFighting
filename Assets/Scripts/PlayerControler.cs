@@ -33,6 +33,7 @@ public class PlayerControler : MonoBehaviour {
 	
 	public Animator _animator;
 	int attackHash = Animator.StringToHash("Attack");
+	int skill1Hash = Animator.StringToHash("Skill1");
 	int isAttackedHash = Animator.StringToHash("IsAttacked");
 	int isDeadHash = Animator.StringToHash("IsDead");
 
@@ -315,6 +316,12 @@ public class PlayerControler : MonoBehaviour {
 			_isAttack = true;
 		
 		}
+		if(Input.GetKeyDown(KeyCode.F))
+		{
+			Skill1();
+
+			
+		}
 		//approach 2 move with velocity
 		directionMove.Normalize ();
 		//gameObject.GetComponent<Rigidbody> ().velocity = directionMove * speed * 100;
@@ -337,7 +344,7 @@ public class PlayerControler : MonoBehaviour {
 			BeHitted();
 		}
 	}
-	IEnumerator WaitOneSecond() { yield return new WaitForSeconds(1); }
+
 	public void BeHitted()
 	{
 		if (hp <= 0) {
@@ -366,6 +373,11 @@ public class PlayerControler : MonoBehaviour {
 	public bool GetIsAttack()
 	{
 		return _isAttack;
+	}
+	void Skill1()
+	{
+		_animator.SetTrigger (skill1Hash);
+		GetComponent<Rigidbody>().AddForce(transform.forward*600,ForceMode.Impulse);
 	}
 	void Attack()
 	{
