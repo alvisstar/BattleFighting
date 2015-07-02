@@ -9,10 +9,12 @@ public class HpBar : MonoBehaviour {
 //	public Texture2D progressBarEmpty;
 //	public Texture2D progressBarFull;
 	public GameObject owner;
+	public GameObject currentHpObject;
+	public GameObject maxHpObject;
 
 	// Use this for initialization
 	void Start () {
-	
+		UpdateHpBar (0.4f);
 	}
 	
 	// Update is called once per frame
@@ -26,6 +28,16 @@ public class HpBar : MonoBehaviour {
 			transform.position = owner.GetComponent<PlayerControler>().headTranform.position;
 		else if (owner.GetComponent<BotControler>())
 			transform.position = owner.GetComponent<BotControler>().headTranform.position;
+	}
+
+	void UpdateHpBar(float currentHpz) {
+		currentHp = currentHpz;
+
+		Vector3 scale = new Vector3 (currentHp * maxHpObject.transform.localScale.x, currentHpObject.transform.localScale.y, currentHpObject.transform.localScale.z);
+		currentHpObject.transform.localScale = scale;
+
+//		Vector3 position = new Vector3 (- (maxHpObject.transform.localScale.x - scale.x) /2 , currentHpObject.transform.position.y, currentHpObject.transform.position.z);
+//		currentHpObject.transform.position = position;
 	}
 	
 	void OnGUI()
