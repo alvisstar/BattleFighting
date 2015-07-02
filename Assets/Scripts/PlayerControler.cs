@@ -57,6 +57,7 @@ public class PlayerControler : MonoBehaviour {
 	TouchZone 	zoneSkill2	;
 
 	public GameObject hpBarPrefab;
+	public Transform headTranform;
 
 	void Start () {
 		_animator = GetComponent<Animator>();

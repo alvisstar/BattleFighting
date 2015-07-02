@@ -30,6 +30,7 @@ public class BotControler : AdvancedFSM {
 	}
 	public AIBotManager controller;
 	public GameObject hpBarPrefab;
+	public Transform headTranform;
 	void Start () {
 		speed = 0.1f;
 		isDie = false;

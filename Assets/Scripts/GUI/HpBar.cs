@@ -22,7 +22,10 @@ public class HpBar : MonoBehaviour {
 //		} else if (GetComponent<BotControler> ()) {
 //			currentHp = GetComponent<BotControler> ().hp / GetComponent<BotControler> ().maxHp;
 //		}
-		transform.position = owner.transform.position + new Vector3(0,3.2f,0);
+		if (owner.GetComponent<PlayerControler>())
+			transform.position = owner.GetComponent<PlayerControler>().headTranform.position;
+		else if (owner.GetComponent<BotControler>())
+			transform.position = owner.GetComponent<BotControler>().headTranform.position;
 	}
 	
 	void OnGUI()
