@@ -14,7 +14,7 @@ public class HpBar : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		UpdateHpBar (0.4f);
+//		UpdateHpBar (0.4f);
 	}
 	
 	// Update is called once per frame
