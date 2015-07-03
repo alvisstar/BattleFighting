@@ -7,8 +7,8 @@ public class BotControler : AdvancedFSM {
 	public float speed = 0.1f;
 	private Vector3 directionMove = new Vector3(0,0,0);
 	public bool isDie;
-	public float hp = 2;
-	public float maxHp = 2;
+	public float hp;
+	public float maxHp;
 	// Use this for initialization
 	private bool _isMain = false;
 	[SerializeField] float m_MovingTurnSpeed = 360;
@@ -32,6 +32,7 @@ public class BotControler : AdvancedFSM {
 	public GameObject hpBarPrefab;
 	public Transform headTranform;
 	void Start () {
+		hp = maxHp = 20;
 		speed = 0.1f;
 		isDie = false;
 		NotificationCenter.DefaultCenter.AddObserver(this, "OnBombExplode");
