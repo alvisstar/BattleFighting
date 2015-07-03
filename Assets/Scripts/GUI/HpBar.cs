@@ -1,21 +1,24 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class HpBar : MonoBehaviour {
 	
 	public float currentHp = 1;
 	public GameObject owner;
-	public GameObject currentHpObject;
+	public GameObject currentHpPivot;
 	public GameObject maxHpObject;
+	public GameObject currentHpObject;
 
 	private float currentTime;
 	private float remainShowTime;
 	private float showTime = 2;
 	private float oldHp;
 
+	public Material[] materials;
+
 	// Use this for initialization
 	void Start () {
-		ShowHpBar (false);
+		ShowHpBar (true);
 		oldHp = currentHp;
 	}
 	
@@ -30,26 +33,38 @@ public class HpBar : MonoBehaviour {
 		}
 		UpdateHpBar ();
 
+		// destroy hp bar when current hp <= 0
 		if (currentHp <= 0) {
 			Destroy (gameObject);
 		}
 
+		// auto hide and show hp bar
 		if (oldHp != currentHp) {
 			remainShowTime = showTime;
-			Debug.Log(currentHp);
 		}
 		remainShowTime -= Time.deltaTime;
-		ShowHpBar (remainShowTime > 0);
+//		ShowHpBar (remainShowTime > 0);
 		oldHp = currentHp;
+
+		// set color for health bar
+		if (currentHp >= 0.75) {
+			currentHpObject.GetComponent<Renderer>().material = materials[0];
+		} else if (currentHp >= 0.5 && currentHp < 0.75) {
+			currentHpObject.GetComponent<Renderer>().material = materials[1];
+		} else if (currentHp >= 0.25 && currentHp < 0.5) {
+			currentHpObject.GetComponent<Renderer>().material = materials[2];			
+		} else if (currentHp > 0 && currentHp < 0.25) {
+			currentHpObject.GetComponent<Renderer>().material = materials[3];			
+		}
 	}
 
 	void UpdateHpBar() {
-		Vector3 scale = new Vector3 (currentHp, currentHpObject.transform.localScale.y, currentHpObject.transform.localScale.z);
-		currentHpObject.transform.localScale = scale;
+		Vector3 scale = new Vector3 (currentHp, currentHpPivot.transform.localScale.y, currentHpPivot.transform.localScale.z);
+		currentHpPivot.transform.localScale = scale;
 	}
 
 	void ShowHpBar(bool isShow) {
-		currentHpObject.GetComponentInChildren<MeshRenderer> ().enabled = isShow;
+		currentHpPivot.GetComponentInChildren<MeshRenderer> ().enabled = isShow;
 		maxHpObject.GetComponent<MeshRenderer> ().enabled = isShow;
 	}
 }
