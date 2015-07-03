@@ -18,7 +18,7 @@ public class HpBar : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		ShowHpBar (true);
+		ShowHpBar (false);
 		oldHp = currentHp;
 	}
 	
@@ -43,7 +43,7 @@ public class HpBar : MonoBehaviour {
 			remainShowTime = showTime;
 		}
 		remainShowTime -= Time.deltaTime;
-//		ShowHpBar (remainShowTime > 0);
+		ShowHpBar (remainShowTime > 0);
 		oldHp = currentHp;
 
 		// set color for health bar
