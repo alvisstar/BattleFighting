@@ -15,13 +15,14 @@ public class ThrowingBomb : MonoBehaviour {
 	void Start () {
 		beginExplode = false;
 		timeToExplode = 0;
+		beginExplode = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (beginExplode)
 			timeToExplode += Time.deltaTime;
-		if (timeToExplode >= 2)
+		if (timeToExplode >= 1.7	)
 		{
 			Instantiate(prefabExplode,gameObject.transform.position,Quaternion.identity);
 			Hashtable hash = new Hashtable();
@@ -36,7 +37,9 @@ public class ThrowingBomb : MonoBehaviour {
 		direction = directionz;
 		direction += new Vector3 (0, 1f	, 0);
 		//Physics.IgnoreCollision(GetComponent<Collider>(), characterTransform.gameObject.GetComponent<Collider>());
-		GetComponent<Rigidbody> ().AddForce(direction*10,ForceMode.Impulse);
+
+		GetComponent<Rigidbody> ().velocity =  characterTransform.GetComponent<Rigidbody> ().velocity;
+		GetComponent<Rigidbody> ().AddForce(direction*8,ForceMode.Impulse);
 
 	}
 	
@@ -44,7 +47,7 @@ public class ThrowingBomb : MonoBehaviour {
 	{
 		if(col.gameObject.name == "Terrain" )
 		{
-			beginExplode = true;
+			//beginExplode = true;
 			Physics.IgnoreCollision(GetComponent<Collider>(), characterTransform.gameObject.GetComponent<Collider>(),false);
 
 		}

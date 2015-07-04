@@ -33,6 +33,7 @@ public class PlayerControler : MonoBehaviour {
 	
 	public Animator _animator;
 	int attackHash = Animator.StringToHash("Attack");
+	int skill1Hash = Animator.StringToHash("Skill1");
 	int isAttackedHash = Animator.StringToHash("IsAttacked");
 	int isDeadHash = Animator.StringToHash("IsDead");
 
@@ -54,6 +55,10 @@ public class PlayerControler : MonoBehaviour {
 	TouchZone 	zoneFight;
 	TouchZone 	zoneSkill1	;
 	TouchZone 	zoneSkill2	;
+
+	public GameObject hpBarPrefab;
+	public Transform headTranform;
+
 	void Start () {
 		_animator = GetComponent<Animator>();
 		ctrl = Instantiate (ctrlPrefab);
@@ -66,11 +71,14 @@ public class PlayerControler : MonoBehaviour {
 		_isAttack = false;
 		_isRunningAnimation = false;
 		isDie = false;
-		hp = 50;
+		hp = maxHp = 50;
 		_force = 0;
 		_firstPress = false;
 		_animator.SetBool ("IsEquipNone", true);
 		NotificationCenter.DefaultCenter.AddObserver(this, "OnWeaponChange");
+
+		GameObject hpBarObject = Instantiate (hpBarPrefab);
+		hpBarObject.GetComponent<HpBar> ().owner = gameObject;
 	}
 	void OnWeaponChange (NotificationCenter.Notification arg)
 	{
@@ -87,7 +95,8 @@ public class PlayerControler : MonoBehaviour {
 			_animator.SetBool("IsEquipBomb",false);
 			_animator.SetBool("IsEquipNone",true);
 			_animator.SetBool("IsEquipGun",false);
-
+			_animator.SetBool("IsEquipMine",false);
+			_animator.SetBool("IsEquipHammer",false);
 		
 			
 		}  
@@ -99,6 +108,7 @@ public class PlayerControler : MonoBehaviour {
 			_animator.SetBool("IsEquipNone",false);
 			_animator.SetBool("IsEquipGun",true);
 			_animator.SetBool("IsEquipMine",false);
+			_animator.SetBool("IsEquipHammer",false);
 		}  
 		else if (name.CompareTo("Bomb(Clone)")==0) {
 			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
@@ -108,6 +118,7 @@ public class PlayerControler : MonoBehaviour {
 			_animator.SetBool("IsEquipNone",false);
 			_animator.SetBool("IsEquipGun",false);
 			_animator.SetBool("IsEquipMine",false);
+			_animator.SetBool("IsEquipHammer",false);
 		}  
 		else if (name.CompareTo("Sword(Clone)")==0) {
 			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
@@ -117,6 +128,7 @@ public class PlayerControler : MonoBehaviour {
 			_animator.SetBool("IsEquipNone",false);
 			_animator.SetBool("IsEquipGun",false);
 			_animator.SetBool("IsEquipMine",false);
+			_animator.SetBool("IsEquipHammer",false);
 		} 
 		else if (name.CompareTo("Mine(Clone)")==0) {
 			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
@@ -126,6 +138,17 @@ public class PlayerControler : MonoBehaviour {
 			_animator.SetBool("IsEquipNone",false);
 			_animator.SetBool("IsEquipGun",false);
 			_animator.SetBool("IsEquipMine",true);
+			_animator.SetBool("IsEquipHammer",false);
+		}  
+		else if (name.CompareTo("Hammer(Clone)")==0) {
+			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
+			zoneFight.GetDisplayTex ().LoadImage (tmp.bytes);
+			_animator.SetBool("IsEquipSword",false);
+			_animator.SetBool("IsEquipBomb",false);
+			_animator.SetBool("IsEquipNone",false);
+			_animator.SetBool("IsEquipGun",false);
+			_animator.SetBool("IsEquipMine",false);
+			_animator.SetBool("IsEquipHammer",true);
 		}  
 		
 	
@@ -300,6 +323,12 @@ public class PlayerControler : MonoBehaviour {
 			_isAttack = true;
 		
 		}
+		if(Input.GetKeyDown(KeyCode.F))
+		{
+			Skill1();
+
+			
+		}
 		//approach 2 move with velocity
 		directionMove.Normalize ();
 		//gameObject.GetComponent<Rigidbody> ().velocity = directionMove * speed * 100;
@@ -322,7 +351,7 @@ public class PlayerControler : MonoBehaviour {
 			BeHitted();
 		}
 	}
-	IEnumerator WaitOneSecond() { yield return new WaitForSeconds(1); }
+
 	public void BeHitted()
 	{
 		if (hp <= 0) {
@@ -352,6 +381,11 @@ public class PlayerControler : MonoBehaviour {
 	{
 		return _isAttack;
 	}
+	void Skill1()
+	{
+		_animator.SetTrigger (skill1Hash);
+		GetComponent<Rigidbody>().AddForce(transform.forward*600,ForceMode.Impulse);
+	}
 	void Attack()
 	{
 		if (GetComponent<Equipment> ()._weapon == null) {
@@ -367,8 +401,12 @@ public class PlayerControler : MonoBehaviour {
 		}
 		else if (GetComponent<Equipment> ()._weapon.name == "Gun(Clone)") 
 		{
-			GetComponent<Equipment> ()._weapon.GetComponent<Gun> ().characterTransform = gameObject.transform;
-			GetComponent<Equipment> ()._weapon.GetComponent<Gun> ().Attack ();	
+			if(GetComponent<Equipment> ()._weapon.GetComponent<Gun> ().CheckAllowAttack())
+			{			
+				SetAnimationAttack();
+				_animator.GetBehaviour<GunAttackBehaviour>().player = this.gameObject;
+				
+			}
 	
 		}
 		else if (GetComponent<Equipment> ()._weapon.name == "Bomb(Clone)") 
@@ -395,9 +433,20 @@ public class PlayerControler : MonoBehaviour {
 		}	
 		else if (GetComponent<Equipment> ()._weapon.name == "Sword(Clone)") 
 		{
-			GetComponent<Equipment>()._weapon.GetComponent<Sword> ().characterTransform = gameObject.transform;
-			GetComponent<Equipment> ()._weapon.GetComponent<Sword> ().Attack ();
+			if(GetComponent<Equipment> ()._weapon.GetComponent<Sword> ().CheckAllowAttack())
+			{			
+				SetAnimationAttack();
+				_animator.GetBehaviour<SwordAttackBehaviour>().player = this.gameObject;
+				
+			}
 
+
+		}	
+		else if (GetComponent<Equipment> ()._weapon.name == "Hammer(Clone)") 
+		{
+			GetComponent<Equipment>()._weapon.GetComponent<Hammer> ().characterTransform = gameObject.transform;
+			GetComponent<Equipment> ()._weapon.GetComponent<Hammer> ().Attack ();
+			
 		}		
 	}
 

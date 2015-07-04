@@ -17,8 +17,8 @@ public class Bomb : Weapon {
 			throwingBomb.GetComponent<ThrowingBomb> ().characterTransform = characterTransform;
 			ThrowingBomb script = throwingBomb.GetComponent<ThrowingBomb> ();
 
-			equipTransform.rotation = characterTransform.rotation;
-			script.Init (equipTransform.forward);
+			//equipTransform.rotation = characterTransform.rotation;
+			script.Init (characterTransform.forward);
 
 
 
