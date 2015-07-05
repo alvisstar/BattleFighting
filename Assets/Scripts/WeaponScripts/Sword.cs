@@ -24,7 +24,7 @@ public class Sword : Weapon {
 	void OnTriggerEnter (Collider other) {
 		
 		
-		if ((other.gameObject.tag == "Bot" || other.gameObject.tag == "Player" )&& characterTransform.GetComponent<PlayerControler>()._animator.GetCurrentAnimatorStateInfo(0).IsName("SwordAttack")) {
+		if ((other.gameObject.tag == "Bot" || other.gameObject.tag == "Player" )&& characterTransform.gameObject.GetComponent<PlayerControler>()._animator.GetCurrentAnimatorStateInfo(0).IsName("SwordAttack")) {
 
 			other.gameObject.GetComponent<Rigidbody> ().velocity = other.gameObject.transform.forward*(-1)  *4;			
 			other.gameObject.GetComponent<BotControler>().BeHitted();
