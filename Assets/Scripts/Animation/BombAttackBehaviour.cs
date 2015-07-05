@@ -20,7 +20,7 @@ public class BombAttackBehaviour : StateMachineBehaviour
 	
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-		if(stateInfo.normalizedTime >0.3 && player.GetComponent<PlayerControler>().GetIsAttack())
+		if(stateInfo.normalizedTime >0.5 && player.GetComponent<PlayerControler>().GetIsAttack())
 		{
 			player.GetComponent<Equipment> ()._weapon.GetComponent<Bomb> ().characterTransform = player.transform;
 			player.GetComponent<Equipment> ()._weapon.GetComponent<Bomb> ().equipTransform = player.GetComponent<Equipment> ()._weapon.transform;

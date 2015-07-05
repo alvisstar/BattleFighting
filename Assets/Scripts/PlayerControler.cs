@@ -10,6 +10,7 @@ public class PlayerControler : MonoBehaviour {
 	public float minSpeed = 0.075f;
 	private float _force;
 	public TextAsset imageAsset;
+	bool _allowControl;
 	public float CurrentSpeed {
 		get {
 			return currentSpeed;
@@ -60,6 +61,7 @@ public class PlayerControler : MonoBehaviour {
 	public Transform headTranform;
 
 	void Start () {
+		_allowControl = true;
 		_animator = GetComponent<Animator>();
 		ctrl = Instantiate (ctrlPrefab);
 		walkStick = this.ctrl.GetStick (0);
@@ -163,6 +165,11 @@ public class PlayerControler : MonoBehaviour {
 	void Update () {
 		_isKeyMovePressing = KeyboardControl ();
 		HandleAnimation ();
+		if (GetComponent<Rigidbody> ().velocity == Vector3.zero) {
+			_allowControl = true;
+			_animator.SetBool ("IsSkill1",false);
+			_animator.SetBool ("IsSkill",false);
+		}
 		if(_isAttack)
 		{
 
@@ -215,7 +222,7 @@ public class PlayerControler : MonoBehaviour {
 	void FixedUpdate()
 	{
 		// processing for D-Pad
-		if (this.ctrl) {	
+		if (this.ctrl && _allowControl) {	
 			// Get stick and zone references by IDs...			
 
 
@@ -323,7 +330,7 @@ public class PlayerControler : MonoBehaviour {
 			_isAttack = true;
 		
 		}
-		if(Input.GetKeyDown(KeyCode.F))
+		if(Input.GetKeyDown(KeyCode.F) && _allowControl)
 		{
 			Skill1();
 
@@ -383,8 +390,10 @@ public class PlayerControler : MonoBehaviour {
 	}
 	void Skill1()
 	{
-		_animator.SetTrigger (skill1Hash);
+		_animator.SetBool ("IsSkill1",true);
+		_animator.SetBool ("IsSkill",true);
 		GetComponent<Rigidbody>().AddForce(transform.forward*600,ForceMode.Impulse);
+		_allowControl = false;
 	}
 	void Attack()
 	{
