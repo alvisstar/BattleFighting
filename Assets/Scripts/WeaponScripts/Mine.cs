@@ -13,7 +13,7 @@ public class Mine : Weapon {
 		{
 			numberOfWeapon--;
 			GameObject landMine = Instantiate(minePrefabs, new Vector3(equipTransform.position.x,0,equipTransform.position.z), equipTransform.rotation) as GameObject;
-			landMine.transform.Rotate(0,0,0	);
+			landMine.transform.Rotate(0,0,20	);
 			LandMine script = landMine.GetComponent<LandMine> ();
 			//equipTransform.rotation = characterTransform.rotation;
 			script.Init (characterTransform.forward);

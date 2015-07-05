@@ -13,7 +13,7 @@ public class Bomb : Weapon {
 		if( characterTransform.GetComponent<PlayerControler>()._animator.GetCurrentAnimatorStateInfo(0).IsName("BombAttack"))
 		{
 			numberOfWeapon--;
-			GameObject throwingBomb = Instantiate(bombPrefabs,equipTransform.position + new Vector3(0, 0.5f, 0), equipTransform.rotation) as GameObject;
+			GameObject throwingBomb = Instantiate(bombPrefabs,equipTransform.position + new Vector3(0, 1.0f, 0), equipTransform.rotation) as GameObject;
 			throwingBomb.GetComponent<ThrowingBomb> ().characterTransform = characterTransform;
 			ThrowingBomb script = throwingBomb.GetComponent<ThrowingBomb> ();
 
