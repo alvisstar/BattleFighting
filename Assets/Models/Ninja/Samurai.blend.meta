@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: e921df87bdcec054d8b52b2864f734cc
-timeCreated: 1435598002
+timeCreated: 1436080293
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -14,32 +14,30 @@ ModelImporter:
     100012: ArmUp_R
     100014: Body
     100016: BodyUp
-    100018: //RootNode
-    100020: Character
-    100022: Finger_L
-    100024: Finger_R
-    100026: FingerUp_L
-    100028: FingerUp_R
-    100030: Foot_L
-    100032: Foot_R
-    100034: Hand_L
-    100036: Hand_R
-    100038: Head
-    100040: Hip
-    100042: Hip_001
-    100044: Leg_L
-    100046: Leg_R
-    100048: LegIK_L
-    100050: LegIK_R
-    100052: LegUp_L
-    100054: LegUp_R
-    100056: Shoulder_L
-    100058: Shoulder_R
-    100060: Thumb_L
-    100062: Thumb_R
-    100064: ThumbUp_L
-    100066: ThumbUp_R
-    100068: Weapon
+    100018: Character
+    100020: Finger_L
+    100022: Finger_R
+    100024: FingerUp_L
+    100026: FingerUp_R
+    100028: Foot_L
+    100030: Foot_R
+    100032: Hand_L
+    100034: Hand_R
+    100036: Head
+    100038: Hip
+    100040: Hip_001
+    100042: Leg_L
+    100044: Leg_R
+    100046: LegIK_L
+    100048: LegIK_R
+    100050: LegUp_L
+    100052: LegUp_R
+    100054: //RootNode
+    100056: Thumb_L
+    100058: Thumb_R
+    100060: ThumbUp_L
+    100062: ThumbUp_R
+    100064: Weapon
     400000: Arm_L
     400002: Arm_R
     400004: Armature
@@ -49,32 +47,30 @@ ModelImporter:
     400012: ArmUp_R
     400014: Body
     400016: BodyUp
-    400018: //RootNode
-    400020: Character
-    400022: Finger_L
-    400024: Finger_R
-    400026: FingerUp_L
-    400028: FingerUp_R
-    400030: Foot_L
-    400032: Foot_R
-    400034: Hand_L
-    400036: Hand_R
-    400038: Head
-    400040: Hip
-    400042: Hip_001
-    400044: Leg_L
-    400046: Leg_R
-    400048: LegIK_L
-    400050: LegIK_R
-    400052: LegUp_L
-    400054: LegUp_R
-    400056: Shoulder_L
-    400058: Shoulder_R
-    400060: Thumb_L
-    400062: Thumb_R
-    400064: ThumbUp_L
-    400066: ThumbUp_R
-    400068: Weapon
+    400018: Character
+    400020: Finger_L
+    400022: Finger_R
+    400024: FingerUp_L
+    400026: FingerUp_R
+    400028: Foot_L
+    400030: Foot_R
+    400032: Hand_L
+    400034: Hand_R
+    400036: Head
+    400038: Hip
+    400040: Hip_001
+    400042: Leg_L
+    400044: Leg_R
+    400046: LegIK_L
+    400048: LegIK_R
+    400050: LegUp_L
+    400052: LegUp_R
+    400054: //RootNode
+    400056: Thumb_L
+    400058: Thumb_R
+    400060: ThumbUp_L
+    400062: ThumbUp_R
+    400064: Weapon
     4300000: Character
     7400000: Default Take
     7400002: AttackL
@@ -98,13 +94,17 @@ ModelImporter:
     7400038: MineHurt
     7400040: MineIdle
     7400042: MineWalk
-    7400044: Skill1
-    7400046: SwordAttackL
-    7400048: SwordAttackR
-    7400050: SwordHurt
-    7400052: SwordIdle
-    7400054: SwordWalk
-    7400056: Walk
+    7400044: SamuraiSkill1
+    7400046: SamuraiSkill2
+    7400048: ShitAttack
+    7400050: ShitHurt
+    7400052: ShitIdle
+    7400054: ShitWalk
+    7400056: SwordAttack
+    7400058: SwordHurt
+    7400060: SwordIdle
+    7400062: SwordWalk
+    7400064: Walk
     9500000: //RootNode
     13700000: Character
   materials:
@@ -131,7 +131,7 @@ ModelImporter:
       name: Default Take
       takeName: Default Take
       firstFrame: 0
-      lastFrame: 11
+      lastFrame: 9
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -189,19 +189,15 @@ ModelImporter:
         weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp
         weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
+        weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp/Head
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
         weight: 1
       - path: Armature/Hip_001/Hip/LegUp_L
         weight: 1
@@ -227,7 +223,7 @@ ModelImporter:
       name: AttackL
       takeName: AttackL
       firstFrame: -1
-      lastFrame: 10
+      lastFrame: 9
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -285,19 +281,15 @@ ModelImporter:
         weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp
         weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
+        weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp/Head
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
         weight: 1
       - path: Armature/Hip_001/Hip/LegUp_L
         weight: 1
@@ -323,7 +315,7 @@ ModelImporter:
       name: AttackR
       takeName: AttackR
       firstFrame: -1
-      lastFrame: 10
+      lastFrame: 9
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -381,19 +373,15 @@ ModelImporter:
         weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp
         weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
+        weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp/Head
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
         weight: 1
       - path: Armature/Hip_001/Hip/LegUp_L
         weight: 1
@@ -477,19 +465,15 @@ ModelImporter:
         weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp
         weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
+        weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp/Head
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
         weight: 1
       - path: Armature/Hip_001/Hip/LegUp_L
         weight: 1
@@ -515,7 +499,7 @@ ModelImporter:
       name: BombHurt
       takeName: BombHurt
       firstFrame: -1
-      lastFrame: 10
+      lastFrame: 7
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -573,19 +557,15 @@ ModelImporter:
         weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp
         weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
+        weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp/Head
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
         weight: 1
       - path: Armature/Hip_001/Hip/LegUp_L
         weight: 1
@@ -669,19 +649,15 @@ ModelImporter:
         weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp
         weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
+        weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp/Head
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
         weight: 1
       - path: Armature/Hip_001/Hip/LegUp_L
         weight: 1
@@ -707,7 +683,7 @@ ModelImporter:
       name: BombWalk
       takeName: BombWalk
       firstFrame: -1
-      lastFrame: 11
+      lastFrame: 7
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -765,19 +741,15 @@ ModelImporter:
         weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp
         weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
+        weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp/Head
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
         weight: 1
       - path: Armature/Hip_001/Hip/LegUp_L
         weight: 1
@@ -803,7 +775,7 @@ ModelImporter:
       name: Die
       takeName: Die
       firstFrame: -1
-      lastFrame: 15
+      lastFrame: 8
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -861,19 +833,15 @@ ModelImporter:
         weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp
         weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
+        weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp/Head
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
         weight: 1
       - path: Armature/Hip_001/Hip/LegUp_L
         weight: 1
@@ -899,7 +867,7 @@ ModelImporter:
       name: GunAttack
       takeName: GunAttack
       firstFrame: -1
-      lastFrame: 19
+      lastFrame: 9
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -957,19 +925,15 @@ ModelImporter:
         weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp
         weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
+        weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp/Head
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
         weight: 1
       - path: Armature/Hip_001/Hip/LegUp_L
         weight: 1
@@ -995,7 +959,7 @@ ModelImporter:
       name: GunHurt
       takeName: GunHurt
       firstFrame: -1
-      lastFrame: 10
+      lastFrame: 7
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1053,19 +1017,15 @@ ModelImporter:
         weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp
         weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
+        weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp/Head
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
         weight: 1
       - path: Armature/Hip_001/Hip/LegUp_L
         weight: 1
@@ -1149,19 +1109,15 @@ ModelImporter:
         weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp
         weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
+        weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp/Head
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
         weight: 1
       - path: Armature/Hip_001/Hip/LegUp_L
         weight: 1
@@ -1187,7 +1143,7 @@ ModelImporter:
       name: GunWalk
       takeName: GunWalk
       firstFrame: -1
-      lastFrame: 11
+      lastFrame: 7
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1245,19 +1201,15 @@ ModelImporter:
         weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp
         weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
+        weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp/Head
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
         weight: 1
       - path: Armature/Hip_001/Hip/LegUp_L
         weight: 1
@@ -1283,7 +1235,7 @@ ModelImporter:
       name: HammerAttack
       takeName: HammerAttack
       firstFrame: -1
-      lastFrame: 10
+      lastFrame: 9
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1341,19 +1293,15 @@ ModelImporter:
         weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp
         weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
+        weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp/Head
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
         weight: 1
       - path: Armature/Hip_001/Hip/LegUp_L
         weight: 1
@@ -1379,7 +1327,7 @@ ModelImporter:
       name: HammerHurt
       takeName: HammerHurt
       firstFrame: -1
-      lastFrame: 10
+      lastFrame: 7
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1437,19 +1385,15 @@ ModelImporter:
         weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp
         weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
+        weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp/Head
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
         weight: 1
       - path: Armature/Hip_001/Hip/LegUp_L
         weight: 1
@@ -1533,19 +1477,15 @@ ModelImporter:
         weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp
         weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
+        weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp/Head
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
         weight: 1
       - path: Armature/Hip_001/Hip/LegUp_L
         weight: 1
@@ -1571,7 +1511,7 @@ ModelImporter:
       name: HammerWalk
       takeName: HammerWalk
       firstFrame: -1
-      lastFrame: 11
+      lastFrame: 7
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1629,19 +1569,15 @@ ModelImporter:
         weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp
         weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
+        weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp/Head
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
         weight: 1
       - path: Armature/Hip_001/Hip/LegUp_L
         weight: 1
@@ -1667,7 +1603,7 @@ ModelImporter:
       name: Hurt
       takeName: Hurt
       firstFrame: -1
-      lastFrame: 10
+      lastFrame: 7
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1725,19 +1661,15 @@ ModelImporter:
         weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp
         weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
+        weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp/Head
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
         weight: 1
       - path: Armature/Hip_001/Hip/LegUp_L
         weight: 1
@@ -1821,19 +1753,15 @@ ModelImporter:
         weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp
         weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
+        weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp/Head
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
         weight: 1
       - path: Armature/Hip_001/Hip/LegUp_L
         weight: 1
@@ -1859,7 +1787,7 @@ ModelImporter:
       name: MineAttack
       takeName: MineAttack
       firstFrame: -1
-      lastFrame: 19
+      lastFrame: 12
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1917,19 +1845,15 @@ ModelImporter:
         weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp
         weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
+        weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp/Head
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
         weight: 1
       - path: Armature/Hip_001/Hip/LegUp_L
         weight: 1
@@ -1955,7 +1879,7 @@ ModelImporter:
       name: MineHurt
       takeName: MineHurt
       firstFrame: -1
-      lastFrame: 10
+      lastFrame: 7
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -2013,19 +1937,15 @@ ModelImporter:
         weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp
         weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
+        weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp/Head
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
         weight: 1
       - path: Armature/Hip_001/Hip/LegUp_L
         weight: 1
@@ -2057,7 +1977,7 @@ ModelImporter:
       level: 0
       cycleOffset: 0
       loop: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -2109,19 +2029,15 @@ ModelImporter:
         weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp
         weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
+        weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp/Head
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
         weight: 1
       - path: Armature/Hip_001/Hip/LegUp_L
         weight: 1
@@ -2147,7 +2063,467 @@ ModelImporter:
       name: MineWalk
       takeName: MineWalk
       firstFrame: -1
+      lastFrame: 7
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/ArmIK_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/FingerUp_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/FingerUp_L/Finger_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/ThumbUp_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/ThumbUp_L/Thumb_L
+        weight: 1
+      - path: Armature/ArmIK_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/FingerUp_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/FingerUp_R/Finger_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/ThumbUp_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/ThumbUp_R/Thumb_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/Weapon
+        weight: 1
+      - path: Armature/Hip_001
+        weight: 1
+      - path: Armature/Hip_001/Hip
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Head
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_L/Leg_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_R/Leg_R
+        weight: 1
+      - path: Armature/LegIK_L
+        weight: 1
+      - path: Armature/LegIK_L/Foot_L
+        weight: 1
+      - path: Armature/LegIK_R
+        weight: 1
+      - path: Armature/LegIK_R/Foot_R
+        weight: 1
+      - path: Character
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: SamuraiSkill1
+      takeName: SamuraiSkill1
+      firstFrame: -1
+      lastFrame: 10
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/ArmIK_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/FingerUp_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/FingerUp_L/Finger_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/ThumbUp_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/ThumbUp_L/Thumb_L
+        weight: 1
+      - path: Armature/ArmIK_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/FingerUp_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/FingerUp_R/Finger_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/ThumbUp_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/ThumbUp_R/Thumb_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/Weapon
+        weight: 1
+      - path: Armature/Hip_001
+        weight: 1
+      - path: Armature/Hip_001/Hip
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Head
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_L/Leg_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_R/Leg_R
+        weight: 1
+      - path: Armature/LegIK_L
+        weight: 1
+      - path: Armature/LegIK_L/Foot_L
+        weight: 1
+      - path: Armature/LegIK_R
+        weight: 1
+      - path: Armature/LegIK_R/Foot_R
+        weight: 1
+      - path: Character
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: SamuraiSkill2
+      takeName: SamuraiSkill2
+      firstFrame: -1
       lastFrame: 11
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/ArmIK_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/FingerUp_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/FingerUp_L/Finger_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/ThumbUp_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/ThumbUp_L/Thumb_L
+        weight: 1
+      - path: Armature/ArmIK_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/FingerUp_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/FingerUp_R/Finger_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/ThumbUp_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/ThumbUp_R/Thumb_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/Weapon
+        weight: 1
+      - path: Armature/Hip_001
+        weight: 1
+      - path: Armature/Hip_001/Hip
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Head
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_L/Leg_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_R/Leg_R
+        weight: 1
+      - path: Armature/LegIK_L
+        weight: 1
+      - path: Armature/LegIK_L/Foot_L
+        weight: 1
+      - path: Armature/LegIK_R
+        weight: 1
+      - path: Armature/LegIK_R/Foot_R
+        weight: 1
+      - path: Character
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: ShitAttack
+      takeName: ShitAttack
+      firstFrame: -1
+      lastFrame: 9
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/ArmIK_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/FingerUp_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/FingerUp_L/Finger_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/ThumbUp_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/ThumbUp_L/Thumb_L
+        weight: 1
+      - path: Armature/ArmIK_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/FingerUp_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/FingerUp_R/Finger_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/ThumbUp_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/ThumbUp_R/Thumb_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/Weapon
+        weight: 1
+      - path: Armature/Hip_001
+        weight: 1
+      - path: Armature/Hip_001/Hip
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Head
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_L/Leg_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_R/Leg_R
+        weight: 1
+      - path: Armature/LegIK_L
+        weight: 1
+      - path: Armature/LegIK_L/Foot_L
+        weight: 1
+      - path: Armature/LegIK_R
+        weight: 1
+      - path: Armature/LegIK_R/Foot_R
+        weight: 1
+      - path: Character
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: ShitHurt
+      takeName: ShitHurt
+      firstFrame: -1
+      lastFrame: 7
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/ArmIK_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/FingerUp_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/FingerUp_L/Finger_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/ThumbUp_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/ThumbUp_L/Thumb_L
+        weight: 1
+      - path: Armature/ArmIK_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/FingerUp_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/FingerUp_R/Finger_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/ThumbUp_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/ThumbUp_R/Thumb_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/Weapon
+        weight: 1
+      - path: Armature/Hip_001
+        weight: 1
+      - path: Armature/Hip_001/Hip
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Head
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_L/Leg_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_R/Leg_R
+        weight: 1
+      - path: Armature/LegIK_L
+        weight: 1
+      - path: Armature/LegIK_L/Foot_L
+        weight: 1
+      - path: Armature/LegIK_R
+        weight: 1
+      - path: Armature/LegIK_R/Foot_R
+        weight: 1
+      - path: Character
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: ShitIdle
+      takeName: ShitIdle
+      firstFrame: -1
+      lastFrame: 19
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -2205,19 +2581,15 @@ ModelImporter:
         weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp
         weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
+        weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp/Head
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
         weight: 1
       - path: Armature/Hip_001/Hip/LegUp_L
         weight: 1
@@ -2240,10 +2612,102 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
     - serializedVersion: 16
-      name: Skill1
-      takeName: Skill1
+      name: ShitWalk
+      takeName: ShitWalk
       firstFrame: -1
-      lastFrame: 6
+      lastFrame: 7
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/ArmIK_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/FingerUp_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/FingerUp_L/Finger_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/ThumbUp_L
+        weight: 1
+      - path: Armature/ArmIK_L/Hand_L/ThumbUp_L/Thumb_L
+        weight: 1
+      - path: Armature/ArmIK_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/FingerUp_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/FingerUp_R/Finger_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/ThumbUp_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/ThumbUp_R/Thumb_R
+        weight: 1
+      - path: Armature/ArmIK_R/Hand_R/Weapon
+        weight: 1
+      - path: Armature/Hip_001
+        weight: 1
+      - path: Armature/Hip_001/Hip
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/Head
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_L/Leg_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/LegUp_R/Leg_R
+        weight: 1
+      - path: Armature/LegIK_L
+        weight: 1
+      - path: Armature/LegIK_L/Foot_L
+        weight: 1
+      - path: Armature/LegIK_R
+        weight: 1
+      - path: Armature/LegIK_R/Foot_R
+        weight: 1
+      - path: Character
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: SwordAttack
+      takeName: SwordAttack
+      firstFrame: -1
+      lastFrame: 9
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -2301,211 +2765,15 @@ ModelImporter:
         weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp
         weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Head
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
         weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
         weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
         weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/LegUp_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/LegUp_L/Leg_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/LegUp_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/LegUp_R/Leg_R
-        weight: 1
-      - path: Armature/LegIK_L
-        weight: 1
-      - path: Armature/LegIK_L/Foot_L
-        weight: 1
-      - path: Armature/LegIK_R
-        weight: 1
-      - path: Armature/LegIK_R/Foot_R
-        weight: 1
-      - path: Character
-        weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
-    - serializedVersion: 16
-      name: SwordAttackL
-      takeName: SwordAttackL
-      firstFrame: -1
-      lastFrame: 10
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Armature
-        weight: 1
-      - path: Armature/ArmIK_L
-        weight: 1
-      - path: Armature/ArmIK_L/Hand_L
-        weight: 1
-      - path: Armature/ArmIK_L/Hand_L/FingerUp_L
-        weight: 1
-      - path: Armature/ArmIK_L/Hand_L/FingerUp_L/Finger_L
-        weight: 1
-      - path: Armature/ArmIK_L/Hand_L/ThumbUp_L
-        weight: 1
-      - path: Armature/ArmIK_L/Hand_L/ThumbUp_L/Thumb_L
-        weight: 1
-      - path: Armature/ArmIK_R
-        weight: 1
-      - path: Armature/ArmIK_R/Hand_R
-        weight: 1
-      - path: Armature/ArmIK_R/Hand_R/FingerUp_R
-        weight: 1
-      - path: Armature/ArmIK_R/Hand_R/FingerUp_R/Finger_R
-        weight: 1
-      - path: Armature/ArmIK_R/Hand_R/ThumbUp_R
-        weight: 1
-      - path: Armature/ArmIK_R/Hand_R/ThumbUp_R/Thumb_R
-        weight: 1
-      - path: Armature/ArmIK_R/Hand_R/Weapon
-        weight: 1
-      - path: Armature/Hip_001
-        weight: 1
-      - path: Armature/Hip_001/Hip
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
         weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp/Head
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/LegUp_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/LegUp_L/Leg_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/LegUp_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/LegUp_R/Leg_R
-        weight: 1
-      - path: Armature/LegIK_L
-        weight: 1
-      - path: Armature/LegIK_L/Foot_L
-        weight: 1
-      - path: Armature/LegIK_R
-        weight: 1
-      - path: Armature/LegIK_R/Foot_R
-        weight: 1
-      - path: Character
-        weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
-    - serializedVersion: 16
-      name: SwordAttackR
-      takeName: SwordAttackR
-      firstFrame: -1
-      lastFrame: 10
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Armature
-        weight: 1
-      - path: Armature/ArmIK_L
-        weight: 1
-      - path: Armature/ArmIK_L/Hand_L
-        weight: 1
-      - path: Armature/ArmIK_L/Hand_L/FingerUp_L
-        weight: 1
-      - path: Armature/ArmIK_L/Hand_L/FingerUp_L/Finger_L
-        weight: 1
-      - path: Armature/ArmIK_L/Hand_L/ThumbUp_L
-        weight: 1
-      - path: Armature/ArmIK_L/Hand_L/ThumbUp_L/Thumb_L
-        weight: 1
-      - path: Armature/ArmIK_R
-        weight: 1
-      - path: Armature/ArmIK_R/Hand_R
-        weight: 1
-      - path: Armature/ArmIK_R/Hand_R/FingerUp_R
-        weight: 1
-      - path: Armature/ArmIK_R/Hand_R/FingerUp_R/Finger_R
-        weight: 1
-      - path: Armature/ArmIK_R/Hand_R/ThumbUp_R
-        weight: 1
-      - path: Armature/ArmIK_R/Hand_R/ThumbUp_R/Thumb_R
-        weight: 1
-      - path: Armature/ArmIK_R/Hand_R/Weapon
-        weight: 1
-      - path: Armature/Hip_001
-        weight: 1
-      - path: Armature/Hip_001/Hip
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Head
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
         weight: 1
       - path: Armature/Hip_001/Hip/LegUp_L
         weight: 1
@@ -2531,7 +2799,7 @@ ModelImporter:
       name: SwordHurt
       takeName: SwordHurt
       firstFrame: -1
-      lastFrame: 10
+      lastFrame: 7
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -2589,19 +2857,15 @@ ModelImporter:
         weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp
         weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
+        weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp/Head
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
         weight: 1
       - path: Armature/Hip_001/Hip/LegUp_L
         weight: 1
@@ -2685,19 +2949,15 @@ ModelImporter:
         weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp
         weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
+        weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp/Head
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
         weight: 1
       - path: Armature/Hip_001/Hip/LegUp_L
         weight: 1
@@ -2723,7 +2983,7 @@ ModelImporter:
       name: SwordWalk
       takeName: SwordWalk
       firstFrame: -1
-      lastFrame: 11
+      lastFrame: 7
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -2781,19 +3041,15 @@ ModelImporter:
         weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp
         weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
+        weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp/Head
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
         weight: 1
       - path: Armature/Hip_001/Hip/LegUp_L
         weight: 1
@@ -2819,7 +3075,7 @@ ModelImporter:
       name: Walk
       takeName: Walk
       firstFrame: -1
-      lastFrame: 11
+      lastFrame: 7
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -2877,19 +3133,15 @@ ModelImporter:
         weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp
         weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_L/Arm_L
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R
+        weight: 1
+      - path: Armature/Hip_001/Hip/Body/BodyUp/ArmUp_R/Arm_R
+        weight: 1
       - path: Armature/Hip_001/Hip/Body/BodyUp/Head
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_L/ArmUp_L/Arm_L
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R
-        weight: 1
-      - path: Armature/Hip_001/Hip/Body/BodyUp/Shoulder_R/ArmUp_R/Arm_R
         weight: 1
       - path: Armature/Hip_001/Hip/LegUp_L
         weight: 1
