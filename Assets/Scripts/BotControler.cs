@@ -203,7 +203,8 @@ public class BotControler : AdvancedFSM {
 
 	void OnTriggerEnter(Collider col)
 	{
-		if (col.gameObject.tag == "Hand" && col.GetComponentInParent<PlayerControler>().CheckIsAnimation("AttackR")) {
+		if (col.gameObject.tag == "Hand" && 
+		    (col.GetComponentInParent<PlayerControler>().CheckIsAnimation("AttackR")||col.GetComponentInParent<PlayerControler>().CheckIsAnimation("AttackL"))) {
 			GetComponent<Rigidbody> ().velocity = col.gameObject.transform.forward  *7;		
 			BeHitted();
 		}

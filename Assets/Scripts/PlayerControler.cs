@@ -131,6 +131,7 @@ public class PlayerControler : MonoBehaviour {
 			_animator.SetBool("IsEquipGun",false);
 			_animator.SetBool("IsEquipMine",false);
 			_animator.SetBool("IsEquipHammer",false);
+			Physics.IgnoreCollision( GetComponent<Equipment>()._weapon.GetComponent<Collider>(),GetComponent<Collider>(),true);
 		} 
 		else if (name.CompareTo("Mine(Clone)")==0) {
 			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
@@ -375,7 +376,11 @@ public class PlayerControler : MonoBehaviour {
 	{
 		if(!_isRunningAnimation)
 		{
+			int n = Random.Range(0,2);
+			_animator.SetInteger("Type",n);
 			_animator.SetTrigger (attackHash);
+
+			
 			_isRunningAnimation = true;
 		}
 	}
