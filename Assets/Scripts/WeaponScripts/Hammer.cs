@@ -25,7 +25,7 @@ public class Hammer : Weapon {
 		
 		if ((other.gameObject.tag == "Bot" || other.gameObject.tag == "Player" )&& characterTransform.gameObject.GetComponent<PlayerControler>()._animator.GetCurrentAnimatorStateInfo(0).IsName("HammerAttack")) {
 			
-			other.gameObject.GetComponent<Rigidbody> ().velocity = other.gameObject.transform.forward*(-1)  *25;			
+			other.gameObject.GetComponent<Rigidbody> ().velocity = other.gameObject.transform.forward*(-1)  *30;			
 			other.gameObject.GetComponent<BotControler>().BeHitted();
 			
 			

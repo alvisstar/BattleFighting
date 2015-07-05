@@ -26,7 +26,7 @@ public class Sword : Weapon {
 		
 		if ((other.gameObject.tag == "Bot" || other.gameObject.tag == "Player" )&& characterTransform.gameObject.GetComponent<PlayerControler>()._animator.GetCurrentAnimatorStateInfo(0).IsName("SwordAttack")) {
 
-			other.gameObject.GetComponent<Rigidbody> ().velocity = other.gameObject.transform.forward*(-1)  *4;			
+			other.gameObject.GetComponent<Rigidbody> ().velocity = other.gameObject.transform.forward*(-1)  *10;			
 			other.gameObject.GetComponent<BotControler>().BeHitted();
 
 
