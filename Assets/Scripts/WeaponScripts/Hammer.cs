@@ -15,10 +15,7 @@ public class Hammer : Weapon {
 	public override void OnAttack()
 	{
 		
-		characterTransform.GetComponent<PlayerControler>().SetAnimationAttack();
-		
-		characterTransform.GetComponent<PlayerControler>().FinishAttack();
-		
+
 		
 		
 		
@@ -26,10 +23,14 @@ public class Hammer : Weapon {
 	void OnTriggerEnter (Collider other) {
 
 		
-		if (other.gameObject.tag == "Bot" || other.gameObject.tag == "Player") {
-
-			other.gameObject.GetComponent<Rigidbody> ().velocity = other.gameObject.transform.forward  *30;				
-
+		if ((other.gameObject.tag == "Bot" || other.gameObject.tag == "Player" )&& characterTransform.GetComponent<PlayerControler>()._animator.GetCurrentAnimatorStateInfo(0).IsName("HammerAttack")) {
+			
+			other.gameObject.GetComponent<Rigidbody> ().velocity = other.gameObject.transform.forward*(-1)  *25;			
+			other.gameObject.GetComponent<BotControler>().BeHitted();
+			
+			
+			
 		}
 	}
+
 }

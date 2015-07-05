@@ -453,8 +453,8 @@ public class PlayerControler : MonoBehaviour {
 		}	
 		else if (GetComponent<Equipment> ()._weapon.name == "Hammer(Clone)") 
 		{
-			GetComponent<Equipment>()._weapon.GetComponent<Hammer> ().characterTransform = gameObject.transform;
-			GetComponent<Equipment> ()._weapon.GetComponent<Hammer> ().Attack ();
+			SetAnimationAttack();
+			_animator.GetBehaviour<HammerAttackBehaviour>().player = this.gameObject;
 			
 		}		
 	}

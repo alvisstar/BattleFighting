@@ -18,11 +18,19 @@ public class Sword : Weapon {
 
 	public override void OnAttack()
 	{
-
-			
-			
-			
-
 		
+
+	}
+	void OnTriggerEnter (Collider other) {
+		
+		
+		if ((other.gameObject.tag == "Bot" || other.gameObject.tag == "Player" )&& characterTransform.GetComponent<PlayerControler>()._animator.GetCurrentAnimatorStateInfo(0).IsName("SwordAttack")) {
+
+			other.gameObject.GetComponent<Rigidbody> ().velocity = other.gameObject.transform.forward*(-1)  *4;			
+			other.gameObject.GetComponent<BotControler>().BeHitted();
+
+
+			
+		}
 	}
 }
