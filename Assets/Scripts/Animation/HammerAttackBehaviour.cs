@@ -16,6 +16,7 @@ public class HammerAttackBehaviour : StateMachineBehaviour
 	// This will be called when the animator first transitions to this state.
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
+		if(player !=null)
 		if (  player.GetComponent<PlayerControler> ().GetIsAttack ()) {
 			
 
