@@ -20,7 +20,7 @@ public class ShitAttackBehaviour : StateMachineBehaviour
 	
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-		if(stateInfo.normalizedTime >0.5 && player.GetComponent<PlayerControler>().GetIsAttack())
+		if(stateInfo.normalizedTime >0.2 && player.GetComponent<PlayerControler>().GetIsAttack())
 		{
 			player.GetComponent<Equipment> ()._weapon.GetComponent<Shit> ().characterTransform = player.transform;
 			player.GetComponent<Equipment> ()._weapon.GetComponent<Shit> ().equipTransform = player.GetComponent<Equipment> ()._weapon.transform;
