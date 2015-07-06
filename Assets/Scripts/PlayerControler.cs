@@ -166,7 +166,7 @@ public class PlayerControler : MonoBehaviour {
 	void Update () {
 		_isKeyMovePressing = KeyboardControl ();
 		HandleAnimation ();
-		if (GetComponent<Rigidbody> ().velocity == Vector3.zero) {
+		if (Vector3.Distance(GetComponent<Rigidbody> ().velocity, Vector3.zero) < 10) {
 			_allowControl = true;
 			_animator.SetBool ("IsSkill1",false);
 			_animator.SetBool ("IsSkill",false);
@@ -397,7 +397,7 @@ public class PlayerControler : MonoBehaviour {
 	{
 		_animator.SetBool ("IsSkill1",true);
 		_animator.SetBool ("IsSkill",true);
-		GetComponent<Rigidbody>().AddForce(transform.forward*600,ForceMode.Impulse);
+		GetComponent<Rigidbody>().AddForce(transform.forward*200,ForceMode.Impulse);
 		_allowControl = false;
 	}
 	void Attack()
