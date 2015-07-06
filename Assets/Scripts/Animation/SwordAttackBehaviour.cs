@@ -16,6 +16,7 @@ public class SwordAttackBehaviour : StateMachineBehaviour
 	// This will be called when the animator first transitions to this state.
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
+		if(player !=null)
 		if (  player.GetComponent<PlayerControler> ().GetIsAttack ()) {
 
 			player.GetComponent<Equipment> ()._weapon.GetComponent<Sword> ().trail.Activate();
@@ -38,6 +39,7 @@ public class SwordAttackBehaviour : StateMachineBehaviour
 	override public void OnStateExit (Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 		// When leaving the special move state, stop the particles.
+		if(player!=null)
 		player.GetComponent<Equipment> ()._weapon.GetComponent<Sword> ().trail.Deactivate();
 	}
 	

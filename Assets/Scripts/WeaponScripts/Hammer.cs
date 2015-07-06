@@ -22,7 +22,7 @@ public class Hammer : Weapon {
 	}
 	void OnTriggerEnter (Collider other) {
 
-		
+		if(characterTransform!=null)
 		if ((other.gameObject.tag == "Bot" || other.gameObject.tag == "Player" )&& characterTransform.gameObject.GetComponent<PlayerControler>()._animator.GetCurrentAnimatorStateInfo(0).IsName("HammerAttack")) {
 			
 			other.gameObject.GetComponent<Rigidbody> ().velocity = other.gameObject.transform.forward*(-1)  *30;			

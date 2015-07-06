@@ -84,6 +84,8 @@ public class PlayerControler : MonoBehaviour {
 	}
 	void OnWeaponChange (NotificationCenter.Notification arg)
 	{
+		_isAttack = false;
+		_isRunningAnimation = false;
 		Hashtable hash = arg.data;
 		string name = (string)hash ["Type"];
 		if (name == "Longbow03(Clone)") {
@@ -99,6 +101,7 @@ public class PlayerControler : MonoBehaviour {
 			_animator.SetBool("IsEquipGun",false);
 			_animator.SetBool("IsEquipMine",false);
 			_animator.SetBool("IsEquipHammer",false);
+			_animator.SetBool("IsEquipShit",false);
 		
 			
 		}  
@@ -111,6 +114,7 @@ public class PlayerControler : MonoBehaviour {
 			_animator.SetBool("IsEquipGun",true);
 			_animator.SetBool("IsEquipMine",false);
 			_animator.SetBool("IsEquipHammer",false);
+			_animator.SetBool("IsEquipShit",false);
 		}  
 		else if (name.CompareTo("Bomb(Clone)")==0) {
 			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
@@ -121,6 +125,7 @@ public class PlayerControler : MonoBehaviour {
 			_animator.SetBool("IsEquipGun",false);
 			_animator.SetBool("IsEquipMine",false);
 			_animator.SetBool("IsEquipHammer",false);
+			_animator.SetBool("IsEquipShit",false);
 		}  
 		else if (name.CompareTo("Sword(Clone)")==0) {
 			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
@@ -131,6 +136,7 @@ public class PlayerControler : MonoBehaviour {
 			_animator.SetBool("IsEquipGun",false);
 			_animator.SetBool("IsEquipMine",false);
 			_animator.SetBool("IsEquipHammer",false);
+			_animator.SetBool("IsEquipShit",false);
 			Physics.IgnoreCollision( GetComponent<Equipment>()._weapon.GetComponent<Collider>(),GetComponent<Collider>(),true);
 		} 
 		else if (name.CompareTo("Mine(Clone)")==0) {
@@ -142,6 +148,7 @@ public class PlayerControler : MonoBehaviour {
 			_animator.SetBool("IsEquipGun",false);
 			_animator.SetBool("IsEquipMine",true);
 			_animator.SetBool("IsEquipHammer",false);
+			_animator.SetBool("IsEquipShit",false);
 		}  
 		else if (name.CompareTo("Hammer(Clone)")==0) {
 			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
@@ -152,8 +159,19 @@ public class PlayerControler : MonoBehaviour {
 			_animator.SetBool("IsEquipGun",false);
 			_animator.SetBool("IsEquipMine",false);
 			_animator.SetBool("IsEquipHammer",true);
+			_animator.SetBool("IsEquipShit",false);
 		}  
-		
+		else if (name.CompareTo("Shit(Clone)")==0) {
+			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
+			zoneFight.GetDisplayTex ().LoadImage (tmp.bytes);
+			_animator.SetBool("IsEquipSword",false);
+			_animator.SetBool("IsEquipBomb",false);
+			_animator.SetBool("IsEquipNone",false);
+			_animator.SetBool("IsEquipGun",false);
+			_animator.SetBool("IsEquipMine",false);
+			_animator.SetBool("IsEquipHammer",false);
+			_animator.SetBool("IsEquipShit",true);
+		}  
 	
 
 	}
@@ -166,7 +184,7 @@ public class PlayerControler : MonoBehaviour {
 	void Update () {
 		_isKeyMovePressing = KeyboardControl ();
 		HandleAnimation ();
-		if (GetComponent<Rigidbody> ().velocity == Vector3.zero) {
+		if (Vector3.Distance(GetComponent<Rigidbody> ().velocity, Vector3.zero) < 10) {
 			_allowControl = true;
 			_animator.SetBool ("IsSkill1",false);
 			_animator.SetBool ("IsSkill",false);
@@ -397,7 +415,7 @@ public class PlayerControler : MonoBehaviour {
 	{
 		_animator.SetBool ("IsSkill1",true);
 		_animator.SetBool ("IsSkill",true);
-		GetComponent<Rigidbody>().AddForce(transform.forward*600,ForceMode.Impulse);
+		GetComponent<Rigidbody>().AddForce(transform.forward*200,ForceMode.Impulse);
 		_allowControl = false;
 	}
 	void Attack()
@@ -461,7 +479,18 @@ public class PlayerControler : MonoBehaviour {
 			SetAnimationAttack();
 			_animator.GetBehaviour<HammerAttackBehaviour>().player = this.gameObject;
 			
-		}		
+		}	
+		else if (GetComponent<Equipment> ()._weapon.name == "Shit(Clone)") 
+		{
+			if(GetComponent<Equipment> ()._weapon.GetComponent<Shit> ().CheckAllowAttack())
+			{			
+				SetAnimationAttack();
+				_animator.GetBehaviour<ShitAttackBehaviour>().player = this.gameObject;
+				
+			}
+			
+			
+		}
 	}
 
 }

@@ -32,6 +32,7 @@ public class Sword : Weapon {
 		}
 	}
 	void OnCollisionEnter(Collision other) {
+		if(characterTransform!=null)
 		if ((other.gameObject.tag == "Bot" || other.gameObject.tag == "Player" )&& characterTransform.gameObject.GetComponent<PlayerControler>()._animator.GetCurrentAnimatorStateInfo(0).IsName("SwordAttack")) {
 			Vector3 pos = other.contacts[0].point;
 			
