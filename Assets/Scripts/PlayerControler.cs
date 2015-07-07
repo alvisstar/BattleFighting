@@ -64,9 +64,12 @@ public class PlayerControler : MonoBehaviour {
 	public GameObject hpBarPrefab;
 	public Transform headTranform;
 
+	private Skill _playerSkill;
+
 	void Start () {
 		_allowControl = true;
 		_animator = GetComponent<Animator>();
+		_playerSkill = GetComponent<Skill> ();
 		ctrl = Instantiate (ctrlPrefab);
 		walkStick = this.ctrl.GetStick (0);
 		zoneFight		= this.ctrl.GetZone(0);
@@ -86,13 +89,13 @@ public class PlayerControler : MonoBehaviour {
 		GameObject hpBarObject = Instantiate (hpBarPrefab);
 		hpBarObject.GetComponent<HpBar> ().owner = gameObject;
 	}
-	void ActiveTrail()
+	public void ActiveTrail()
 	{
 		trail1.SetActive (true);
 		trail2.SetActive (true);
 		trail3.SetActive (true);
 	}
-	void DisableTrail()
+	public void DisableTrail()
 	{
 		trail1.SetActive (false);
 		trail2.SetActive (false);
@@ -119,8 +122,6 @@ public class PlayerControler : MonoBehaviour {
 			_animator.SetBool("IsEquipMine",false);
 			_animator.SetBool("IsEquipHammer",false);
 			_animator.SetBool("IsEquipShit",false);
-		
-			
 		}  
 		else if (name == "Gun(Clone)") {
 			TextAsset tmp = Resources.Load ("Button-B", typeof(TextAsset)) as TextAsset;
@@ -201,12 +202,6 @@ public class PlayerControler : MonoBehaviour {
 	void Update () {
 		_isKeyMovePressing = KeyboardControl ();
 		HandleAnimation ();
-		if (Vector3.Distance(GetComponent<Rigidbody> ().velocity, Vector3.zero) < 10) {
-			_allowControl = true;
-			_animator.SetBool ("IsSkill1",false);
-			_animator.SetBool ("IsSkill",false);
-			DisableTrail();
-		}
 		if(_isAttack)
 		{
 
@@ -252,8 +247,7 @@ public class PlayerControler : MonoBehaviour {
 		//int atakState = Animator.StringToHash(name); 
 		if (_animator.GetCurrentAnimatorStateInfo (0).IsName(name))
 			return true;
-		return false;
-	
+		return false;	
 	}
 
 	void FixedUpdate()
@@ -282,7 +276,6 @@ public class PlayerControler : MonoBehaviour {
 
 				_firstPress = false;
 
-
 				if(_force <=0)
 				{
 					_force =0;
@@ -295,7 +288,6 @@ public class PlayerControler : MonoBehaviour {
 					_force -=3;
 					RotateByDirection (walkStick.GetVec3d (true, 0));
 				}
-
 			}
 
 			if (zoneFight.JustUniPressed(true, true))
@@ -313,7 +305,6 @@ public class PlayerControler : MonoBehaviour {
 			m_Move = v*Vector3.forward + h*Vector3.right;
 			RotateByDirection(m_Move);
 		}
-
 	}
 
 	void OnGUI()
@@ -369,9 +360,7 @@ public class PlayerControler : MonoBehaviour {
 		}
 		if(Input.GetKeyDown(KeyCode.F) && _allowControl)
 		{
-			Skill1();
-
-			
+			_playerSkill.activeSkill1 ();			
 		}
 		//approach 2 move with velocity
 		directionMove.Normalize ();
@@ -385,9 +374,8 @@ public class PlayerControler : MonoBehaviour {
 	void HandleAnimation(){
 		float move = _isKeyMovePressing || _isTouchingDPad ? 1 : 0;
 		_animator.SetFloat("Speed", move);
-
-
 	}
+
 	void OnTriggerEnter(Collider col)
 	{
 		if (col.gameObject.tag == "BotHand" 
@@ -402,11 +390,9 @@ public class PlayerControler : MonoBehaviour {
 		if (hp <= 0) {
 			GetComponent<Animator>().SetTrigger(isDeadHash);
 			isDie = true;
-
 		} else {
 			hp--;
 			GetComponent<Animator>().SetTrigger(isAttackedHash);
-
 		}
 	}
 	public void SetAnimationAttack()
@@ -416,7 +402,6 @@ public class PlayerControler : MonoBehaviour {
 			int n = Random.Range(0,2);
 			_animator.SetInteger("Type",n);
 			_animator.SetTrigger (attackHash);
-
 			
 			_isRunningAnimation = true;
 		}
@@ -430,14 +415,7 @@ public class PlayerControler : MonoBehaviour {
 	{
 		return _isAttack;
 	}
-	void Skill1()
-	{
-		_animator.SetBool ("IsSkill1",true);
-		_animator.SetBool ("IsSkill",true);
-		GetComponent<Rigidbody>().AddForce(transform.forward*200,ForceMode.Impulse);
-		_allowControl = false;
-		ActiveTrail ();
-	}
+
 	void Attack()
 	{
 		if (GetComponent<Equipment> ()._weapon == null) {
@@ -449,28 +427,22 @@ public class PlayerControler : MonoBehaviour {
 		{
 			GetComponent<Equipment> ()._weapon.GetComponent<LongBowScript> ().characterTransform = gameObject.transform;
 			GetComponent<Equipment> ()._weapon.GetComponent<LongBowScript> ().Attack ();
-
 		}
 		else if (GetComponent<Equipment> ()._weapon.name == "Gun(Clone)") 
 		{
 			if(GetComponent<Equipment> ()._weapon.GetComponent<Gun> ().CheckAllowAttack())
 			{			
 				SetAnimationAttack();
-				_animator.GetBehaviour<GunAttackBehaviour>().player = this.gameObject;
-				
-			}
-	
+				_animator.GetBehaviour<GunAttackBehaviour>().player = this.gameObject;				
+			}	
 		}
 		else if (GetComponent<Equipment> ()._weapon.name == "Bomb(Clone)") 
 		{
 			if(GetComponent<Equipment> ()._weapon.GetComponent<Bomb> ().CheckAllowAttack())
 			{			
 				SetAnimationAttack();
-				_animator.GetBehaviour<BombAttackBehaviour>().player = this.gameObject;
-					
+				_animator.GetBehaviour<BombAttackBehaviour>().player = this.gameObject;					
 			}
-
-
 		}
 		else if (GetComponent<Equipment> ()._weapon.name == "Mine(Clone)") 
 		{
@@ -479,38 +451,31 @@ public class PlayerControler : MonoBehaviour {
 				SetAnimationAttack();
 				_animator.GetBehaviour<MineAttackBehaviour>().player = this.gameObject;
 			}
-
-
-
 		}	
 		else if (GetComponent<Equipment> ()._weapon.name == "Sword(Clone)") 
 		{
 			if(GetComponent<Equipment> ()._weapon.GetComponent<Sword> ().CheckAllowAttack())
 			{			
 				SetAnimationAttack();
-				_animator.GetBehaviour<SwordAttackBehaviour>().player = this.gameObject;
-				
+				_animator.GetBehaviour<SwordAttackBehaviour>().player = this.gameObject;				
 			}
-
-
 		}	
 		else if (GetComponent<Equipment> ()._weapon.name == "Hammer(Clone)") 
 		{
 			SetAnimationAttack();
-			_animator.GetBehaviour<HammerAttackBehaviour>().player = this.gameObject;
-			
+			_animator.GetBehaviour<HammerAttackBehaviour>().player = this.gameObject;			
 		}	
 		else if (GetComponent<Equipment> ()._weapon.name == "Shit(Clone)") 
 		{
 			if(GetComponent<Equipment> ()._weapon.GetComponent<Shit> ().CheckAllowAttack())
 			{			
 				SetAnimationAttack();
-				_animator.GetBehaviour<ShitAttackBehaviour>().player = this.gameObject;
-				
+				_animator.GetBehaviour<ShitAttackBehaviour>().player = this.gameObject;				
 			}
-			
-			
 		}
 	}
 
+	public void setAllowControl (bool allowControl) {
+		_allowControl = allowControl;
+	}
 }
