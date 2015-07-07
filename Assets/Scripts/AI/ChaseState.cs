@@ -25,14 +25,9 @@ public class ChaseState : FSMState
 		//When the distance is near, transition to attack state
 		float dist = Vector3.Distance(npc.position, destPos);
 
-		if (dist < 6.0f)
+		if (dist <= 4.0f)
 		{
-			if(controller.GetNumberBotChasePlayer() >2)	
-			{
-				npc.GetComponent<BotControler>().PerformTransition(Transition.InclosurePlayer);
-				
-			}
-			else
+
 				npc.GetComponent<BotControler>().PerformTransition(Transition.ReachPlayer);
 			
 		}
