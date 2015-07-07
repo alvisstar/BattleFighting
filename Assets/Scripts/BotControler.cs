@@ -41,6 +41,7 @@ public class BotControler : AdvancedFSM {
 		
 		GameObject hpBarObject = Instantiate (hpBarPrefab);
 		hpBarObject.GetComponent<HpBar> ().owner = gameObject;
+		GetComponent<Animator>().SetBool ("IsEquipNone", true);
 	}
 	private void ConstructFSM()
 	{

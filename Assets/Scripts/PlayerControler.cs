@@ -372,7 +372,8 @@ public class PlayerControler : MonoBehaviour {
 	}
 	void OnTriggerEnter(Collider col)
 	{
-		if (col.gameObject.tag == "BotHand" && col.GetComponentInParent<BotControler>().CheckIsAnimation("TripleKick")) {
+		if (col.gameObject.tag == "BotHand" 
+		    &&( col.GetComponentInParent<BotControler>().CheckIsAnimation("AttackR")|| col.GetComponentInParent<BotControler>().CheckIsAnimation("AttackL"))) {
 			GetComponent<Rigidbody> ().velocity = col.gameObject.transform.forward * currentSpeed *30;
 			BeHitted();
 		}
