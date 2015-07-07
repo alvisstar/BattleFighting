@@ -4,6 +4,10 @@ using System.IO;
 using UnityEditor;
 public class PlayerControler : MonoBehaviour {
 
+	public GameObject trail1;
+	public GameObject trail2;
+	public GameObject trail3;
+
 	private float currentSpeed = 0.15f;
 	public float normalSpeed = 0.15f;
 	public float maxSpeed = 0.3f;
@@ -82,6 +86,19 @@ public class PlayerControler : MonoBehaviour {
 		GameObject hpBarObject = Instantiate (hpBarPrefab);
 		hpBarObject.GetComponent<HpBar> ().owner = gameObject;
 	}
+	void ActiveTrail()
+	{
+		trail1.SetActive (true);
+		trail2.SetActive (true);
+		trail3.SetActive (true);
+	}
+	void DisableTrail()
+	{
+		trail1.SetActive (false);
+		trail2.SetActive (false);
+		trail3.SetActive (false);
+	}
+
 	void OnWeaponChange (NotificationCenter.Notification arg)
 	{
 		_isAttack = false;
@@ -188,6 +205,7 @@ public class PlayerControler : MonoBehaviour {
 			_allowControl = true;
 			_animator.SetBool ("IsSkill1",false);
 			_animator.SetBool ("IsSkill",false);
+			DisableTrail();
 		}
 		if(_isAttack)
 		{
@@ -418,6 +436,7 @@ public class PlayerControler : MonoBehaviour {
 		_animator.SetBool ("IsSkill",true);
 		GetComponent<Rigidbody>().AddForce(transform.forward*200,ForceMode.Impulse);
 		_allowControl = false;
+		ActiveTrail ();
 	}
 	void Attack()
 	{
