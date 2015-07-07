@@ -13,8 +13,8 @@ public class BotControler : AdvancedFSM {
 	private bool _isMain = false;
 	[SerializeField] float m_MovingTurnSpeed = 360;
 	[SerializeField] float m_StationaryTurnSpeed = 180;
-	int isAttackedHash = Animator.StringToHash("IsAttacked");
-	int isDeadHash = Animator.StringToHash("IsDead");
+	int beAttackHash = Animator.StringToHash("BeAttack");
+	int dieHash = Animator.StringToHash("Die");
 	int isAttackHash = Animator.StringToHash("Attack");
 	float m_TurnAmount;
 	float m_ForwardAmount;
@@ -88,10 +88,10 @@ public class BotControler : AdvancedFSM {
 		if((position - gameObject.transform.position).magnitude <3)
 			if (hp <= 0) {
 				isDie = true;
-				GetComponent<Animator>().SetTrigger(isDeadHash);
+			GetComponent<Animator>().SetTrigger(dieHash);
 			} else {
 				hp--;
-				GetComponent<Animator>().SetTrigger(isAttackedHash);
+				GetComponent<Animator>().SetTrigger(beAttackHash);
 			}
 	}
 	
@@ -102,10 +102,10 @@ public class BotControler : AdvancedFSM {
 		if((position - gameObject.transform.position).magnitude <5)
 		if (hp <= 0) {
 			isDie = true;
-			GetComponent<Animator>().SetTrigger(isDeadHash);
+			GetComponent<Animator>().SetTrigger(dieHash);
 		} else {
 			hp--;
-			GetComponent<Animator>().SetTrigger(isAttackedHash);
+			GetComponent<Animator>().SetTrigger(beAttackHash);
 		}
 	}
 	
@@ -194,10 +194,10 @@ public class BotControler : AdvancedFSM {
 	{
 		if (hp <= 0) {
 			isDie = true;
-			GetComponent<Animator>().SetTrigger(isDeadHash);
+			GetComponent<Animator>().SetTrigger(dieHash);
 		} else {
 			hp--;
-			GetComponent<Animator>().SetTrigger(isAttackedHash);
+			GetComponent<Animator>().SetTrigger(beAttackHash);
 		}
 	}
 
@@ -205,7 +205,7 @@ public class BotControler : AdvancedFSM {
 	void OnTriggerEnter(Collider col)
 	{
 		if (col.gameObject.tag == "Hand" && 
-		    (col.GetComponentInParent<PlayerControler>().CheckIsAnimation("AttackR")||col.GetComponentInParent<PlayerControler>().CheckIsAnimation("AttackL"))) {
+		    (col.GetComponentInParent<PlayerControler>().CheckIsAnimation("AttackR")||col.GetComponentInParent<PlayerControler>().CheckIsAnimation("AttackL")) && !isDie) {
 			GetComponent<Rigidbody> ().velocity = col.gameObject.transform.forward  *7;		
 			BeHitted();
 		}

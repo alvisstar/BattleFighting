@@ -39,8 +39,8 @@ public class PlayerControler : MonoBehaviour {
 	public Animator _animator;
 	int attackHash = Animator.StringToHash("Attack");
 	int skill1Hash = Animator.StringToHash("Skill1");
-	int isAttackedHash = Animator.StringToHash("IsAttacked");
-	int isDeadHash = Animator.StringToHash("IsDead");
+	int beAttackHash = Animator.StringToHash("BeAttack");
+	int dieHash = Animator.StringToHash("Die");
 
 	bool _isRunningAnimation;
 	bool _isAttack;
@@ -391,7 +391,7 @@ public class PlayerControler : MonoBehaviour {
 	void OnTriggerEnter(Collider col)
 	{
 		if (col.gameObject.tag == "BotHand" 
-		    &&( col.GetComponentInParent<BotControler>().CheckIsAnimation("AttackR")|| col.GetComponentInParent<BotControler>().CheckIsAnimation("AttackL"))) {
+		    &&( col.GetComponentInParent<BotControler>().CheckIsAnimation("AttackR")|| col.GetComponentInParent<BotControler>().CheckIsAnimation("AttackL")) && !isDie) {
 			GetComponent<Rigidbody> ().velocity = col.gameObject.transform.forward * currentSpeed *30;
 			BeHitted();
 		}
@@ -400,12 +400,12 @@ public class PlayerControler : MonoBehaviour {
 	public void BeHitted()
 	{
 		if (hp <= 0) {
-			GetComponent<Animator>().SetTrigger(isDeadHash);
+			GetComponent<Animator>().SetTrigger(dieHash);
 			isDie = true;
 
 		} else {
 			hp--;
-			GetComponent<Animator>().SetTrigger(isAttackedHash);
+			GetComponent<Animator>().SetTrigger(beAttackHash);
 
 		}
 	}
