@@ -38,6 +38,7 @@ ModelImporter:
     100060: ThumbUp_L
     100062: ThumbUp_R
     100064: Weapon
+    100066: Cube
     400000: Arm_L
     400002: Arm_R
     400004: Armature
@@ -71,7 +72,9 @@ ModelImporter:
     400060: ThumbUp_L
     400062: ThumbUp_R
     400064: Weapon
+    400066: Cube
     4300000: Character
+    4300002: Cube
     7400000: Default Take
     7400002: AttackL
     7400004: AttackR
@@ -107,6 +110,7 @@ ModelImporter:
     7400064: Walk
     9500000: //RootNode
     13700000: Character
+    13700002: Cube
   materials:
     importMaterials: 1
     materialName: 0
