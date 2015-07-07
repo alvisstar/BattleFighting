@@ -4,9 +4,6 @@ using System.IO;
 using UnityEditor;
 public class PlayerControler : MonoBehaviour {
 
-	public GameObject trail1;
-	public GameObject trail2;
-	public GameObject trail3;
 
 	private float currentSpeed = 0.15f;
 	public float normalSpeed = 0.15f;
@@ -65,6 +62,7 @@ public class PlayerControler : MonoBehaviour {
 	public Transform headTranform;
 
 	private Skill _playerSkill;
+	Xft.XWeaponTrail[] trails;
 
 	void Start () {
 		_allowControl = true;
@@ -88,18 +86,23 @@ public class PlayerControler : MonoBehaviour {
 
 		GameObject hpBarObject = Instantiate (hpBarPrefab);
 		hpBarObject.GetComponent<HpBar> ().owner = gameObject;
+		trails = GetComponentsInChildren<Xft.XWeaponTrail> ();
+		DisableTrail ();
 	}
 	public void ActiveTrail()
 	{
-		trail1.SetActive (true);
-		trail2.SetActive (true);
-		trail3.SetActive (true);
+
+		for (int i =0; i <trails.Length; i++) {
+			trails[i].Activate();
+		}
+	
 	}
 	public void DisableTrail()
 	{
-		trail1.SetActive (false);
-		trail2.SetActive (false);
-		trail3.SetActive (false);
+
+		for (int i =0; i <trails.Length; i++) {
+			trails[i].Deactivate();
+		}
 	}
 
 	void OnWeaponChange (NotificationCenter.Notification arg)
@@ -360,7 +363,8 @@ public class PlayerControler : MonoBehaviour {
 		}
 		if(Input.GetKeyDown(KeyCode.F) && _allowControl)
 		{
-			_playerSkill.activeSkill1 ();			
+			_playerSkill.activeSkill1 ();	
+
 		}
 		//approach 2 move with velocity
 		directionMove.Normalize ();

@@ -11,18 +11,19 @@ public class SamuraiSkill : Skill {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Vector3.Distance(GetComponent<Rigidbody> ().velocity, Vector3.zero) < 10) {
+		if (GetComponent<Rigidbody> ().velocity ==Vector3.zero ) {
+			_player.DisableTrail();
 			_player.setAllowControl(true);
 			_player._animator.SetBool ("IsSkill1",false);
 			_player._animator.SetBool ("IsSkill",false);
-			_player.DisableTrail();
+
 		}
 	}
 
 	public override void activeSkill1 ()
 	{
 		base.activeSkill1 ();
-		GetComponent<Rigidbody>().AddForce(transform.forward*200,ForceMode.Impulse);
+		GetComponent<Rigidbody>().AddForce(transform.forward*400,ForceMode.Impulse);
 		_player.ActiveTrail ();
 	}
 
