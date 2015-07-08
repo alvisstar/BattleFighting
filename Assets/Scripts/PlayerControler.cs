@@ -83,6 +83,8 @@ public class PlayerControler : MonoBehaviour {
 		_firstPress = false;
 		_animator.SetBool ("IsEquipNone", true);
 		NotificationCenter.DefaultCenter.AddObserver(this, "OnWeaponChange");
+		NotificationCenter.DefaultCenter.AddObserver(this, "OnBombExplode");
+		NotificationCenter.DefaultCenter.AddObserver(this, "OnMineExplode");
 
 		GameObject hpBarObject = Instantiate (hpBarPrefab);
 		hpBarObject.GetComponent<HpBar> ().owner = gameObject;
@@ -104,7 +106,17 @@ public class PlayerControler : MonoBehaviour {
 			trails[i].Deactivate();
 		}
 	}
-
+	void setParamAnimator(string name)
+	{
+		_animator.SetBool("IsEquipSword",false);
+		_animator.SetBool("IsEquipBomb",false);
+		_animator.SetBool("IsEquipNone",false);
+		_animator.SetBool("IsEquipGun",false);
+		_animator.SetBool("IsEquipMine",false);
+		_animator.SetBool("IsEquipHammer",false);
+		_animator.SetBool("IsEquipShit",false);
+		_animator.SetBool(name,true);
+	}
 	void OnWeaponChange (NotificationCenter.Notification arg)
 	{
 		_isAttack = false;
@@ -118,84 +130,58 @@ public class PlayerControler : MonoBehaviour {
 		else if (name == "None") {
 			TextAsset tmp = Resources.Load ("Button-B", typeof(TextAsset)) as TextAsset;
 			zoneFight.GetDisplayTex ().LoadImage (tmp.bytes);
-			_animator.SetBool("IsEquipSword",false);
-			_animator.SetBool("IsEquipBomb",false);
-			_animator.SetBool("IsEquipNone",true);
-			_animator.SetBool("IsEquipGun",false);
-			_animator.SetBool("IsEquipMine",false);
-			_animator.SetBool("IsEquipHammer",false);
-			_animator.SetBool("IsEquipShit",false);
+			setParamAnimator("IsEquipNone");
 		}  
 		else if (name == "Gun(Clone)") {
 			TextAsset tmp = Resources.Load ("Button-B", typeof(TextAsset)) as TextAsset;
 			zoneFight.GetDisplayTex ().LoadImage (tmp.bytes);
-			_animator.SetBool("IsEquipSword",false);
-			_animator.SetBool("IsEquipBomb",false);
-			_animator.SetBool("IsEquipNone",false);
-			_animator.SetBool("IsEquipGun",true);
-			_animator.SetBool("IsEquipMine",false);
-			_animator.SetBool("IsEquipHammer",false);
-			_animator.SetBool("IsEquipShit",false);
+			setParamAnimator("IsEquipGun");
 		}  
 		else if (name.CompareTo("Bomb(Clone)")==0) {
 			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
 			zoneFight.GetDisplayTex ().LoadImage (tmp.bytes);
-			_animator.SetBool("IsEquipSword",false);
-			_animator.SetBool("IsEquipBomb",true);
-			_animator.SetBool("IsEquipNone",false);
-			_animator.SetBool("IsEquipGun",false);
-			_animator.SetBool("IsEquipMine",false);
-			_animator.SetBool("IsEquipHammer",false);
-			_animator.SetBool("IsEquipShit",false);
+			setParamAnimator("IsEquipBomb");
 		}  
 		else if (name.CompareTo("Sword(Clone)")==0) {
 			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
 			zoneFight.GetDisplayTex ().LoadImage (tmp.bytes);
-			_animator.SetBool("IsEquipSword",true);
-			_animator.SetBool("IsEquipBomb",false);
-			_animator.SetBool("IsEquipNone",false);
-			_animator.SetBool("IsEquipGun",false);
-			_animator.SetBool("IsEquipMine",false);
-			_animator.SetBool("IsEquipHammer",false);
-			_animator.SetBool("IsEquipShit",false);
+			setParamAnimator("IsEquipSword");
 			Physics.IgnoreCollision( GetComponent<Equipment>()._weapon.GetComponent<Collider>(),GetComponent<Collider>(),true);
 		} 
 		else if (name.CompareTo("Mine(Clone)")==0) {
 			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
 			zoneFight.GetDisplayTex ().LoadImage (tmp.bytes);
-			_animator.SetBool("IsEquipSword",false);
-			_animator.SetBool("IsEquipBomb",false);
-			_animator.SetBool("IsEquipNone",false);
-			_animator.SetBool("IsEquipGun",false);
-			_animator.SetBool("IsEquipMine",true);
-			_animator.SetBool("IsEquipHammer",false);
-			_animator.SetBool("IsEquipShit",false);
+			setParamAnimator("IsEquipMine");
 		}  
 		else if (name.CompareTo("Hammer(Clone)")==0) {
 			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
 			zoneFight.GetDisplayTex ().LoadImage (tmp.bytes);
-			_animator.SetBool("IsEquipSword",false);
-			_animator.SetBool("IsEquipBomb",false);
-			_animator.SetBool("IsEquipNone",false);
-			_animator.SetBool("IsEquipGun",false);
-			_animator.SetBool("IsEquipMine",false);
-			_animator.SetBool("IsEquipHammer",true);
-			_animator.SetBool("IsEquipShit",false);
+			setParamAnimator("IsEquipHammer");
+			Physics.IgnoreCollision( GetComponent<Equipment>()._weapon.GetComponent<Collider>(),GetComponent<Collider>(),true);
 		}  
 		else if (name.CompareTo("Shit(Clone)")==0) {
 			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
 			zoneFight.GetDisplayTex ().LoadImage (tmp.bytes);
-			_animator.SetBool("IsEquipSword",false);
-			_animator.SetBool("IsEquipBomb",false);
-			_animator.SetBool("IsEquipNone",false);
-			_animator.SetBool("IsEquipGun",false);
-			_animator.SetBool("IsEquipMine",false);
-			_animator.SetBool("IsEquipHammer",false);
-			_animator.SetBool("IsEquipShit",true);
+			setParamAnimator("IsEquipShit");
 		}  
 	
 
 	}
+	void OnBombExplode (NotificationCenter.Notification arg)
+	{
+		Hashtable hash  = arg.data;
+		Vector3 position =(Vector3) hash["Position"];
+		if((position - gameObject.transform.position).magnitude <5)
+			BeHitted ();
+	}
+	
+	void OnMineExplode (NotificationCenter.Notification arg)
+	{
+		Hashtable hash  = arg.data;
+		Vector3 position =(Vector3) hash["Position"];
+		if ((position - gameObject.transform.position).magnitude < 5)
+			BeHitted ();
+	}	
 	public void Init(Vector3 position,bool isMain)
 	{
 		gameObject.transform.position = position;

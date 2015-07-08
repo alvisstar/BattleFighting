@@ -11,6 +11,7 @@ public class BotControler : AdvancedFSM {
 		BOT_ATTACK,
 		BOT_HURT
 	};
+	bool allowBeHit;
 	public State state;
 	public float speed = 0.1f;
 	private Vector3 directionMove = new Vector3(0,0,0);
@@ -53,6 +54,7 @@ public class BotControler : AdvancedFSM {
 		GetComponent<Animator>().SetBool ("IsEquipNone", true);
 		state = State.BOT_IDLE;
 		recoveryTime = 0;
+		allowBeHit = true;
 	}
 	private void ConstructFSM()
 	{
@@ -96,28 +98,16 @@ public class BotControler : AdvancedFSM {
 	{
 		Hashtable hash  = arg.data;
 		Vector3 position =(Vector3) hash["Position"];
-		if((position - gameObject.transform.position).magnitude <3)
-			if (hp <= 0) {
-				isDie = true;
-			GetComponent<Animator>().SetTrigger(dieHash);
-			} else {
-				hp--;
-				GetComponent<Animator>().SetTrigger(beAttackHash);
-			}
+		if((position - gameObject.transform.position).magnitude <5)
+			BeHitted ();
 	}
 	
 	void OnMineExplode (NotificationCenter.Notification arg)
 	{
 		Hashtable hash  = arg.data;
 		Vector3 position =(Vector3) hash["Position"];
-		if((position - gameObject.transform.position).magnitude <5)
-		if (hp <= 0) {
-			isDie = true;
-			GetComponent<Animator>().SetTrigger(dieHash);
-		} else {
-			hp--;
-			GetComponent<Animator>().SetTrigger(beAttackHash);
-		}
+		if ((position - gameObject.transform.position).magnitude < 5)
+			BeHitted ();
 	}
 	
 	public void Init(Vector3 position,bool isMain)
@@ -220,13 +210,17 @@ public class BotControler : AdvancedFSM {
 		}
 	}
 
-
+	void OnTriggerExit(Collider col)
+	{
+		allowBeHit = true;
+	}
 	void OnTriggerEnter(Collider col)
 	{
-		if (col.gameObject.tag == "Hand" && 
+		if (allowBeHit && col.gameObject.tag == "Hand" && 
 		    (col.GetComponentInParent<PlayerControler>().CheckIsAnimation("AttackR")||col.GetComponentInParent<PlayerControler>().CheckIsAnimation("AttackL")) && !isDie) {
 			GetComponent<Rigidbody> ().velocity = col.gameObject.transform.forward  *0.15f*60;		
 			BeHitted();
+			allowBeHit = false;
 
 		}
 	}

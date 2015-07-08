@@ -32,7 +32,7 @@ public class AttackState : FSMState
 		Vector3 relativePos = player.position - npc.position ;
 		
 		npc.GetComponent<BotControler>().RotateByDirection (relativePos);
-		if(npc.GetComponent<BotControler>().recoveryTime <= 0)
-			npc.GetComponent<BotControler> ().AttackTarget ();
+		//if(npc.GetComponent<BotControler>().recoveryTime <= 0)
+			//npc.GetComponent<BotControler> ().AttackTarget ();
 	}
 }

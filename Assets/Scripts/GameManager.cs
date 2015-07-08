@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour {
 	{
 
 		//int n = Random (5, 6);
-		for (int i =0; i<4; i++) {
+		for (int i =0; i<1; i++) {
 			GameObject opponentChar = (Instantiate(characterPrefabs[1], new Vector3 (-1, 0, 0), Quaternion.identity) as GameObject);
 			BotControler opponentScript = opponentChar.GetComponent<BotControler>();
 			float x = Random.Range(-GameObject.Find ("Ground").GetComponent<Renderer>().bounds.size.x/2 + 2,GameObject.Find ("Ground").GetComponent<Renderer>().bounds.size.x/2 -2);
