@@ -18,7 +18,7 @@ public class AttackState : FSMState
 	{
 		//Check the distance with the player tank
 		float dist = Vector3.Distance(npc.position, player.position);
-		if (dist > 4.0f)
+		if (dist > 3.5f)
 		{
 			//Rotate to the target point
 
@@ -32,6 +32,7 @@ public class AttackState : FSMState
 		Vector3 relativePos = player.position - npc.position ;
 		
 		npc.GetComponent<BotControler>().RotateByDirection (relativePos);
-		npc.GetComponent<BotControler> ().AttackTarget ();
+		if(npc.GetComponent<BotControler>().recoveryTime <= 0)
+			npc.GetComponent<BotControler> ().AttackTarget ();
 	}
 }

@@ -25,7 +25,7 @@ public class ChaseState : FSMState
 		//When the distance is near, transition to attack state
 		float dist = Vector3.Distance(npc.position, destPos);
 
-		if (dist <= 4.0f)
+		if (dist <= 3.5f)
 		{
 
 				npc.GetComponent<BotControler>().PerformTransition(Transition.ReachPlayer);
@@ -38,20 +38,24 @@ public class ChaseState : FSMState
 	public override void Act(Transform player, Transform npc)
 	{
 		//Rotate to the target point
-		Vector3 relativePos = steer (npc) * Time.deltaTime;
+		if (npc.GetComponent<BotControler> ().recoveryTime <= 0) {
+			Vector3 relativePos = steer (npc) * Time.deltaTime;
 		
-		npc.GetComponent<BotControler>().RotateByDirection (relativePos);
-		npc.GetComponent<Animator> ().SetFloat ("Speed", 1);
-		if (relativePos != Vector3.zero)          
-			npc.GetComponent<Rigidbody> ().velocity = relativePos;
-		// enforce minimum and maximum speeds for the boids      
-		float speed = npc.GetComponent<Rigidbody> ().velocity.magnitude;      
-		if (speed > controller.maxVelocity) {        
-			npc.GetComponent<Rigidbody> ().velocity = npc.GetComponent<Rigidbody> ().velocity.normalized * controller.maxVelocity;      
-		} else if (speed < controller.minVelocity) {        
-			npc.GetComponent<Rigidbody> ().velocity = npc.GetComponent<Rigidbody> ().velocity.normalized * controller.minVelocity;     
-		}    
-
+			npc.GetComponent<BotControler> ().RotateByDirection (relativePos);
+			npc.GetComponent<Animator> ().SetFloat ("Speed", 1);
+			if (relativePos != Vector3.zero)          
+				npc.GetComponent<Rigidbody> ().velocity = relativePos;
+			// enforce minimum and maximum speeds for the boids      
+			float speed = npc.GetComponent<Rigidbody> ().velocity.magnitude;      
+			if (speed > controller.maxVelocity) {        
+				npc.GetComponent<Rigidbody> ().velocity = npc.GetComponent<Rigidbody> ().velocity.normalized * controller.maxVelocity;      
+			} else if (speed < controller.minVelocity) {        
+				npc.GetComponent<Rigidbody> ().velocity = npc.GetComponent<Rigidbody> ().velocity.normalized * controller.minVelocity;     
+			}    
+		} else {
+			npc.GetComponent<Animator> ().SetFloat ("Speed", 0);
+		}
+	
 	}
 	private Vector3 steer (Transform npc) {    
 		Vector3 center = controller.flockCenter -         npc.localPosition;  // cohesion

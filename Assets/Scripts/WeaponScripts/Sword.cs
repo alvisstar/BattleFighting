@@ -26,7 +26,7 @@ public class Sword : Weapon {
 		if ((other.gameObject.tag == "Bot" || other.gameObject.tag == "Player" )&& characterTransform.gameObject.GetComponent<PlayerControler>()._animator.GetCurrentAnimatorStateInfo(0).IsName("SwordAttack")) {
 			//Vector3 pos = other.contacts[0].point;
 			
-			other.gameObject.GetComponent<Rigidbody> ().velocity = other.gameObject.transform.forward*(-1)  *10;			
+			other.gameObject.GetComponent<Rigidbody> ().velocity = other.gameObject.transform.forward*(-1)*0.15f  *80;			
 			other.gameObject.GetComponent<BotControler>().BeHitted();
 			GameObject explosionIceBall = Instantiate(prefabHit,other.transform.position,Quaternion.identity) as GameObject;
 		}
@@ -36,7 +36,7 @@ public class Sword : Weapon {
 		if ((other.gameObject.tag == "Bot" || other.gameObject.tag == "Player" )&& characterTransform.gameObject.GetComponent<PlayerControler>()._animator.GetCurrentAnimatorStateInfo(0).IsName("SwordAttack")) {
 			Vector3 pos = other.contacts[0].point;
 			
-			other.gameObject.GetComponent<Rigidbody> ().velocity = other.gameObject.transform.forward*(-1)  *10;			
+			other.gameObject.GetComponent<Rigidbody> ().velocity = other.gameObject.transform.forward*(-1)  *0.15f  *60;			
 			other.gameObject.GetComponent<BotControler>().BeHitted();
 			GameObject explosionIceBall = Instantiate(prefabHit,pos,Quaternion.identity) as GameObject;
 	}

@@ -4,6 +4,14 @@ using System.Collections;
 public class BotControler : AdvancedFSM {
 
 	// Use this for initialization
+	public enum State
+	{
+		BOT_IDLE,
+		BOT_CHASE,
+		BOT_ATTACK,
+		BOT_HURT
+	};
+	public State state;
 	public float speed = 0.1f;
 	private Vector3 directionMove = new Vector3(0,0,0);
 	public bool isDie;
@@ -31,6 +39,7 @@ public class BotControler : AdvancedFSM {
 	public AIBotManager controller;
 	public GameObject hpBarPrefab;
 	public Transform headTranform;
+	public float recoveryTime;
 	void Start () {
 		hp = maxHp = 20;
 		speed = 0.1f;
@@ -42,6 +51,8 @@ public class BotControler : AdvancedFSM {
 		GameObject hpBarObject = Instantiate (hpBarPrefab);
 		hpBarObject.GetComponent<HpBar> ().owner = gameObject;
 		GetComponent<Animator>().SetBool ("IsEquipNone", true);
+		state = State.BOT_IDLE;
+		recoveryTime = 0;
 	}
 	private void ConstructFSM()
 	{
@@ -121,6 +132,10 @@ public class BotControler : AdvancedFSM {
 			
 		
 		} 	
+		if(state == State.BOT_HURT)
+		{
+			recoveryTime -=Time.deltaTime;
+		}
 
 	}
 	void FixedUpdate () {
@@ -155,6 +170,8 @@ public class BotControler : AdvancedFSM {
 	{
 		GetComponent<Animator>().SetTrigger(isAttackHash);
 		GetComponent<Animator>().SetFloat("Speed", 1);
+		state = State.BOT_ATTACK;
+		recoveryTime = 0;
 
 
 	}
@@ -198,6 +215,8 @@ public class BotControler : AdvancedFSM {
 		} else {
 			hp--;
 			GetComponent<Animator>().SetTrigger(beAttackHash);
+			state = State.BOT_HURT;
+			recoveryTime =1f;
 		}
 	}
 
@@ -206,8 +225,9 @@ public class BotControler : AdvancedFSM {
 	{
 		if (col.gameObject.tag == "Hand" && 
 		    (col.GetComponentInParent<PlayerControler>().CheckIsAnimation("AttackR")||col.GetComponentInParent<PlayerControler>().CheckIsAnimation("AttackL")) && !isDie) {
-			GetComponent<Rigidbody> ().velocity = col.gameObject.transform.forward  *7;		
+			GetComponent<Rigidbody> ().velocity = col.gameObject.transform.forward  *0.15f*60;		
 			BeHitted();
+
 		}
 	}
 }

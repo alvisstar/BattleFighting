@@ -384,7 +384,7 @@ public class PlayerControler : MonoBehaviour {
 	{
 		if (col.gameObject.tag == "BotHand" 
 		    &&( col.GetComponentInParent<BotControler>().CheckIsAnimation("AttackR")|| col.GetComponentInParent<BotControler>().CheckIsAnimation("AttackL")) && !isDie) {
-			GetComponent<Rigidbody> ().velocity = col.gameObject.transform.forward * currentSpeed *30;
+			GetComponent<Rigidbody> ().velocity = col.gameObject.transform.forward * currentSpeed *60;
 			BeHitted();
 		}
 	}
