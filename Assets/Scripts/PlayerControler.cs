@@ -78,7 +78,7 @@ public class PlayerControler : MonoBehaviour {
 		_isAttack = false;
 		_isRunningAnimation = false;
 		isDie = false;
-		hp = maxHp = 50;
+		hp = maxHp = 100;
 		_force = 0;
 		_firstPress = false;
 		_animator.SetBool ("IsEquipNone", true);
