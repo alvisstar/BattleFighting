@@ -63,7 +63,7 @@ public class PlayerControler : MonoBehaviour {
 
 	public Skill _playerSkill;
 	Xft.XWeaponTrail[] trails;
-
+	public bool onTrigger;
 	void Start () {
 		_allowControl = true;
 		_animator = GetComponent<Animator>();
@@ -90,6 +90,7 @@ public class PlayerControler : MonoBehaviour {
 		hpBarObject.GetComponent<HpBar> ().owner = gameObject;
 		trails = GetComponentsInChildren<Xft.XWeaponTrail> ();
 		DisableTrail ();
+		onTrigger = false;
 	}
 	public void ActiveTrail()
 	{

@@ -30,7 +30,15 @@ public class SwordAttackBehaviour : StateMachineBehaviour
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 
-
+		if(player !=null)
+		if ( stateInfo.normalizedTime < 0.5) {
+			
+			player.GetComponent<PlayerControler> ().onTrigger = true;
+		}
+		else
+		{
+			player.GetComponent<PlayerControler> ().onTrigger = false;
+		}
 			
 			
 		
@@ -40,7 +48,10 @@ public class SwordAttackBehaviour : StateMachineBehaviour
 	{
 		// When leaving the special move state, stop the particles.
 		if(player!=null)
-		player.GetComponent<Equipment> ()._weapon.GetComponent<Sword> ().trail.Deactivate();
+		{
+			player.GetComponent<Equipment> ()._weapon.GetComponent<Sword> ().trail.Deactivate();
+			player.GetComponent<PlayerControler> ().onTrigger = false;
+		}
 	}
 	
 	
