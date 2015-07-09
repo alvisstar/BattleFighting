@@ -71,7 +71,7 @@ public class SamuraiSkill : Skill
 				foreach (BotControler bot in _gameManager.botScripts) {
 					if (Vector3.Distance (bot.GetComponent<Rigidbody> ().position, GetComponent<Rigidbody> ().position) <= rangeOfSkill2) {
 						bot.BeHitted ();
-						bot.GetComponent<Rigidbody> ().AddForce (-transform.forward * 10, ForceMode.Impulse);
+						bot.GetComponent<Rigidbody> ().AddForce (-bot.transform.forward * 10, ForceMode.Impulse);
 //					Debug.Log(bot.GetHashCode());
 					}
 				}
