@@ -42,12 +42,7 @@ public class SamuraiSkill : Skill
 				|| currentTimeSkill1 >= timeOfSkill1) {
 				isBeingActiveSkill1 = false;
 
-				_player.DisableTrail ();
-				_player.setAllowControl (true);
-				_player._animator.SetBool ("IsSkill1", false);
-				_player._animator.SetBool ("IsSkill", false);
-
-				GetComponent<Rigidbody> ().velocity = Vector3.zero;
+				deActiveSkill1();
 			}
 		} else {
 			currentTimeSkill1 = 0;
@@ -61,8 +56,7 @@ public class SamuraiSkill : Skill
 
 			// destroy skill 2 when time out
 			if (currentTimeSkill2 >= timeOfSkill2) {
-				isBeingActiveSkill2 = false;
-				Destroy (skill2Object);
+				deActiveSkill2();
 			}
 
 			// processing power of skill 2
@@ -80,6 +74,28 @@ public class SamuraiSkill : Skill
 			currentTimeSkill2 = 0;
 			currentTimeAddForce = 0;
 		}
+	}
+
+	public override void deActiveSkill1 ()
+	{
+
+		base.deActiveSkill1 ();
+		_player.DisableTrail ();
+		_player.setAllowControl (true);
+		_player._animator.SetBool ("IsSkill1", false);
+		_player._animator.SetBool ("IsSkill", false);
+		
+		GetComponent<Rigidbody> ().velocity = Vector3.zero;
+
+	}
+	
+	public override void deActiveSkill2 ()
+	{
+			
+		base.deActiveSkill2 ();
+		isBeingActiveSkill2 = false;
+
+		Destroy (skill2Object);
 	}
 
 	public override void activeSkill1 ()
@@ -101,8 +117,16 @@ public class SamuraiSkill : Skill
 			return;
 
 		base.activeSkill2 ();
-		
+		_player.setAllowControl (false);
+		_player._animator.SetTrigger (Animator.StringToHash("Skill2"));
+		_player._animator.SetBool ("IsSkill",true);
 		isBeingActiveSkill2 = true;
 		skill2Object = Instantiate (prefabSkill2);
+	}
+	public override void finishAnimation ()
+	{
+
+		_player._animator.SetBool ("IsSkill", false);
+		_player.setAllowControl (true);
 	}
 }

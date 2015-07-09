@@ -13,6 +13,22 @@ public class Skill : MonoBehaviour {
 	}
 
 	public virtual void activeSkill2() {
+
 		
 	}
+	public virtual void deActiveSkill1() {
+
+
+	}
+	
+	public virtual void deActiveSkill2() {
+
+		
+	}
+	public virtual void finishAnimation() {
+		
+		
+	}
+	
+
 }

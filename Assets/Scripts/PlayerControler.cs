@@ -61,7 +61,7 @@ public class PlayerControler : MonoBehaviour {
 	public GameObject hpBarPrefab;
 	public Transform headTranform;
 
-	private Skill _playerSkill;
+	public Skill _playerSkill;
 	Xft.XWeaponTrail[] trails;
 
 	void Start () {
@@ -353,6 +353,7 @@ public class PlayerControler : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.G))
 		{
 			_playerSkill.activeSkill2 ();
+			_animator.GetBehaviour<SkillSecondBehaviour>().player = this.gameObject;					
 		}
 		//approach 2 move with velocity
 		directionMove.Normalize ();
