@@ -4,6 +4,7 @@ using System.Collections;
 public class Skill : MonoBehaviour {
 
 	protected PlayerControler _player;
+	protected GameManager _gameManager;
 
 	public virtual void activeSkill1() {
 		_player._animator.SetBool ("IsSkill1",true);

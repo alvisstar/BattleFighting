@@ -27,7 +27,6 @@ public class GameManager : MonoBehaviour {
 	}
 	void SpawnWave()
 	{
-
 		//int n = Random (5, 6);
 		for (int i =0; i<1; i++) {
 			GameObject opponentChar = (Instantiate(characterPrefabs[1], new Vector3 (-1, 0, 0), Quaternion.identity) as GameObject);

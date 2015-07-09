@@ -344,13 +344,15 @@ public class PlayerControler : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.Space))
 		{
 			//_animator.SetTrigger (attackHash);
-			_isAttack = true;
-		
+			_isAttack = true;		
 		}
 		if(Input.GetKeyDown(KeyCode.F) && _allowControl)
 		{
-			_playerSkill.activeSkill1 ();	
-
+			_playerSkill.activeSkill1 ();
+		}
+		if(Input.GetKeyDown(KeyCode.G))
+		{
+			_playerSkill.activeSkill2 ();
 		}
 		//approach 2 move with velocity
 		directionMove.Normalize ();
