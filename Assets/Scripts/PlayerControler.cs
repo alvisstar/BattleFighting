@@ -293,6 +293,17 @@ public class PlayerControler : MonoBehaviour {
 				_isAttack = true;
 
 			}
+			if (zoneSkill1.JustUniPressed(true, true))
+			{
+				_playerSkill.activeSkill1();
+				
+			}
+			if (zoneSkill2.JustUniPressed(true, true))
+			{
+
+				_playerSkill.activeSkill2();
+				_animator.GetBehaviour<SkillSecondBehaviour>().player = this.gameObject;					
+			}
 			
 		} else {			
 			// processing for keyboard
