@@ -12,6 +12,8 @@ public class PlayerControler : MonoBehaviour {
 	private float _force;
 	public TextAsset imageAsset;
 	bool _allowControl;
+	Vector3 speedRotate;
+	float forceRotate;
 	public float CurrentSpeed {
 		get {
 			return currentSpeed;
@@ -49,7 +51,7 @@ public class PlayerControler : MonoBehaviour {
 	float m_TurnAmount;
 	float m_ForwardAmount;
 	[SerializeField] float m_MovingTurnSpeed = 360;
-	[SerializeField] float m_StationaryTurnSpeed = 180;
+	[SerializeField] float m_StationaryTurnSpeed = 360;
 	public TouchController	ctrlPrefab;
 	private TouchController	ctrl;
 	public GUISkin	guiSkin;
@@ -64,6 +66,9 @@ public class PlayerControler : MonoBehaviour {
 	public Skill _playerSkill;
 	Xft.XWeaponTrail[] trails;
 	public bool onTrigger;
+
+	private Vector3 oldForward;
+
 	void Start () {
 		_allowControl = true;
 		_animator = GetComponent<Animator>();
@@ -91,6 +96,8 @@ public class PlayerControler : MonoBehaviour {
 		trails = GetComponentsInChildren<Xft.XWeaponTrail> ();
 		DisableTrail ();
 		onTrigger = false;
+
+		oldForward = transform.forward;
 	}
 	public void ActiveTrail()
 	{
@@ -251,14 +258,14 @@ public class PlayerControler : MonoBehaviour {
 				if(!_firstPress)
 				{
 					_firstPress = true;
-					_force =40;
+					_force =30;
 				}
 				RotateByDirection (walkStick.GetVec3d (true, 0));
 				//gameObject.transform.position += walkStick.GetVec3d (true, 0)  * currentSpeed ;
-				GetComponent<Rigidbody> ().velocity = walkStick.GetVec3d (true, 0) * currentSpeed * _force;
-				_force +=1f;
-				if(_force >=80)
-					_force =80;
+				GetComponent<Rigidbody> ().velocity = transform.forward* currentSpeed * (_force -forceRotate);
+				_force +=0.5f;
+				if(_force >=100)
+					_force =100;
 				_isTouchingDPad = true;
 			}			
 			// Stop when stick is released...			
@@ -274,7 +281,7 @@ public class PlayerControler : MonoBehaviour {
 				else
 				{
 					_isTouchingDPad = true;	
-					GetComponent<Rigidbody> ().velocity = transform.forward* currentSpeed * _force;
+					GetComponent<Rigidbody> ().velocity = transform.forward* currentSpeed * (_force -forceRotate);
 					_force -=3;
 					RotateByDirection (walkStick.GetVec3d (true, 0));
 				}
@@ -319,6 +326,21 @@ public class PlayerControler : MonoBehaviour {
 		// help the character turn faster (this is in addition to root rotation in the animation)
 		float turnSpeed = Mathf.Lerp(m_StationaryTurnSpeed, m_MovingTurnSpeed, m_ForwardAmount);
 		transform.Rotate(0, m_TurnAmount * turnSpeed * Time.deltaTime, 0);
+
+		float angle = Vector3.Angle (oldForward, transform.forward);
+		float percentOfAngle = angle / 12;
+		if (percentOfAngle >= 1)
+			percentOfAngle = 1;
+		if (percentOfAngle >= 0.3)
+			forceRotate = _force * percentOfAngle;
+		else
+			forceRotate = 0;
+
+		Debug.Log ("Angle" + angle);
+		Debug.Log ("Force" + _force);
+		speedRotate = transform.forward*currentSpeed * percentOfAngle*_force;
+
+		oldForward = transform.forward;
 	}
 
 	bool KeyboardControl()

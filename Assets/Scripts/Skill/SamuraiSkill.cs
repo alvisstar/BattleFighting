@@ -28,6 +28,7 @@ public class SamuraiSkill : Skill
 	{
 		_player = GetComponent<PlayerControler> ();	
 		_gameManager = GameObject.Find ("Game Manager").GetComponent<GameManager> ();
+		timeOfSkill2 = 5;
 	}
 	
 	// Update is called once per frame
