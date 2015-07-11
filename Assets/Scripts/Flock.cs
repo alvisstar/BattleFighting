@@ -1,63 +1,62 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
-/// <summary>
-/// This script is the modification of the implementation of the Boids behaviors from http://www.unifycommunity.com/wiki/index.php?title=Flocking
-/// </summary>
-
-public class Flock : MonoBehaviour 
-{
-	internal FlockController controller;
+public class Flock : MonoBehaviour {
 	
-	void Update()
-	{
-		if (controller)
-		{
-			Vector3 relativePos = steer() * Time.deltaTime;
-			
-			if(relativePos != Vector3.zero)
-				GetComponent<Rigidbody>().velocity = relativePos;
-			
-			// enforce minimum and maximum speeds for the boids
-			float speed = GetComponent<Rigidbody>().velocity.magnitude;
-			if (speed > controller.maxVelocity)
-			{
-				GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity.normalized * controller.maxVelocity;
-			}
-			else if (speed < controller.minVelocity)
-			{
-				GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity.normalized * controller.minVelocity;
-			}
-		}
+	// Use this for initialization
+
+	public List<PlayerControler> botScripts ;
+
+	
+	public float minVelocity = 500;  
+	public float maxVelocity = 800; 
+	public int flockSize = 7;  
+	public float centerWeight = 4;
+	public float velocityWeight = 6;  
+	
+	
+	public float separationWeight = 3;
+	//How close each boid should follow to the leader (the more   //weight make the closer follow)  
+	public float followWeight = 3;
+	//Additional Random Noise  
+	public float randomizeWeight = 3; 
+	
+	public Transform target;
+	//Center position of the flock in the group  
+	internal Vector3 flockCenter;    
+	internal Vector3 flockVelocity;  //Average Velocity
+	
+	public float rangeAttack;
+	
+	void Start () {
+		
+
+		
 	}
-	
-	//Calculate flock steering Vector based on the Craig Reynold's algorithm (Cohesion, Alignment, Follow leader and Seperation)
-	private Vector3 steer()
-	{
-		Vector3 center = controller.flockCenter - transform.localPosition;			// cohesion
-		Vector3 velocity = controller.flockVelocity - GetComponent<Rigidbody>().velocity; 			// alignment
-		Vector3 follow = controller.target.localPosition - transform.localPosition; // follow leader
-		Vector3 separation = Vector3.zero; 											// separation
+
+	// Update is called once per frame
+	void FixedUpdate () {
 		
-		foreach (Flock flock in controller.flockList)
-		{
-			if (flock != this) 
-			{
-				Vector3 relativePos = transform.localPosition - flock.transform.localPosition;
-				separation += relativePos / (relativePos.sqrMagnitude);				
-			}
+	}
+	void Update () {
+		
+		flockSize = botScripts.Count;
+		if(flockSize ==0)
+			flockSize=1;
+		Vector3 center = Vector3.zero;    
+		Vector3 velocity = Vector3.zero;
+		foreach (PlayerControler bot in botScripts) 
+		{   center += bot.transform.localPosition;      
+			velocity += bot.gameObject.GetComponent<Rigidbody>().velocity;    
 		}
 		
-		// randomize
-		Vector3 randomize = new Vector3( (Random.value * 2) - 1, (Random.value * 2) - 1, (Random.value * 2) - 1);
 		
-		randomize.Normalize();
+		flockCenter = center / flockSize;    
+		flockVelocity = velocity / flockSize;  
 		
-		return (controller.centerWeight*center + 
-		        controller.velocityWeight*velocity + 
-		        controller.separationWeight*separation + 
-		        controller.followWeight*follow + 
-		        controller.randomizeWeight*randomize);
-	}	
+		
+	}
+
+	
+	
 }

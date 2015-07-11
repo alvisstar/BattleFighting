@@ -28,14 +28,14 @@ public class GameManager : MonoBehaviour {
 	void SpawnWave()
 	{
 		//int n = Random (5, 6);
-		for (int i =0; i<1; i++) {
+		for (int i =0; i<2; i++) {
 			GameObject opponentChar = (Instantiate(characterPrefabs[0], new Vector3 (-1, 0, 0), Quaternion.identity) as GameObject);
 			PlayerControler opponentScript = opponentChar.GetComponent<PlayerControler>();
 			float x = Random.Range(-GameObject.Find ("Ground").GetComponent<Renderer>().bounds.size.x/2 + 2,GameObject.Find ("Ground").GetComponent<Renderer>().bounds.size.x/2 -2);
 			float z = Random.Range(-GameObject.Find ("Ground").GetComponent<Renderer>().bounds.size.z/2 + 2,GameObject.Find ("Ground").GetComponent<Renderer>().bounds.size.z/2 -2);
 			opponentScript.Init(new Vector3 (x, 0, z), false);
 			opponentScript.controller = aiBotManager.GetComponent<AICharacterManager>();
-			opponentScript.targetObject = myChar;
+			//opponentScript.targetObject = myChar;
 			botScripts.Add(opponentScript);
 		}
 		maxWave--;

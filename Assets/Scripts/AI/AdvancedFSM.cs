@@ -13,9 +13,8 @@ using System.Collections.Generic;
 public enum Transition
 {
 	None = 0,
-	InclosurePlayer,
+	SawItem,
 	SawPlayer,
-	TouchPlayer,
 	ReachPlayer,
 	NoHealth,
 }
@@ -23,9 +22,8 @@ public enum Transition
 public enum FSMStateID
 {
 	None = 0,
-	Rounding,
+	TakingItem,
 	Chasing,
-	ChaseToAttack,
 	Attacking,
 	Dead,
 }

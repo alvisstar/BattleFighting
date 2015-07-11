@@ -23,6 +23,17 @@ public class AttackState : FSMState
 		{
 			range=npc.GetComponent<Equipment> ()._weapon.GetComponent<Weapon>().rangeAttack;
 		}
+		float distItem =-1;
+		if(GameObject.Find("Item(Clone)")!=null)
+			distItem = Vector3.Distance(npc.position,GameObject.Find("Item(Clone)").transform.position);
+		if (distItem !=-1 && distItem < 10) {
+			npc.GetComponent<PlayerControler>().focusItem = true;
+			npc.GetComponent<PlayerControler>().itemToTake = GameObject.Find("Item(Clone)");
+			npc.GetComponent<PlayerControler>().targetObject = GameObject.Find("Item(Clone)");
+			controller.target = GameObject.Find("Item(Clone)").transform;
+			npc.GetComponent<PlayerControler>().PerformTransition(Transition.SawItem);
+		}
+		else
 		if (dist > range)
 		{
 			//Rotate to the target point

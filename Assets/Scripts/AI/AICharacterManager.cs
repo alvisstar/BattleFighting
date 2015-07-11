@@ -28,7 +28,7 @@ public class AICharacterManager : MonoBehaviour {
 	internal Vector3 flockVelocity;  //Average Velocity
 	
 	public float rangeAttack;
-	
+
 	void Start () {
 		
 		maxNumberNearPLayer = 0;
@@ -41,6 +41,12 @@ public class AICharacterManager : MonoBehaviour {
 		this.character = character;
 		this.botScripts = botScripts;
 		target = character.transform;
+		for(int i =1 ;i< botScripts.Count ;i++)
+		{
+			botScripts[i].targetObject = botScripts[0].gameObject;
+			botScripts[i].GetComponent<Flock>().botScripts.Add(botScripts[i]);
+
+		}
 		
 	}
 	// Update is called once per frame
@@ -49,7 +55,7 @@ public class AICharacterManager : MonoBehaviour {
 	}
 	void Update () {
 		
-		
+
 		Vector3 center = Vector3.zero;    
 		Vector3 velocity = Vector3.zero;
 		foreach (PlayerControler bot in botScripts) 
@@ -61,7 +67,34 @@ public class AICharacterManager : MonoBehaviour {
 		flockCenter = center / flockSize;    
 		flockVelocity = velocity / flockSize;  
 		
-		
+		ChangeTarget ();
+	}
+	public void ChangeTarget()
+	{
+		for(int i =0 ;i< botScripts.Count ;i++)
+		{
+			if(botScripts[i].needChangeTarget == true)
+			{
+				int n = Random.Range(0,botScripts.Count);
+				if(n==i)
+				{
+					if(i ==0)
+						n++;
+					else
+						if(i ==botScripts.Count-1)
+							n--;
+					else
+						n++;
+				}
+
+
+				botScripts[i].targetObject = botScripts[n].gameObject;
+				botScripts[n].GetComponent<Flock>().botScripts.Add(botScripts[i]);
+				botScripts[i].needChangeTarget = false;
+			}
+
+			
+		}
 	}
 
 

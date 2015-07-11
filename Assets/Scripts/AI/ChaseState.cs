@@ -29,12 +29,24 @@ public class ChaseState : FSMState
 		{
 			range=npc.GetComponent<Equipment> ()._weapon.GetComponent<Weapon>().rangeAttack;
 		}
-		if (dist <= range)
-		{
 
-				npc.GetComponent<PlayerControler>().PerformTransition(Transition.ReachPlayer);
-			
+		float distItem =-1;
+		if(GameObject.Find("Item(Clone)")!=null)
+			distItem = Vector3.Distance(npc.position,GameObject.Find("Item(Clone)").transform.position);
+		if (distItem !=-1 && distItem < 10) {
+			npc.GetComponent<PlayerControler>().focusItem = true;
+			npc.GetComponent<PlayerControler>().itemToTake = GameObject.Find("Item(Clone)");
+			npc.GetComponent<PlayerControler>().targetObject = GameObject.Find("Item(Clone)");
+			controller.target = GameObject.Find("Item(Clone)").transform;
+			npc.GetComponent<PlayerControler>().PerformTransition(Transition.SawItem);
 		}
+		else
+			if (dist <= range)
+			{
+
+					npc.GetComponent<PlayerControler>().PerformTransition(Transition.ReachPlayer);
+			
+			}
 
 			
 	}
@@ -43,6 +55,7 @@ public class ChaseState : FSMState
 	{
 		//Rotate to the target point
 		//if (npc.GetComponent<PlayerControler> ().recoveryTime <= 0) {
+		Flock flock = npc.GetComponent<Flock> ();
 			Vector3 relativePos = steer (npc) * Time.deltaTime;
 		
 			npc.GetComponent<PlayerControler> ().RotateByDirection (relativePos);
@@ -51,24 +64,25 @@ public class ChaseState : FSMState
 				npc.GetComponent<Rigidbody> ().velocity = relativePos;
 			// enforce minimum and maximum speeds for the boids      
 			float speed = npc.GetComponent<Rigidbody> ().velocity.magnitude;      
-			if (speed > controller.maxVelocity) {        
-				npc.GetComponent<Rigidbody> ().velocity = npc.GetComponent<Rigidbody> ().velocity.normalized * controller.maxVelocity;      
-			} else if (speed < controller.minVelocity) {        
-				npc.GetComponent<Rigidbody> ().velocity = npc.GetComponent<Rigidbody> ().velocity.normalized * controller.minVelocity;     
+			if (speed > flock.maxVelocity) {        
+				npc.GetComponent<Rigidbody> ().velocity = npc.GetComponent<Rigidbody> ().velocity.normalized * flock.maxVelocity;      
+			} else if (speed < flock.minVelocity) {        
+				npc.GetComponent<Rigidbody> ().velocity = npc.GetComponent<Rigidbody> ().velocity.normalized * flock.minVelocity;     
 			}    
 		//} else {
 		//	npc.GetComponent<Animator> ().SetFloat ("Speed", 0);
 		//}
 	
 	}
-	private Vector3 steer (Transform npc) {    
-		Vector3 center = controller.flockCenter -         npc.localPosition;  // cohesion
-		Vector3 velocity = controller.flockVelocity -         npc.GetComponent<Rigidbody>().velocity;  // alignment
-		Vector3 follow = controller.target.localPosition -         npc.localPosition;  // follow leader
+	private Vector3 steer (Transform npc) {  
+		Flock flock = npc.GetComponent<Flock> ();
+		Vector3 center = flock.flockCenter -         npc.localPosition;  // cohesion
+		Vector3 velocity = flock.flockVelocity -         npc.GetComponent<Rigidbody>().velocity;  // alignment
+		Vector3 follow = npc.GetComponent<PlayerControler> ().targetObject.transform.localPosition -         npc.localPosition;  // follow leader
 		Vector3 separation = Vector3.zero;
-		foreach (PlayerControler flock in controller.botScripts) {     
-			if (flock != npc.GetComponent<PlayerControler>()) {        
-				Vector3 relativePos = npc.localPosition -             flock.transform.localPosition;
+		foreach (PlayerControler player in controller.botScripts) {     
+			if (player != npc.GetComponent<PlayerControler>()) {        
+				Vector3 relativePos = npc.localPosition -             player.transform.localPosition;
 				separation += relativePos / (relativePos.sqrMagnitude);    
 				
 			}    
@@ -76,8 +90,8 @@ public class ChaseState : FSMState
 		// randomize    
 		Vector3 randomize = new Vector3( (Random.value * 2) - 1,         (Random.value * 2) - 1, (Random.value * 2) - 1);
 		randomize.Normalize();
-		return (controller.centerWeight * center +         
-		        controller.velocityWeight * velocity +         controller.separationWeight * separation +        
-		        controller.followWeight * follow +         controller.randomizeWeight * randomize);  
+		return (flock.centerWeight * center +         
+		        flock.velocityWeight * velocity +         flock.separationWeight * separation +        
+		        flock.followWeight * follow +         flock.randomizeWeight * randomize);  
 	} 
 }

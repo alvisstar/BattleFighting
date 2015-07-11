@@ -4,7 +4,9 @@ using System.IO;
 using UnityEditor;
 public class PlayerControler : AdvancedFSM {
 
-
+	public bool focusItem;
+	public bool needChangeTarget;
+	public GameObject itemToTake;
 	private float currentSpeed = 0.15f;
 	public float normalSpeed = 0.15f;
 	public float maxSpeed = 0.3f;
@@ -80,6 +82,8 @@ public class PlayerControler : AdvancedFSM {
 	}
 	public AICharacterManager controller;
 	void Start () {
+		needChangeTarget = false;
+		focusItem = false;
 		_allowControl = true;
 		_animator = GetComponent<Animator>();
 		_playerSkill = GetComponent<Skill> ();
@@ -116,30 +120,24 @@ public class PlayerControler : AdvancedFSM {
 		
 		ChaseState chase = new ChaseState(controller);
 		//chase.AddTransition(Transition.InclosurePlayer, FSMStateID.Rounding);
-		//chase.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
+		chase.AddTransition(Transition.SawItem, FSMStateID.TakingItem);
 		chase.AddTransition(Transition.ReachPlayer, FSMStateID.Attacking);
 		chase.AddTransition(Transition.NoHealth, FSMStateID.Dead);
 		
 		
 		
 		AttackState attack = new AttackState(controller);
-		//attack.AddTransition(Transition.InclosurePlayer, FSMStateID.Rounding);
+		attack.AddTransition(Transition.SawItem, FSMStateID.TakingItem);
 		attack.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
 		attack.AddTransition(Transition.NoHealth, FSMStateID.Dead);
 		
-		/*RoundingState rounding = new RoundingState(controller);
-		rounding.AddTransition(Transition.ReachPlayer, FSMStateID.ChaseToAttack);
-		rounding.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
-		rounding.AddTransition(Transition.NoHealth, FSMStateID.Dead);
-		
-
-		ChaseToAttack chaseToAttack = new ChaseToAttack(controller);
-		chaseToAttack.AddTransition(Transition.TouchPlayer, FSMStateID.Attacking);
-		chaseToAttack.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
-		chaseToAttack.AddTransition(Transition.NoHealth, FSMStateID.Dead);*/
+		PickItemState pickItem = new PickItemState(controller);
+		pickItem.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
+		pickItem.AddTransition(Transition.NoHealth, FSMStateID.Dead);
 		
 		AddFSMState(chase);
 		AddFSMState(attack);
+		AddFSMState(pickItem);
 		//AddFSMState(rounding);
 		//AddFSMState(chaseToAttack);
 	}
@@ -170,10 +168,12 @@ public class PlayerControler : AdvancedFSM {
 		_animator.SetBool(name,true);
 
 
+
 	}
 	void OnWeaponChange (NotificationCenter.Notification arg)
 	{
-		if(arg.sender ==GetComponent<Equipment>() ||arg.sender ==GetComponent<Equipment>()._weapon.GetComponent<Weapon>())
+		if(arg.sender ==GetComponent<Equipment>()
+		   ||(GetComponent<Equipment>()._weapon!=null&& arg.sender ==GetComponent<Equipment>()._weapon.GetComponent<Weapon>()))
 		{
 		_isAttack = false;
 		_isRunningAnimation = false;
@@ -248,6 +248,8 @@ public class PlayerControler : AdvancedFSM {
 	}
 	// Update is called once per frame
 	void Update () {
+		if (itemToTake == null)
+			focusItem = false;
 		if(_isMain)
 		{
 		_isKeyMovePressing = KeyboardControl ();
@@ -296,6 +298,7 @@ public class PlayerControler : AdvancedFSM {
 	public bool CheckIsAnimation(string name)
 	{
 		//int atakState = Animator.StringToHash(name); 
+
 		if (_animator.GetCurrentAnimatorStateInfo (0).IsName(name))
 			return true;
 		return false;	
@@ -369,8 +372,13 @@ public class PlayerControler : AdvancedFSM {
 		}
 		if(!_isMain)
 		{
-			CurrentState.Reason (controller.target,transform);
-			CurrentState.Act (controller.target,transform);
+			if(targetObject == null)
+				needChangeTarget = true;
+			if(targetObject!=null)
+			{
+				CurrentState.Reason (targetObject.transform,transform);
+				CurrentState.Act (targetObject.transform,transform);
+			}
 		}
 	}
 
