@@ -63,7 +63,7 @@ public class SamuraiSkill : Skill
 			// processing power of skill 2
 			if (currentTimeAddForce > 0.25f) {
 				currentTimeAddForce = 0;
-				foreach (BotControler bot in _gameManager.botScripts) {
+				foreach (PlayerControler bot in _gameManager.botScripts) {
 					if (Vector3.Distance (bot.GetComponent<Rigidbody> ().position, GetComponent<Rigidbody> ().position) <= rangeOfSkill2) {
 						bot.BeHitted ();
 						bot.GetComponent<Rigidbody> ().AddForce (-bot.transform.forward * 10, ForceMode.Impulse);

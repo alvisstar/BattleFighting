@@ -4,7 +4,7 @@ using System.Collections;
 public class ChaseToAttack : FSMState {
 
 	// Use this for initialization
-	public ChaseToAttack(AIBotManager controller1) 
+	public ChaseToAttack(AICharacterManager controller1) 
 	{ 
 		controller = controller1;
 		stateID = FSMStateID.ChaseToAttack;
@@ -62,7 +62,7 @@ public class ChaseToAttack : FSMState {
 		Vector3 velocity = controller.flockVelocity -         npc.GetComponent<Rigidbody>().velocity;  // alignment
 		Vector3 follow = controller.target.localPosition -         npc.localPosition;  // follow leader
 		Vector3 separation = Vector3.zero;
-		foreach (BotControler flock in controller.botScripts) {     
+		foreach (PlayerControler flock in controller.botScripts) {     
 			if (flock != npc.GetComponent<BotControler>()) {        
 				Vector3 relativePos = npc.localPosition -             flock.transform.localPosition;
 				separation += relativePos / (relativePos.sqrMagnitude);    

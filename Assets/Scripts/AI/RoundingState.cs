@@ -5,7 +5,7 @@ public class RoundingState : FSMState {
 
 	// Use this for initialization
 
-	public RoundingState(AIBotManager controller1) 
+	public RoundingState(AICharacterManager controller1) 
 	{ 
 		controller = controller1;
 		stateID = FSMStateID.Rounding;
@@ -36,7 +36,7 @@ public class RoundingState : FSMState {
 	{
 		//Find another random patrol point if the current point is reached
 		Vector3 relativePos = player.position - npc.position ;
-		npc.GetComponent<BotControler>().RotateByDirection (relativePos);
+		npc.GetComponent<PlayerControler>().RotateByDirection (relativePos);
 		npc.GetComponent<Animator> ().SetFloat ("Speed", 0);
 
 	}
@@ -47,7 +47,7 @@ public class RoundingState : FSMState {
 		Vector3 a =controller.target.localPosition + new Vector3(random,0,random);
 		Vector3 follow = a -         npc.localPosition;  // follow leader
 		Vector3 separation = Vector3.zero;
-		foreach (BotControler flock in controller.botScripts) {     
+		foreach (PlayerControler flock in controller.botScripts) {     
 			if (flock != npc.GetComponent<BotControler>()) {        
 				Vector3 relativePos = npc.localPosition -             flock.transform.localPosition;
 				separation += relativePos / (relativePos.sqrMagnitude);    

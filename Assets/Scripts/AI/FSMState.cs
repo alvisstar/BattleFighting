@@ -25,7 +25,7 @@ public abstract class FSMState
 	protected Vector3 destPos;
 	protected float curRotSpeed;
 	protected float curSpeed;
-	protected AIBotManager controller;
+	protected AICharacterManager controller;
 	public void AddTransition(Transition transition, FSMStateID id)
 	{
 		// Check if anyone of the args is invallid

@@ -4,7 +4,7 @@ using System.Collections;
 public class ChaseState : FSMState
 {
 
-	public ChaseState(AIBotManager controller1) 
+	public ChaseState(AICharacterManager controller1) 
 	{ 
 		controller = controller1;
 		stateID = FSMStateID.Chasing;
@@ -24,11 +24,15 @@ public class ChaseState : FSMState
 		//Check the distance with player tank
 		//When the distance is near, transition to attack state
 		float dist = Vector3.Distance(npc.position, destPos);
-
-		if (dist <= 3.5f)
+		float range = 3.5f;
+		if(npc.GetComponent<Equipment> ()._weapon !=null)
+		{
+			range=npc.GetComponent<Equipment> ()._weapon.GetComponent<Weapon>().rangeAttack;
+		}
+		if (dist <= range)
 		{
 
-				npc.GetComponent<BotControler>().PerformTransition(Transition.ReachPlayer);
+				npc.GetComponent<PlayerControler>().PerformTransition(Transition.ReachPlayer);
 			
 		}
 
@@ -38,10 +42,10 @@ public class ChaseState : FSMState
 	public override void Act(Transform player, Transform npc)
 	{
 		//Rotate to the target point
-		if (npc.GetComponent<BotControler> ().recoveryTime <= 0) {
+		//if (npc.GetComponent<PlayerControler> ().recoveryTime <= 0) {
 			Vector3 relativePos = steer (npc) * Time.deltaTime;
 		
-			npc.GetComponent<BotControler> ().RotateByDirection (relativePos);
+			npc.GetComponent<PlayerControler> ().RotateByDirection (relativePos);
 			npc.GetComponent<Animator> ().SetFloat ("Speed", 1);
 			if (relativePos != Vector3.zero)          
 				npc.GetComponent<Rigidbody> ().velocity = relativePos;
@@ -52,9 +56,9 @@ public class ChaseState : FSMState
 			} else if (speed < controller.minVelocity) {        
 				npc.GetComponent<Rigidbody> ().velocity = npc.GetComponent<Rigidbody> ().velocity.normalized * controller.minVelocity;     
 			}    
-		} else {
-			npc.GetComponent<Animator> ().SetFloat ("Speed", 0);
-		}
+		//} else {
+		//	npc.GetComponent<Animator> ().SetFloat ("Speed", 0);
+		//}
 	
 	}
 	private Vector3 steer (Transform npc) {    
@@ -62,8 +66,8 @@ public class ChaseState : FSMState
 		Vector3 velocity = controller.flockVelocity -         npc.GetComponent<Rigidbody>().velocity;  // alignment
 		Vector3 follow = controller.target.localPosition -         npc.localPosition;  // follow leader
 		Vector3 separation = Vector3.zero;
-		foreach (BotControler flock in controller.botScripts) {     
-			if (flock != npc.GetComponent<BotControler>()) {        
+		foreach (PlayerControler flock in controller.botScripts) {     
+			if (flock != npc.GetComponent<PlayerControler>()) {        
 				Vector3 relativePos = npc.localPosition -             flock.transform.localPosition;
 				separation += relativePos / (relativePos.sqrMagnitude);    
 				

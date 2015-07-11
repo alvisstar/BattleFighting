@@ -7,6 +7,9 @@ public class Bomb : Weapon {
 	public GameObject bombPrefabs;
 	public Transform characterTransform;
 	public Transform equipTransform;
+	void Start () {
+		rangeAttack = 10;
+	}
 	public override void OnAttack()
 	{
 

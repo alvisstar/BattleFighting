@@ -13,6 +13,8 @@ public class Sword : Weapon {
 		numberOfWeapon = -1;
 		delayTime = 0;
 		trail.Deactivate ();
+		rangeAttack = 4;
+
 		//trail.Init ();
 
 	}
@@ -30,7 +32,7 @@ public class Sword : Weapon {
 			Vector3 pos = other.contacts[0].point;
 			
 			other.gameObject.GetComponent<Rigidbody> ().velocity = other.gameObject.transform.forward*(-1)  *0.15f  *60;			
-			other.gameObject.GetComponent<BotControler>().BeHitted();
+			other.gameObject.GetComponent<PlayerControler>().BeHitted();
 			GameObject explosionIceBall = Instantiate(prefabHit,pos,Quaternion.identity) as GameObject;
 	}
 	}

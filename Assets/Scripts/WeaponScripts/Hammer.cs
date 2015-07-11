@@ -9,7 +9,7 @@ public class Hammer : Weapon {
 	public Transform equipTransform;
 	void Start () {
 		numberOfWeapon = -1;
-		
+		rangeAttack = 4;
 	}
 	
 	public override void OnAttack()

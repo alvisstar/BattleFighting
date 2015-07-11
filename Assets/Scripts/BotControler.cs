@@ -37,7 +37,7 @@ public class BotControler : AdvancedFSM {
 			_targetObject = value;
 		}
 	}
-	public AIBotManager controller;
+	public AICharacterManager controller;
 	public GameObject hpBarPrefab;
 	public Transform headTranform;
 	public float recoveryTime;

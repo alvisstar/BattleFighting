@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AttackState : FSMState
+public class PickItemState : FSMState
 {
-	public AttackState(AICharacterManager controller1) 
+	public PickItemState(AICharacterManager controller1) 
 	{ 
 		controller = controller1;
 		stateID = FSMStateID.Attacking;
@@ -11,25 +11,20 @@ public class AttackState : FSMState
 		curSpeed = 100.0f;
 		
 		//find next Waypoint position
-
+		
 	}
 	
 	public override void Reason(Transform player, Transform npc)
 	{
 		//Check the distance with the player tank
 		float dist = Vector3.Distance(npc.position, player.position);
-		float range = 3.5f;
-		if(npc.GetComponent<Equipment> ()._weapon !=null)
-		{
-			range=npc.GetComponent<Equipment> ()._weapon.GetComponent<Weapon>().rangeAttack;
-		}
-		if (dist > range)
+		if (dist > 3.5f)
 		{
 			//Rotate to the target point
-
+			
 			npc.GetComponent<PlayerControler>().PerformTransition(Transition.SawPlayer);
 		}
-
+		
 	}
 	
 	public override void Act(Transform player, Transform npc)
@@ -38,6 +33,6 @@ public class AttackState : FSMState
 		
 		npc.GetComponent<PlayerControler>().RotateByDirection (relativePos);
 		//if(npc.GetComponent<BotControler>().recoveryTime <= 0)
-			npc.GetComponent<PlayerControler> ().AttackTarget ();
+		npc.GetComponent<PlayerControler> ().AttackTarget ();
 	}
 }

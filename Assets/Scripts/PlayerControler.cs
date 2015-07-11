@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.IO;
 using UnityEditor;
-public class PlayerControler : MonoBehaviour {
+public class PlayerControler : AdvancedFSM {
 
 
 	private float currentSpeed = 0.15f;
@@ -68,7 +68,17 @@ public class PlayerControler : MonoBehaviour {
 	public bool onTrigger;
 
 	private Vector3 oldForward;
+	private GameObject _targetObject;
 
+	public GameObject targetObject {
+		get {
+			return _targetObject;
+		}
+		set {
+			_targetObject = value;
+		}
+	}
+	public AICharacterManager controller;
 	void Start () {
 		_allowControl = true;
 		_animator = GetComponent<Animator>();
@@ -87,7 +97,7 @@ public class PlayerControler : MonoBehaviour {
 		_force = 0;
 		_firstPress = false;
 		_animator.SetBool ("IsEquipNone", true);
-		NotificationCenter.DefaultCenter.AddObserver(this, "OnWeaponChange");
+		NotificationCenter.DefaultCenter.AddObserver(this, "OnWeaponChange",this);
 		NotificationCenter.DefaultCenter.AddObserver(this, "OnBombExplode");
 		NotificationCenter.DefaultCenter.AddObserver(this, "OnMineExplode");
 
@@ -98,6 +108,40 @@ public class PlayerControler : MonoBehaviour {
 		onTrigger = false;
 
 		oldForward = transform.forward;
+		ConstructFSM ();
+	}
+	private void ConstructFSM()
+	{
+		
+		
+		ChaseState chase = new ChaseState(controller);
+		//chase.AddTransition(Transition.InclosurePlayer, FSMStateID.Rounding);
+		//chase.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
+		chase.AddTransition(Transition.ReachPlayer, FSMStateID.Attacking);
+		chase.AddTransition(Transition.NoHealth, FSMStateID.Dead);
+		
+		
+		
+		AttackState attack = new AttackState(controller);
+		//attack.AddTransition(Transition.InclosurePlayer, FSMStateID.Rounding);
+		attack.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
+		attack.AddTransition(Transition.NoHealth, FSMStateID.Dead);
+		
+		/*RoundingState rounding = new RoundingState(controller);
+		rounding.AddTransition(Transition.ReachPlayer, FSMStateID.ChaseToAttack);
+		rounding.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
+		rounding.AddTransition(Transition.NoHealth, FSMStateID.Dead);
+		
+
+		ChaseToAttack chaseToAttack = new ChaseToAttack(controller);
+		chaseToAttack.AddTransition(Transition.TouchPlayer, FSMStateID.Attacking);
+		chaseToAttack.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
+		chaseToAttack.AddTransition(Transition.NoHealth, FSMStateID.Dead);*/
+		
+		AddFSMState(chase);
+		AddFSMState(attack);
+		//AddFSMState(rounding);
+		//AddFSMState(chaseToAttack);
 	}
 	public void ActiveTrail()
 	{
@@ -124,9 +168,13 @@ public class PlayerControler : MonoBehaviour {
 		_animator.SetBool("IsEquipHammer",false);
 		_animator.SetBool("IsEquipShit",false);
 		_animator.SetBool(name,true);
+
+
 	}
 	void OnWeaponChange (NotificationCenter.Notification arg)
 	{
+		if(arg.sender ==GetComponent<Equipment>() ||arg.sender ==GetComponent<Equipment>()._weapon.GetComponent<Weapon>())
+		{
 		_isAttack = false;
 		_isRunningAnimation = false;
 		Hashtable hash = arg.data;
@@ -134,11 +182,13 @@ public class PlayerControler : MonoBehaviour {
 		if (name == "Longbow03(Clone)") {
 			TextAsset tmp = Resources.Load ("Button-A", typeof(TextAsset)) as TextAsset;
 			zoneFight.GetDisplayTex ().LoadImage (tmp.bytes);
+
 		} 
 		else if (name == "None") {
 			TextAsset tmp = Resources.Load ("Button-B", typeof(TextAsset)) as TextAsset;
 			zoneFight.GetDisplayTex ().LoadImage (tmp.bytes);
 			setParamAnimator("IsEquipNone");
+
 		}  
 		else if (name == "Gun(Clone)") {
 			TextAsset tmp = Resources.Load ("Button-B", typeof(TextAsset)) as TextAsset;
@@ -154,6 +204,7 @@ public class PlayerControler : MonoBehaviour {
 			TextAsset tmp = Resources.Load ("Button-C", typeof(TextAsset)) as TextAsset;
 			zoneFight.GetDisplayTex ().LoadImage (tmp.bytes);
 			setParamAnimator("IsEquipSword");
+
 			Physics.IgnoreCollision( GetComponent<Equipment>()._weapon.GetComponent<Collider>(),GetComponent<Collider>(),true);
 		} 
 		else if (name.CompareTo("Mine(Clone)")==0) {
@@ -173,7 +224,7 @@ public class PlayerControler : MonoBehaviour {
 			setParamAnimator("IsEquipShit");
 		}  
 	
-
+		}
 	}
 	void OnBombExplode (NotificationCenter.Notification arg)
 	{
@@ -197,8 +248,11 @@ public class PlayerControler : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
+		if(_isMain)
+		{
 		_isKeyMovePressing = KeyboardControl ();
 		HandleAnimation ();
+		}
 		if(_isAttack)
 		{
 
@@ -250,7 +304,7 @@ public class PlayerControler : MonoBehaviour {
 	void FixedUpdate()
 	{
 		// processing for D-Pad
-		if (this.ctrl && _allowControl) {	
+		if (this.ctrl && _allowControl && _isMain) {	
 			// Get stick and zone references by IDs...			
 
 
@@ -307,11 +361,16 @@ public class PlayerControler : MonoBehaviour {
 			
 		} else {			
 			// processing for keyboard
-			float h = Input.GetAxis("Horizontal");
-			float v = Input.GetAxis("Vertical");
+			//float h = Input.GetAxis("Horizontal");
+			//float v = Input.GetAxis("Vertical");
 			// we use world-relative directions in the case of no main camera
-			m_Move = v*Vector3.forward + h*Vector3.right;
-			RotateByDirection(m_Move);
+			//m_Move = v*Vector3.forward + h*Vector3.right;
+			//RotateByDirection(m_Move);
+		}
+		if(!_isMain)
+		{
+			CurrentState.Reason (controller.target,transform);
+			CurrentState.Act (controller.target,transform);
 		}
 	}
 
@@ -443,7 +502,10 @@ public class PlayerControler : MonoBehaviour {
 	{
 		return _isAttack;
 	}
-
+	public void AttackTarget()
+	{
+		_isAttack = true;
+	}
 	void Attack()
 	{
 		if (GetComponent<Equipment> ()._weapon == null) {
@@ -485,7 +547,9 @@ public class PlayerControler : MonoBehaviour {
 			if(GetComponent<Equipment> ()._weapon.GetComponent<Sword> ().CheckAllowAttack())
 			{			
 				SetAnimationAttack();
-				_animator.GetBehaviour<SwordAttackBehaviour>().player = this.gameObject;				
+				_animator.GetBehaviour<SwordAttackBehaviour>().player = this.gameObject;	
+				float a = GetComponent<Equipment>()._weapon.GetComponent<Weapon>().rangeAttack;
+				a =1;
 			}
 		}	
 		else if (GetComponent<Equipment> ()._weapon.name == "Hammer(Clone)") 
