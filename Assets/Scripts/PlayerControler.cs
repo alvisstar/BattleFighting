@@ -128,16 +128,23 @@ public class PlayerControler : AdvancedFSM {
 		
 		AttackState attack = new AttackState(controller);
 		attack.AddTransition(Transition.SawItem, FSMStateID.TakingItem);
+		attack.AddTransition(Transition.LowHp, FSMStateID.Running);
 		attack.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
 		attack.AddTransition(Transition.NoHealth, FSMStateID.Dead);
 		
 		PickItemState pickItem = new PickItemState(controller);
 		pickItem.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
 		pickItem.AddTransition(Transition.NoHealth, FSMStateID.Dead);
-		
+
+
+		EscapeState escape = new EscapeState(controller);
+		escape.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
+		escape.AddTransition(Transition.NoHealth, FSMStateID.Dead);
+
 		AddFSMState(chase);
 		AddFSMState(attack);
 		AddFSMState(pickItem);
+		AddFSMState(escape);
 		//AddFSMState(rounding);
 		//AddFSMState(chaseToAttack);
 	}
@@ -485,6 +492,8 @@ public class PlayerControler : AdvancedFSM {
 			isDie = true;
 		} else {
 			hp--;
+			if(!_isMain)
+				CurrentState.hpDecrease++;
 			GetComponent<Animator>().SetTrigger(beAttackHash);
 
 		}

@@ -26,6 +26,12 @@ public class AttackState : FSMState
 		float distItem =-1;
 		if(GameObject.Find("Item(Clone)")!=null)
 			distItem = Vector3.Distance(npc.position,GameObject.Find("Item(Clone)").transform.position);
+		if(hpDecrease>=5)
+		{
+			//npc.GetComponent<PlayerControler>().targetObject = null;
+			npc.GetComponent<PlayerControler>().PerformTransition(Transition.LowHp);
+		}
+		else
 		if (distItem !=-1 && distItem < 10) {
 			npc.GetComponent<PlayerControler>().focusItem = true;
 			npc.GetComponent<PlayerControler>().itemToTake = GameObject.Find("Item(Clone)");
@@ -36,12 +42,12 @@ public class AttackState : FSMState
 			npc.GetComponent<PlayerControler>().PerformTransition(Transition.SawItem);
 		}
 		else
-		if (dist > range)
-		{
-			//Rotate to the target point
+			if (dist > range)
+			{
+				//Rotate to the target point
 
-			npc.GetComponent<PlayerControler>().PerformTransition(Transition.SawPlayer);
-		}
+				npc.GetComponent<PlayerControler>().PerformTransition(Transition.SawPlayer);
+			}
 
 	}
 	

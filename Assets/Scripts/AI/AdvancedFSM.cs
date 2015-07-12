@@ -13,6 +13,7 @@ using System.Collections.Generic;
 public enum Transition
 {
 	None = 0,
+	LowHp,
 	SawItem,
 	SawPlayer,
 	ReachPlayer,
@@ -22,6 +23,7 @@ public enum Transition
 public enum FSMStateID
 {
 	None = 0,
+	Running,
 	TakingItem,
 	Chasing,
 	Attacking,
@@ -133,6 +135,7 @@ public class AdvancedFSM : FSM
 		{
 			if (state.ID == currentStateID)
 			{
+				currentState.hpDecrease =0;
 				currentState = state;
 				break;
 			}

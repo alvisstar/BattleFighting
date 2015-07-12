@@ -9,7 +9,7 @@ public class PickItemState : FSMState
 		stateID = FSMStateID.TakingItem;
 		curRotSpeed = 1.0f;
 		curSpeed = 100.0f;
-		
+		hpDecrease = 0;
 		//find next Waypoint position
 		
 	}

@@ -46,7 +46,9 @@ public class AICharacterManager : MonoBehaviour {
 	{
 
 			for (int i =0; i< botScripts.Count; i++) {
-				if (botScripts [i].needChangeTarget == true) {
+			if (botScripts [i].needChangeTarget == true ) {
+				if(botScripts.Count>1)
+				{
 					int n = Random.Range (0, botScripts.Count);
 					if (n == i) {
 						if (i == 0)
@@ -64,6 +66,13 @@ public class AICharacterManager : MonoBehaviour {
 					botScripts [i].needChangeTarget = false;
 					
 				}
+			}
+			else
+			{
+				botScripts [i].targetObject = character;
+				character.GetComponent<Flock> ().botScripts.Add (botScripts [i]);
+				botScripts [i].needChangeTarget = false;
+			}
 
 
 			

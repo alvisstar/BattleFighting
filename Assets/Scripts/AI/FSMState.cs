@@ -26,6 +26,7 @@ public abstract class FSMState
 	protected float curRotSpeed;
 	protected float curSpeed;
 	protected AICharacterManager controller;
+	public float hpDecrease;
 	public void AddTransition(Transition transition, FSMStateID id)
 	{
 		// Check if anyone of the args is invallid
