@@ -36,14 +36,16 @@ public class ChaseState : FSMState
 		if (distItem !=-1 && distItem < 10) {
 			npc.GetComponent<PlayerControler>().focusItem = true;
 			npc.GetComponent<PlayerControler>().itemToTake = GameObject.Find("Item(Clone)");
+			npc.GetComponent<PlayerControler> ().targetObject.GetComponent<Flock> ().botScripts.Remove(npc.GetComponent<PlayerControler> ());
 			npc.GetComponent<PlayerControler>().targetObject = GameObject.Find("Item(Clone)");
+			npc.GetComponent<PlayerControler>().targetObject.GetComponent<Flock> ().botScripts.Add(npc.GetComponent<PlayerControler> ());
 			controller.target = GameObject.Find("Item(Clone)").transform;
 			npc.GetComponent<PlayerControler>().PerformTransition(Transition.SawItem);
 		}
 		else
 			if (dist <= range)
 			{
-
+			//npc.GetComponent<PlayerControler> ().targetObject.GetComponent<Flock> ().botScripts.Remove(npc.GetComponent<PlayerControler> ());
 					npc.GetComponent<PlayerControler>().PerformTransition(Transition.ReachPlayer);
 			
 			}
@@ -55,7 +57,7 @@ public class ChaseState : FSMState
 	{
 		//Rotate to the target point
 		//if (npc.GetComponent<PlayerControler> ().recoveryTime <= 0) {
-		Flock flock = npc.GetComponent<Flock> ();
+		Flock flock = npc.GetComponent<PlayerControler> ().targetObject.GetComponent<Flock> ();
 			Vector3 relativePos = steer (npc) * Time.deltaTime;
 		
 			npc.GetComponent<PlayerControler> ().RotateByDirection (relativePos);
@@ -75,12 +77,12 @@ public class ChaseState : FSMState
 	
 	}
 	private Vector3 steer (Transform npc) {  
-		Flock flock = npc.GetComponent<Flock> ();
+		Flock flock = npc.GetComponent<PlayerControler> ().targetObject.GetComponent<Flock> ();
 		Vector3 center = flock.flockCenter -         npc.localPosition;  // cohesion
 		Vector3 velocity = flock.flockVelocity -         npc.GetComponent<Rigidbody>().velocity;  // alignment
 		Vector3 follow = npc.GetComponent<PlayerControler> ().targetObject.transform.localPosition -         npc.localPosition;  // follow leader
 		Vector3 separation = Vector3.zero;
-		foreach (PlayerControler player in controller.botScripts) {     
+		foreach (PlayerControler player in flock.botScripts) {     
 			if (player != npc.GetComponent<PlayerControler>()) {        
 				Vector3 relativePos = npc.localPosition -             player.transform.localPosition;
 				separation += relativePos / (relativePos.sqrMagnitude);    

@@ -29,7 +29,9 @@ public class AttackState : FSMState
 		if (distItem !=-1 && distItem < 10) {
 			npc.GetComponent<PlayerControler>().focusItem = true;
 			npc.GetComponent<PlayerControler>().itemToTake = GameObject.Find("Item(Clone)");
+			npc.GetComponent<PlayerControler> ().targetObject.GetComponent<Flock> ().botScripts.Remove(npc.GetComponent<PlayerControler> ());
 			npc.GetComponent<PlayerControler>().targetObject = GameObject.Find("Item(Clone)");
+			npc.GetComponent<PlayerControler>().targetObject.GetComponent<Flock> ().botScripts.Add(npc.GetComponent<PlayerControler> ());
 			controller.target = GameObject.Find("Item(Clone)").transform;
 			npc.GetComponent<PlayerControler>().PerformTransition(Transition.SawItem);
 		}

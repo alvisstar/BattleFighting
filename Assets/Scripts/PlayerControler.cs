@@ -414,8 +414,7 @@ public class PlayerControler : AdvancedFSM {
 		else
 			forceRotate = 0;
 
-		Debug.Log ("Angle" + angle);
-		Debug.Log ("Force" + _force);
+
 		speedRotate = transform.forward*currentSpeed * percentOfAngle*_force;
 
 		oldForward = transform.forward;
