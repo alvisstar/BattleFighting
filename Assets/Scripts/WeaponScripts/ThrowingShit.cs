@@ -27,13 +27,14 @@ public class ThrowingShit : MonoBehaviour {
 		if (beginEffect) {
 			timeEffect += Time.deltaTime;
 			warmObject.transform.position = new Vector3(target.transform.position.x,warmObject.transform.position.y,target.transform.position.z);
+			Debug.Log(target.transform.position.x +" and " + target.transform.position.z);
 		}
 	
 		if (timeEffect >= 5	)
 		{
 			//Instantiate(prefabExplode,gameObject.transform.position,Quaternion.identity);
 
-			Destroy (warmObject);
+			//Destroy (warmObject);
 		}
 	}
 	
@@ -51,7 +52,7 @@ public class ThrowingShit : MonoBehaviour {
 	void OnCollisionEnter (Collision col)
 	{
 		if (col.gameObject.name == "Ground") {
-			Destroy (gameObject);	
+			//Destroy (gameObject);	
 		} else if (col.gameObject.tag == "Player") {
 			//Destroy(gameObject);
 			beginEffect =true;
