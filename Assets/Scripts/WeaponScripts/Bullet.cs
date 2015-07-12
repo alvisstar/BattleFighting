@@ -16,11 +16,11 @@ public class Bullet : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter(Collider other) {
-		if(other.gameObject.tag == "Bot" )
+		if(other.gameObject.tag == "Player" )
 		{
 			
 			
-			other.gameObject.GetComponent<BotControler>().BeHitted();
+			other.gameObject.GetComponent<PlayerControler>().BeHitted();
 			Destroy(gameObject);
 		}
 	}

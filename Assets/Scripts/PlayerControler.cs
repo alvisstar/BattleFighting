@@ -471,8 +471,8 @@ public class PlayerControler : AdvancedFSM {
 
 	void OnTriggerEnter(Collider col)
 	{
-		if (col.gameObject.tag == "BotHand" 
-		    &&( col.GetComponentInParent<BotControler>().CheckIsAnimation("AttackR")|| col.GetComponentInParent<BotControler>().CheckIsAnimation("AttackL")) && !isDie) {
+		if (col.gameObject.tag == "Hand" 
+		    &&( col.GetComponentInParent<PlayerControler>().CheckIsAnimation("AttackR")|| col.GetComponentInParent<PlayerControler>().CheckIsAnimation("AttackL")) && !isDie) {
 			GetComponent<Rigidbody> ().velocity = col.gameObject.transform.forward * currentSpeed *60;
 			BeHitted();
 		}
