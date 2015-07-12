@@ -4,31 +4,36 @@ using System.Collections;
 public class ThrowingShit : MonoBehaviour {
 	
 	// Use this for initialization
-	public GameObject bombPrefabs;
+
+	public GameObject explosePrefabs;
+	public GameObject warmPrefabs;
+	public GameObject warmObject;
+	public GameObject target;
 	public Transform characterTransform;
 	Vector3 direction;
-	bool beginExplode;
-	float timeToExplode;
+	bool beginEffect;
+	float timeEffect;
 	
 	//public GameObject prefabExplode = null;
 	
 	void Start () {
-		beginExplode = false;
-		timeToExplode = 0;
-		beginExplode = true;
+		beginEffect = false;
+		timeEffect = 0;
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (beginExplode)
-			timeToExplode += Time.deltaTime;
-		if (timeToExplode >= 1.7	)
+		if (beginEffect) {
+			timeEffect += Time.deltaTime;
+			warmObject.transform.position = new Vector3(target.transform.position.x,warmObject.transform.position.y,target.transform.position.z);
+		}
+	
+		if (timeEffect >= 5	)
 		{
 			//Instantiate(prefabExplode,gameObject.transform.position,Quaternion.identity);
-			Hashtable hash = new Hashtable();
-			hash.Add("Position", gameObject.transform.position);
-			NotificationCenter.DefaultCenter.PostNotification(this, "OnBombExplode",hash);
-			Destroy (gameObject);
+
+			Destroy (warmObject);
 		}
 	}
 	
@@ -45,12 +50,14 @@ public class ThrowingShit : MonoBehaviour {
 	
 	void OnCollisionEnter (Collision col)
 	{
-		if(col.gameObject.name == "Terrain" )
-		{
-			//beginExplode = true;
-			if(characterTransform!=null)
-				Physics.IgnoreCollision(GetComponent<Collider>(), characterTransform.gameObject.GetComponent<Collider>(),false);
-			
+		if (col.gameObject.name == "Ground") {
+			Destroy (gameObject);	
+		} else if (col.gameObject.tag == "Player") {
+			//Destroy(gameObject);
+			beginEffect =true;
+			Instantiate(explosePrefabs,col.contacts[0].point,Quaternion.identity);
+			warmObject = Instantiate(warmPrefabs,col.contacts[0].point,Quaternion.identity) as GameObject;
+			target = col.gameObject;
 		}
 	}
 }
