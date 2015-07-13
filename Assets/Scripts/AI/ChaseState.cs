@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 public class ChaseState : FSMState
 {
 
@@ -30,17 +30,20 @@ public class ChaseState : FSMState
 			range=npc.GetComponent<Equipment> ()._weapon.GetComponent<Weapon>().rangeAttack;
 		}
 
-		float distItem =-1;
-		if(GameObject.Find("Item(Clone)")!=null)
-			distItem = Vector3.Distance(npc.position,GameObject.Find("Item(Clone)").transform.position);
-		if (distItem !=-1 && distItem < 10) {
+		List<GameObject> listItem = controller.GetListNearItem (npc);
+		if (listItem.Count > 0) {
 			npc.GetComponent<PlayerControler>().focusItem = true;
-			npc.GetComponent<PlayerControler>().itemToTake = GameObject.Find("Item(Clone)");
-			npc.GetComponent<PlayerControler> ().targetObject.GetComponent<Flock> ().botScripts.Remove(npc.GetComponent<PlayerControler> ());
-			npc.GetComponent<PlayerControler>().targetObject = GameObject.Find("Item(Clone)");
+			npc.GetComponent<PlayerControler>().itemToTake = listItem[0];
+			if(npc.GetComponent<PlayerControler> ().targetObject!=null)
+			{
+				Flock flock = npc.GetComponent<PlayerControler> ().targetObject.GetComponent<Flock> ();
+				npc.GetComponent<PlayerControler> ().targetObject.GetComponent<Flock> ().botScripts.Remove(npc.GetComponent<PlayerControler> ());
+			}
+			npc.GetComponent<PlayerControler>().targetObject = listItem[0];
 			npc.GetComponent<PlayerControler>().targetObject.GetComponent<Flock> ().botScripts.Add(npc.GetComponent<PlayerControler> ());
-			controller.target = GameObject.Find("Item(Clone)").transform;
+			controller.target =listItem[0].transform;
 			npc.GetComponent<PlayerControler>().PerformTransition(Transition.SawItem);
+			
 		}
 		else
 			if (dist <= range)

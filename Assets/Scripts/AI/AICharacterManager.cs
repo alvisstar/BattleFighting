@@ -56,6 +56,22 @@ public class AICharacterManager : MonoBehaviour {
 		}
 		return list;
 	}
+	public List<GameObject> GetListNearItem(Transform npc)
+	{
+		List<GameObject> list = new List<GameObject>();
+		GameObject[] gameObjetcs = GameObject.FindGameObjectsWithTag ("Item");
+		for (int i =0; i< gameObjetcs.Length; i++) 
+		{
+			float dist = Vector3.Distance(npc.position,gameObjetcs[i].transform.position);
+			if(dist <=20)
+			{
+				list.Add(gameObjetcs[i]);
+			}
+			
+			
+		}
+		return list;
+	}
 	public void ChangeTarget()
 	{
 

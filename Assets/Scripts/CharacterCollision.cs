@@ -6,7 +6,7 @@ public class CharacterCollision : MonoBehaviour {
 	void OnCollisionEnter (Collision col)
 	{
 		if (col.gameObject.name == "Item" || col.gameObject.name == "Item(Clone)") {
-			GameObject randomItemPrefab = col.gameObject.GetComponent<RandomItem> ().RandomItemz ();
+			GameObject randomItemPrefab = col.gameObject.GetComponent<RandomItem> ().GetItem ();
 			if (randomItemPrefab.name == "SpeedUp") {
 				GameObject speedUp = Instantiate (randomItemPrefab);
 				speedUp.GetComponent<SpeedUp> ().Effect (GetComponent<PlayerControler> ());
