@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ItemGenerator : MonoBehaviour {
 	
-	public GameObject itemPrefab;
+	public GameObject[] itemPrefabs;
 	public float range = 30;
 	private float time = 0;
 
@@ -19,8 +19,10 @@ public class ItemGenerator : MonoBehaviour {
 		time += Time.deltaTime;
 		if (time > 10) {
 			time = 0;
-			Vector3 posRandom = new Vector3(Random.Range(-GameObject.Find ("Ground").GetComponent<Renderer>().bounds.size.x/2 + 2, GameObject.Find ("Ground").GetComponent<Renderer>().bounds.size.x/2-2), 0, Random.Range(-GameObject.Find ("Ground").GetComponent<Renderer>().bounds.size.z/2 +2, GameObject.Find ("Ground").GetComponent<Renderer>().bounds.size.z/2-2));
-			Instantiate(itemPrefab, transform.position + posRandom, transform.rotation);
+			Vector3 sizeOfGround = GameObject.Find ("Ground").GetComponent<Renderer>().bounds.size;
+			Vector3 posRandom = new Vector3(Random.Range(-sizeOfGround.x/2 + 2, sizeOfGround.x/2-2), 0, Random.Range(-sizeOfGround.z/2 +2, sizeOfGround.z/2-2));			
+			int random = Random.Range (0, itemPrefabs.Length);
+			Instantiate(itemPrefabs[random], transform.position + posRandom, transform.rotation);
 		}
 	}
 }
