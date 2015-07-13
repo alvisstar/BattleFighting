@@ -19,7 +19,7 @@ public class PickItemState : FSMState
 		//Check the distance with the player tank
 		float dist = Vector3.Distance(npc.position, player.position);
 		if (npc.GetComponent<PlayerControler> ().focusItem == false)
-			npc.GetComponent<PlayerControler> ().PerformTransition (Transition.SawPlayer);
+			npc.GetComponent<PlayerControler> ().PerformTransition (Transition.NoTarget);
 		
 	}
 	

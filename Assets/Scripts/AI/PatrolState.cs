@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
-
-public class EscapeState : FSMState
+using System.Collections.Generic;
+public class PatrolState : FSMState
 {
 	float timeToChangeDirection;
-	public EscapeState(AICharacterManager controller1) 
+	public PatrolState(AICharacterManager controller1) 
 	{ 
 		controller = controller1;
-		stateID = FSMStateID.Running;
+		stateID = FSMStateID.Patrolling;
 		
 		curRotSpeed = 1.0f;
 		curSpeed = 100.0f;
@@ -18,21 +18,11 @@ public class EscapeState : FSMState
 	
 	public override void Reason(Transform player, Transform npc)
 	{
-		//Set the target position as the player position
-		destPos = player.position;
-		
-		//Check the distance with player tank
-		//When the distance is near, transition to attack state
-		float dist = Vector3.Distance(npc.position, destPos);
-		float range = 3.5f;
-		if(npc.GetComponent<Equipment> ()._weapon !=null)
-		{
-			range=npc.GetComponent<Equipment> ()._weapon.GetComponent<Weapon>().rangeAttack;
-		}
+		List<PlayerControler> list = controller.GetListNearPlayer (npc);
 		float distItem =-1;
 		if(GameObject.Find("Item(Clone)")!=null)
 			distItem = Vector3.Distance(npc.position,GameObject.Find("Item(Clone)").transform.position);
-		if (distItem !=-1 && distItem < 20) {
+		if (distItem !=-1 && distItem < 10) {
 			npc.GetComponent<PlayerControler>().focusItem = true;
 			npc.GetComponent<PlayerControler>().itemToTake = GameObject.Find("Item(Clone)");
 			if(npc.GetComponent<PlayerControler> ().targetObject!=null)
@@ -43,23 +33,23 @@ public class EscapeState : FSMState
 			npc.GetComponent<PlayerControler>().targetObject.GetComponent<Flock> ().botScripts.Add(npc.GetComponent<PlayerControler> ());
 			controller.target = GameObject.Find("Item(Clone)").transform;
 			npc.GetComponent<PlayerControler>().PerformTransition(Transition.SawItem);
-			
+
 		}
 		else
+			if (list.Count > 0) {
+				npc.GetComponent<PlayerControler>().targetObject = list[0].gameObject;
+				list[0].GetComponent<Flock> ().botScripts.Add (npc.GetComponent<PlayerControler>());
+				npc.GetComponent<PlayerControler>().PerformTransition(Transition.SawPlayer);
 
-		if (dist > 20)
-		{
-			//npc.GetComponent<PlayerControler> ().targetObject.GetComponent<Flock> ().botScripts.Remove(npc.GetComponent<PlayerControler> ());
-			npc.GetComponent<PlayerControler>().PerformTransition(Transition.SawPlayer);
-			
-		}
+			}
 		
+
+
 		
 	}
 	
 	public override void Act(Transform player, Transform npc)
 	{
-		Flock flock = npc.GetComponent<PlayerControler> ().targetObject.GetComponent<Flock> ();
 		float n = Random.Range (-1, 1);
 		Vector3 relativePos =new Vector3 (n , 0, n)+ npc.position ;
 		npc.GetComponent<PlayerControler> ().RotateByDirection (npc.forward);
@@ -69,12 +59,11 @@ public class EscapeState : FSMState
 		if (timeToChangeDirection <= 0) {
 			ChangeDirection(npc);
 		}
-		if (flock.botScripts.Count > 1) {
-			npc.GetComponent<Rigidbody> ().velocity  = flock.botScripts[0].transform.forward  * 0.15f*50;
-		}
-		else
-			npc.GetComponent<Rigidbody> ().velocity  = npc.forward  * 0.15f*50;
-
+		
+		npc.GetComponent<Rigidbody> ().velocity  = npc.forward  * 0.15f*50;
+	
+		//npc.GetComponent<Rigidbody> ().velocity = relativePos.normalized * 0.15f*50;  
+		
 		
 	}
 	private void ChangeDirection(Transform npc) {
@@ -86,4 +75,5 @@ public class EscapeState : FSMState
 		npc.forward = newUp;
 		timeToChangeDirection = 1.5f;
 	}
+	
 }

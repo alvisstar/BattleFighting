@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class AttackState : FSMState
@@ -9,7 +9,7 @@ public class AttackState : FSMState
 		stateID = FSMStateID.Attacking;
 		curRotSpeed = 1.0f;
 		curSpeed = 100.0f;
-		
+		hpDecrease = 0;
 		//find next Waypoint position
 
 	}
@@ -26,7 +26,7 @@ public class AttackState : FSMState
 		float distItem =-1;
 		if(GameObject.Find("Item(Clone)")!=null)
 			distItem = Vector3.Distance(npc.position,GameObject.Find("Item(Clone)").transform.position);
-		if(hpDecrease>=5)
+		if(hpDecrease>=5 && npc.GetComponent<PlayerControler>().targetObject.GetComponent<PlayerControler>().CurrentStateID == FSMStateID.Attacking)
 		{
 			//npc.GetComponent<PlayerControler>().targetObject = null;
 			npc.GetComponent<PlayerControler>().PerformTransition(Transition.LowHp);

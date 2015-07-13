@@ -13,6 +13,7 @@ using System.Collections.Generic;
 public enum Transition
 {
 	None = 0,
+	NoTarget,
 	LowHp,
 	SawItem,
 	SawPlayer,
@@ -23,6 +24,7 @@ public enum Transition
 public enum FSMStateID
 {
 	None = 0,
+	Patrolling,
 	Running,
 	TakingItem,
 	Chasing,

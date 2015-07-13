@@ -116,10 +116,14 @@ public class PlayerControler : AdvancedFSM {
 	}
 	private void ConstructFSM()
 	{
-		
+
+		PatrolState patrol = new PatrolState(controller);
+		patrol.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
+		patrol.AddTransition(Transition.SawItem, FSMStateID.TakingItem);
+		patrol.AddTransition(Transition.ReachPlayer, FSMStateID.Attacking);
+		patrol.AddTransition(Transition.NoHealth, FSMStateID.Dead);
 		
 		ChaseState chase = new ChaseState(controller);
-		//chase.AddTransition(Transition.InclosurePlayer, FSMStateID.Rounding);
 		chase.AddTransition(Transition.SawItem, FSMStateID.TakingItem);
 		chase.AddTransition(Transition.ReachPlayer, FSMStateID.Attacking);
 		chase.AddTransition(Transition.NoHealth, FSMStateID.Dead);
@@ -134,13 +138,16 @@ public class PlayerControler : AdvancedFSM {
 		
 		PickItemState pickItem = new PickItemState(controller);
 		pickItem.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
+		pickItem.AddTransition(Transition.NoTarget, FSMStateID.Patrolling);
 		pickItem.AddTransition(Transition.NoHealth, FSMStateID.Dead);
 
 
 		EscapeState escape = new EscapeState(controller);
+		escape.AddTransition(Transition.SawItem, FSMStateID.TakingItem);
 		escape.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
 		escape.AddTransition(Transition.NoHealth, FSMStateID.Dead);
 
+		AddFSMState(patrol);
 		AddFSMState(chase);
 		AddFSMState(attack);
 		AddFSMState(pickItem);
@@ -379,12 +386,18 @@ public class PlayerControler : AdvancedFSM {
 		}
 		if(!_isMain)
 		{
-			if(targetObject == null)
-				needChangeTarget = true;
+			//if(targetObject == null)
+				//needChangeTarget = true;
 			if(targetObject!=null)
 			{
+							
 				CurrentState.Reason (targetObject.transform,transform);
 				CurrentState.Act (targetObject.transform,transform);
+			}
+			else
+			{
+				CurrentState.Reason (new GameObject().transform,transform);
+				CurrentState.Act (new GameObject().transform,transform);
 			}
 		}
 	}

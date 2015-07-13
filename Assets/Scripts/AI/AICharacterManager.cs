@@ -39,9 +39,23 @@ public class AICharacterManager : MonoBehaviour {
 	}
 	void Update () {
 		
-		ChangeTarget ();
+		//ChangeTarget ();
 	}
-
+	public List<PlayerControler> GetListNearPlayer(Transform npc)
+	{
+		List<PlayerControler> list = new List<PlayerControler>();
+		for (int i =0; i< botScripts.Count; i++) 
+		{
+				float dist = Vector3.Distance(npc.position,botScripts[i].transform.position);
+				if(	botScripts[i] != npc.GetComponent<PlayerControler>() && dist <=20)
+				{
+					list.Add(botScripts[i]);
+				}
+				
+				
+		}
+		return list;
+	}
 	public void ChangeTarget()
 	{
 
