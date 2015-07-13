@@ -40,17 +40,24 @@ public class Flock : MonoBehaviour {
 	}
 	void Update () {
 		
+
+		Vector3 center = Vector3.zero;    
+		Vector3 velocity = Vector3.zero;
+		for (int i =0 ;i< botScripts.Count;i++) 
+		{   
+			if(botScripts[i]!=null)
+			{
+				center += botScripts[i].transform.localPosition;      
+				velocity += botScripts[i].gameObject.GetComponent<Rigidbody>().velocity;   
+			}
+			else{
+				botScripts.RemoveAt(i);
+			}
+		}
+		
 		flockSize = botScripts.Count;
 		if(flockSize ==0)
 			flockSize=1;
-		Vector3 center = Vector3.zero;    
-		Vector3 velocity = Vector3.zero;
-		foreach (PlayerControler bot in botScripts) 
-		{   center += bot.transform.localPosition;      
-			velocity += bot.gameObject.GetComponent<Rigidbody>().velocity;    
-		}
-		
-		
 		flockCenter = center / flockSize;    
 		flockVelocity = velocity / flockSize;  
 		

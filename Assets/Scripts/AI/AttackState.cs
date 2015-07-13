@@ -26,20 +26,29 @@ public class AttackState : FSMState
 		float distItem =-1;
 		if(GameObject.Find("Item(Clone)")!=null)
 			distItem = Vector3.Distance(npc.position,GameObject.Find("Item(Clone)").transform.position);
+
+		if (npc.GetComponent<PlayerControler> ().targetObject == null) {
+			npc.GetComponent<PlayerControler>().PerformTransition(Transition.NoTarget);
+		}
+		else
 		if(hpDecrease>=5 && npc.GetComponent<PlayerControler>().targetObject.GetComponent<PlayerControler>().CurrentStateID == FSMStateID.Attacking)
 		{
 			//npc.GetComponent<PlayerControler>().targetObject = null;
 			npc.GetComponent<PlayerControler>().PerformTransition(Transition.LowHp);
 		}
 		else
-		if (distItem !=-1 && distItem < 10) {
+		if (distItem !=-1 && distItem < 20) {
 			npc.GetComponent<PlayerControler>().focusItem = true;
 			npc.GetComponent<PlayerControler>().itemToTake = GameObject.Find("Item(Clone)");
-			npc.GetComponent<PlayerControler> ().targetObject.GetComponent<Flock> ().botScripts.Remove(npc.GetComponent<PlayerControler> ());
+			if(npc.GetComponent<PlayerControler> ().targetObject!=null)
+			{
+				npc.GetComponent<PlayerControler> ().targetObject.GetComponent<Flock> ().botScripts.Remove(npc.GetComponent<PlayerControler> ());
+			}
 			npc.GetComponent<PlayerControler>().targetObject = GameObject.Find("Item(Clone)");
 			npc.GetComponent<PlayerControler>().targetObject.GetComponent<Flock> ().botScripts.Add(npc.GetComponent<PlayerControler> ());
 			controller.target = GameObject.Find("Item(Clone)").transform;
 			npc.GetComponent<PlayerControler>().PerformTransition(Transition.SawItem);
+			
 		}
 		else
 			if (dist > range)

@@ -59,7 +59,7 @@ public class EscapeState : FSMState
 	
 	public override void Act(Transform player, Transform npc)
 	{
-		Flock flock = npc.GetComponent<PlayerControler> ().targetObject.GetComponent<Flock> ();
+
 		float n = Random.Range (-1, 1);
 		Vector3 relativePos =new Vector3 (n , 0, n)+ npc.position ;
 		npc.GetComponent<PlayerControler> ().RotateByDirection (npc.forward);
@@ -69,11 +69,9 @@ public class EscapeState : FSMState
 		if (timeToChangeDirection <= 0) {
 			ChangeDirection(npc);
 		}
-		if (flock.botScripts.Count > 1) {
-			npc.GetComponent<Rigidbody> ().velocity  = flock.botScripts[0].transform.forward  * 0.15f*50;
-		}
-		else
-			npc.GetComponent<Rigidbody> ().velocity  = npc.forward  * 0.15f*50;
+
+
+		npc.GetComponent<Rigidbody> ().velocity  = npc.forward  * 0.15f*50;
 
 		
 	}

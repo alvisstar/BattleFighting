@@ -134,6 +134,7 @@ public class PlayerControler : AdvancedFSM {
 		attack.AddTransition(Transition.SawItem, FSMStateID.TakingItem);
 		attack.AddTransition(Transition.LowHp, FSMStateID.Running);
 		attack.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
+		attack.AddTransition(Transition.NoTarget, FSMStateID.Patrolling);
 		attack.AddTransition(Transition.NoHealth, FSMStateID.Dead);
 		
 		PickItemState pickItem = new PickItemState(controller);
