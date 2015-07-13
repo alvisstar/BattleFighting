@@ -30,18 +30,22 @@ public class EscapeState : FSMState
 			range=npc.GetComponent<Equipment> ()._weapon.GetComponent<Weapon>().rangeAttack;
 		}
 		List<GameObject> listItem = controller.GetListNearItem (npc);
-		if (listItem.Count > 0) {
-			npc.GetComponent<PlayerControler>().focusItem = true;
-			npc.GetComponent<PlayerControler>().itemToTake = listItem[0];
-			if(npc.GetComponent<PlayerControler> ().targetObject!=null)
+
+			int index =checkBestItem(listItem,npc);
+			if(index !=-1)
 			{
-				Flock flock = npc.GetComponent<PlayerControler> ().targetObject.GetComponent<Flock> ();
-				npc.GetComponent<PlayerControler> ().targetObject.GetComponent<Flock> ().botScripts.Remove(npc.GetComponent<PlayerControler> ());
-			}
-			npc.GetComponent<PlayerControler>().targetObject = listItem[0];
-			npc.GetComponent<PlayerControler>().targetObject.GetComponent<Flock> ().botScripts.Add(npc.GetComponent<PlayerControler> ());
-			controller.target =listItem[0].transform;
-			npc.GetComponent<PlayerControler>().PerformTransition(Transition.SawItem);
+				npc.GetComponent<PlayerControler>().focusItem = true;
+				npc.GetComponent<PlayerControler>().itemToTake = listItem[index];
+				if(npc.GetComponent<PlayerControler> ().targetObject!=null)
+				{
+					Flock flock = npc.GetComponent<PlayerControler> ().targetObject.GetComponent<Flock> ();
+					npc.GetComponent<PlayerControler> ().targetObject.GetComponent<Flock> ().botScripts.Remove(npc.GetComponent<PlayerControler> ());
+				}
+				npc.GetComponent<PlayerControler>().targetObject = listItem[index];
+				npc.GetComponent<PlayerControler>().targetObject.GetComponent<Flock> ().botScripts.Add(npc.GetComponent<PlayerControler> ());
+				controller.target =listItem[index].transform;
+				npc.GetComponent<PlayerControler>().PerformTransition(Transition.SawItem);
+
 			
 		}
 		else
@@ -55,7 +59,31 @@ public class EscapeState : FSMState
 		
 		
 	}
-	
+	int checkBestItem(List<GameObject> item, Transform npc)
+	{
+		int index = 0;
+		int min = 1000;
+		if (item.Count == 0)
+			return -1;
+		for (int i =0; i< item.Count; i++) 
+		{
+			if(item[i].GetComponent<RandomItem>().piority < min)
+			{
+				index =i;
+				min = item[i].GetComponent<RandomItem>().piority;
+			}
+			
+		}
+		if (npc.GetComponent<Equipment> ()._weapon != null) {
+			if(item[index].GetComponent<RandomItem>().piority >= npc.GetComponent<Equipment> ()._weapon.GetComponent<Weapon>().piority )
+			{
+				index =-1;
+			}
+		} 
+		return index;
+		
+		
+	}
 	public override void Act(Transform player, Transform npc)
 	{
 

@@ -14,7 +14,7 @@ public class Sword : Weapon {
 		delayTime = 0;
 		trail.Deactivate ();
 		rangeAttack = 4;
-
+		piority = 1000;
 		//trail.Init ();
 
 	}

@@ -1,9 +1,10 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+
 public class AttackState : FSMState
 {
-	public AttackState(AICharacterManager controller1) 
+	public AttackState (AICharacterManager controller1)
 	{ 
 		controller = controller1;
 		stateID = FSMStateID.Attacking;
@@ -14,57 +15,76 @@ public class AttackState : FSMState
 
 	}
 	
-	public override void Reason(Transform player, Transform npc)
+	public override void Reason (Transform player, Transform npc)
 	{
 		//Check the distance with the player tank
-		float dist = Vector3.Distance(npc.position, player.position);
+		float dist = Vector3.Distance (npc.position, player.position);
 		float range = 3.5f;
-		if(npc.GetComponent<Equipment> ()._weapon !=null)
-		{
-			range=npc.GetComponent<Equipment> ()._weapon.GetComponent<Weapon>().rangeAttack;
+		if (npc.GetComponent<Equipment> ()._weapon != null) {
+			range = npc.GetComponent<Equipment> ()._weapon.GetComponent<Weapon> ().rangeAttack;
 		}
 		List<GameObject> listItem = controller.GetListNearItem (npc);
-
+		int index = checkBestItem (listItem, npc);
 		if (npc.GetComponent<PlayerControler> ().targetObject == null) {
-			npc.GetComponent<PlayerControler>().PerformTransition(Transition.NoTarget);
-		}
-		else
-		if(hpDecrease>=5 && npc.GetComponent<PlayerControler>().targetObject.GetComponent<PlayerControler>().CurrentStateID == FSMStateID.Attacking)
-		{
+			npc.GetComponent<PlayerControler> ().PerformTransition (Transition.NoTarget);
+		} else
+		if (hpDecrease >= 5 && npc.GetComponent<PlayerControler> ().targetObject.GetComponent<PlayerControler> ().CurrentStateID == FSMStateID.Attacking) {
 			//npc.GetComponent<PlayerControler>().targetObject = null;
-			npc.GetComponent<PlayerControler>().PerformTransition(Transition.LowHp);
-		}
-		else
-		if (listItem.Count > 0) {
-			npc.GetComponent<PlayerControler>().focusItem = true;
-			npc.GetComponent<PlayerControler>().itemToTake = listItem[0];
-			if(npc.GetComponent<PlayerControler> ().targetObject!=null)
-			{
-				Flock flock = npc.GetComponent<PlayerControler> ().targetObject.GetComponent<Flock> ();
-				npc.GetComponent<PlayerControler> ().targetObject.GetComponent<Flock> ().botScripts.Remove(npc.GetComponent<PlayerControler> ());
-			}
-			npc.GetComponent<PlayerControler>().targetObject = listItem[0];
-			npc.GetComponent<PlayerControler>().targetObject.GetComponent<Flock> ().botScripts.Add(npc.GetComponent<PlayerControler> ());
-			controller.target =listItem[0].transform;
-			npc.GetComponent<PlayerControler>().PerformTransition(Transition.SawItem);
-			
-		}
-		else
-			if (dist > range)
-			{
-				//Rotate to the target point
+			npc.GetComponent<PlayerControler> ().PerformTransition (Transition.LowHp);
+		} else
+		
 
-				npc.GetComponent<PlayerControler>().PerformTransition(Transition.SawPlayer);
+			if (index != -1) {
+			npc.GetComponent<PlayerControler> ().focusItem = true;
+			npc.GetComponent<PlayerControler> ().itemToTake = listItem [index];
+			if (npc.GetComponent<PlayerControler> ().targetObject != null) {
+				Flock flock = npc.GetComponent<PlayerControler> ().targetObject.GetComponent<Flock> ();
+				npc.GetComponent<PlayerControler> ().targetObject.GetComponent<Flock> ().botScripts.Remove (npc.GetComponent<PlayerControler> ());
 			}
+			npc.GetComponent<PlayerControler> ().targetObject = listItem [index];
+			npc.GetComponent<PlayerControler> ().targetObject.GetComponent<Flock> ().botScripts.Add (npc.GetComponent<PlayerControler> ());
+			controller.target = listItem [index].transform;
+			npc.GetComponent<PlayerControler> ().PerformTransition (Transition.SawItem);
+
+			
+		} else
+			if (dist > range) {
+			//Rotate to the target point
+
+			npc.GetComponent<PlayerControler> ().PerformTransition (Transition.SawPlayer);
+		}
 
 	}
-	
-	public override void Act(Transform player, Transform npc)
+
+	int checkBestItem (List<GameObject> item, Transform npc)
 	{
-		Vector3 relativePos = player.position - npc.position ;
+		int index = 0;
+		int min = 1000;
+		if (item.Count == 0)
+			return -1;
+		for (int i =0; i< item.Count; i++) {
+			if (item [i].GetComponent<RandomItem> ().piority < min) {
+				index = i;
+				min = item [i].GetComponent<RandomItem> ().piority;
+			}
+			
+		}
+		if (npc.GetComponent<Equipment> ()._weapon != null) {
+			if (item [index].GetComponent<RandomItem> ().piority >= npc.GetComponent<Equipment> ()._weapon.GetComponent<Weapon> ().piority) {
+				index = -1;
+			}
+		} 
+		return index;
 		
-		npc.GetComponent<PlayerControler>().RotateByDirection (relativePos);
+		
+	}
+
+	public override void Act (Transform player, Transform npc)
+	{
+		Vector3 relativePos = player.position - npc.position;
+		
+		npc.GetComponent<PlayerControler> ().RotateByDirection (relativePos);
 		//if(npc.GetComponent<BotControler>().recoveryTime <= 0)
-			npc.GetComponent<PlayerControler> ().AttackTarget ();
+		npc.GetComponent<PlayerControler> ().AttackTarget ();
 	}
 }

@@ -10,6 +10,7 @@ public class Hammer : Weapon {
 	void Start () {
 		numberOfWeapon = -1;
 		rangeAttack = 4;
+		piority = 400;
 	}
 	
 	public override void OnAttack()
@@ -26,7 +27,7 @@ public class Hammer : Weapon {
 			Vector3 pos = other.contacts[0].point;
 			
 			other.gameObject.GetComponent<Rigidbody> ().velocity = other.gameObject.transform.forward*(-1)  *0.15f  *100;			
-			other.gameObject.GetComponent<BotControler>().BeHitted();
+			other.gameObject.GetComponent<PlayerControler>().BeHitted();
 			//GameObject explosionIceBall = Instantiate(prefabHit,pos,Quaternion.identity) as GameObject;
 		}
 	}

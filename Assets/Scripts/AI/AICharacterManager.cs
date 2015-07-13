@@ -54,6 +54,14 @@ public class AICharacterManager : MonoBehaviour {
 				
 				
 		}
+		if (list.Count == 0) {
+		
+			list.Add(character.GetComponent<PlayerControler>());
+			botScripts [0].targetObject = character;
+			character.GetComponent<Flock> ().botScripts.Add (botScripts [0]);
+			botScripts [0].needChangeTarget = false;
+
+		}
 		return list;
 	}
 	public List<GameObject> GetListNearItem(Transform npc)

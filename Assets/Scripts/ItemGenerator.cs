@@ -17,13 +17,31 @@ public class ItemGenerator : MonoBehaviour {
 		//float t =;
 		Vector3 x = GameObject.Find ("Ground").GetComponent<Collider> ().bounds.size;
 		time += Time.deltaTime;
-		if (time > 10) {
+		if (time > 5) {
 			time = 0;
 			Vector3 sizeOfGround = GameObject.Find ("Ground").GetComponent<Renderer>().bounds.size;
 			Vector3 posRandom = new Vector3(Random.Range(-sizeOfGround.x/2 + 2, sizeOfGround.x/2-2), 0, Random.Range(-sizeOfGround.z/2 +2, sizeOfGround.z/2-2));			
-			int random = Random.Range (1, 1);
+			int random = Random.Range (1, 5);
 			GameObject item = Instantiate(itemPrefabs, transform.position + posRandom, transform.rotation) as GameObject;
 			item.GetComponent<RandomItem>().type = random;
+			switch(random)
+			{
+			case 1:
+				item.GetComponent<RandomItem>().piority = 1000;
+				break;
+			case 2:
+				item.GetComponent<RandomItem>().piority = 800;
+				break;
+			case 3:
+				item.GetComponent<RandomItem>().piority = 600;
+				break;
+			case 4:
+				item.GetComponent<RandomItem>().piority = 400;
+				break;
+			case 5:
+				item.GetComponent<RandomItem>().piority = 200;
+				break;
+			}
 		}
 	}
 }

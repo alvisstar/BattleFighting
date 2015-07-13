@@ -11,7 +11,7 @@ public class Gun : Weapon {
 		numberOfWeapon = 30;
 		delayTime = 0.2f;
 		rangeAttack = 20;
-
+		piority = 200;
 	}
 	
 	public override void OnAttack()

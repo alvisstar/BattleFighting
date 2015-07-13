@@ -9,6 +9,7 @@ public class Bomb : Weapon {
 	public Transform equipTransform;
 	void Start () {
 		rangeAttack = 10;
+		piority = 600;
 	}
 	public override void OnAttack()
 	{

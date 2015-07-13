@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+
 public class PatrolState : FSMState
 {
 	float timeToChangeDirection;
-	public PatrolState(AICharacterManager controller1) 
+
+	public PatrolState (AICharacterManager controller1)
 	{ 
 		controller = controller1;
 		stateID = FSMStateID.Patrolling;
@@ -16,61 +18,90 @@ public class PatrolState : FSMState
 		timeToChangeDirection = 0;
 	}
 	
-	public override void Reason(Transform player, Transform npc)
+	public override void Reason (Transform player, Transform npc)
 	{
 		List<PlayerControler> list = controller.GetListNearPlayer (npc);
 		List<GameObject> listItem = controller.GetListNearItem (npc);
-		if (listItem.Count > 0) {
-			npc.GetComponent<PlayerControler>().focusItem = true;
-			npc.GetComponent<PlayerControler>().itemToTake = listItem[0];
-			if(npc.GetComponent<PlayerControler> ().targetObject!=null)
-			{
+
+		int index = checkBestItem (listItem, npc);
+		if (index != -1) {
+			npc.GetComponent<PlayerControler> ().focusItem = true;
+			npc.GetComponent<PlayerControler> ().itemToTake = listItem [index];
+			if (npc.GetComponent<PlayerControler> ().targetObject != null) {
 				Flock flock = npc.GetComponent<PlayerControler> ().targetObject.GetComponent<Flock> ();
-				npc.GetComponent<PlayerControler> ().targetObject.GetComponent<Flock> ().botScripts.Remove(npc.GetComponent<PlayerControler> ());
+				npc.GetComponent<PlayerControler> ().targetObject.GetComponent<Flock> ().botScripts.Remove (npc.GetComponent<PlayerControler> ());
 			}
-			npc.GetComponent<PlayerControler>().targetObject = listItem[0];
-			npc.GetComponent<PlayerControler>().targetObject.GetComponent<Flock> ().botScripts.Add(npc.GetComponent<PlayerControler> ());
-			controller.target =listItem[0].transform;
-			npc.GetComponent<PlayerControler>().PerformTransition(Transition.SawItem);
+			npc.GetComponent<PlayerControler> ().targetObject = listItem [index];
+			npc.GetComponent<PlayerControler> ().targetObject.GetComponent<Flock> ().botScripts.Add (npc.GetComponent<PlayerControler> ());
+			controller.target = listItem [index].transform;
+			npc.GetComponent<PlayerControler> ().PerformTransition (Transition.SawItem);
+
+			
+		} else
+			if (list.Count > 0) {
+			npc.GetComponent<PlayerControler> ().targetObject = list [0].gameObject;
+			list [0].GetComponent<Flock> ().botScripts.Add (npc.GetComponent<PlayerControler> ());
+			npc.GetComponent<PlayerControler> ().PerformTransition (Transition.SawPlayer);
 
 		}
-		else
-			if (list.Count > 0) {
-				npc.GetComponent<PlayerControler>().targetObject = list[0].gameObject;
-				list[0].GetComponent<Flock> ().botScripts.Add (npc.GetComponent<PlayerControler>());
-				npc.GetComponent<PlayerControler>().PerformTransition(Transition.SawPlayer);
-
-			}
 		
 
 
 		
 	}
-	
-	public override void Act(Transform player, Transform npc)
+
+	int checkBestItem (List<GameObject> item, Transform npc)
+	{
+		int index = 0;
+		int min = 1000;
+		if (item.Count == 0)
+			return -1;
+		for (int i =0; i< item.Count; i++) {
+			if (item [i].GetComponent<RandomItem> ().piority < min) {
+				index = i;
+				min = item [i].GetComponent<RandomItem> ().piority;
+			}
+			
+		}
+		if (npc.GetComponent<Equipment> ()._weapon != null) {
+			if (item [index].GetComponent<RandomItem> ().piority >= npc.GetComponent<Equipment> ()._weapon.GetComponent<Weapon> ().piority) {
+				index = -1;
+			}
+		} 
+		return index;
+		
+		
+	}
+
+	public override void Act (Transform player, Transform npc)
 	{
 		float n = Random.Range (-1, 1);
-		Vector3 relativePos =new Vector3 (n , 0, n)+ npc.position ;
+		Vector3 relativePos = new Vector3 (n, 0, n) + npc.position;
 		npc.GetComponent<PlayerControler> ().RotateByDirection (npc.forward);
 		npc.GetComponent<Animator> ().SetFloat ("Speed", 1);
 		timeToChangeDirection -= Time.deltaTime;
 		
 		if (timeToChangeDirection <= 0) {
-			ChangeDirection(npc);
+			ChangeDirection (npc);
+		} else {
+			GameObject map = GameObject.Find("Ground");
+			
 		}
 		
-		npc.GetComponent<Rigidbody> ().velocity  = npc.forward  * 0.15f*50;
+		npc.GetComponent<Rigidbody> ().velocity = npc.forward * 0.15f * 50;
 	
 		//npc.GetComponent<Rigidbody> ().velocity = relativePos.normalized * 0.15f*50;  
 		
 		
 	}
-	private void ChangeDirection(Transform npc) {
-		float angle = Random.Range(0f, 360f);
-		Quaternion quat = Quaternion.AngleAxis(angle, Vector3.one);
+
+	private void ChangeDirection (Transform npc)
+	{
+		float angle = Random.Range (0f, 360f);
+		Quaternion quat = Quaternion.AngleAxis (angle, Vector3.one);
 		Vector3 newUp = quat * Vector3.forward;
 		newUp.y = 0;
-		newUp.Normalize();
+		newUp.Normalize ();
 		npc.forward = newUp;
 		timeToChangeDirection = 1.5f;
 	}

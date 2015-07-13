@@ -7,6 +7,7 @@ public class Weapon : MonoBehaviour {
 	public float delayTime = 1;
 	private float currentTime;
 	public float rangeAttack;
+	public int piority;
 	// Use this for initialization
 	void Start () {
 		currentTime = delayTime;

@@ -7,6 +7,11 @@ public class Mine : Weapon {
 	public GameObject minePrefabs;
 	public Transform characterTransform;
 	public Transform equipTransform;
+	void Start () {
+		numberOfWeapon = 5;
+		rangeAttack = 4;
+		piority = 800;
+	}
 	public override void OnAttack()
 	{
 		if( characterTransform.GetComponent<PlayerControler>()._animator.GetCurrentAnimatorStateInfo(0).IsName("MineAttack"))
