@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class PatrolState : FSMState
 {
 	float timeToChangeDirection;
+	bool isBack;
+	GameObject map;
 
 	public PatrolState (AICharacterManager controller1)
 	{ 
@@ -16,6 +18,8 @@ public class PatrolState : FSMState
 		hpDecrease = 0;
 		//find next Waypoint position
 		timeToChangeDirection = 0;
+		isBack = false;
+		map = GameObject.Find("Ground");
 	}
 	
 	public override void Reason (Transform player, Transform npc)
@@ -75,22 +79,35 @@ public class PatrolState : FSMState
 
 	public override void Act (Transform player, Transform npc)
 	{
-		float n = Random.Range (-1, 1);
-		Vector3 relativePos = new Vector3 (n, 0, n) + npc.position;
-		npc.GetComponent<PlayerControler> ().RotateByDirection (npc.forward);
-		npc.GetComponent<Animator> ().SetFloat ("Speed", 1);
+
+
+	
 		timeToChangeDirection -= Time.deltaTime;
 		
 		if (timeToChangeDirection <= 0) {
 			ChangeDirection (npc);
 		} else {
-			GameObject map = GameObject.Find("Ground");
-			
+
+			if(npc.GetComponent<PlayerControler> ().transform.position.x< -map.GetComponent<Renderer>().bounds.size.x/2 +5
+			   ||npc.GetComponent<PlayerControler> ().transform.position.x>map.GetComponent<Renderer>().bounds.size.x/2 -5
+			   ||npc.GetComponent<PlayerControler> ().transform.position.z< -map.GetComponent<Renderer>().bounds.size.z/2 +5
+			   ||npc.GetComponent<PlayerControler> ().transform.position.z>map.GetComponent<Renderer>().bounds.size.z/2 -5)
+			{
+				if(!isBack)
+				{
+					npc.forward=-npc.forward;
+					timeToChangeDirection =1.5f;
+					isBack = true;
+				}
+
+
+			}
 		}
-		
-		npc.GetComponent<Rigidbody> ().velocity = npc.forward * 0.15f * 50;
+
+		npc.GetComponent<PlayerControler> ().RotateByDirection (npc.forward);
+		npc.GetComponent<Animator> ().SetFloat ("Speed", 1);
 	
-		//npc.GetComponent<Rigidbody> ().velocity = relativePos.normalized * 0.15f*50;  
+		npc.GetComponent<Rigidbody> ().velocity = npc.forward * 0.15f*50;  
 		
 		
 	}
@@ -103,7 +120,9 @@ public class PatrolState : FSMState
 		newUp.y = 0;
 		newUp.Normalize ();
 		npc.forward = newUp;
-		timeToChangeDirection = 1.5f;
+		timeToChangeDirection = Random.Range(1.5f,3f);
+		isBack = false;
+
 	}
 	
 }

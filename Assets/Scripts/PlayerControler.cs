@@ -124,6 +124,7 @@ public class PlayerControler : AdvancedFSM {
 		patrol.AddTransition(Transition.NoHealth, FSMStateID.Dead);
 		
 		ChaseState chase = new ChaseState(controller);
+		chase.AddTransition(Transition.NoTarget, FSMStateID.Patrolling);
 		chase.AddTransition(Transition.SawItem, FSMStateID.TakingItem);
 		chase.AddTransition(Transition.ReachPlayer, FSMStateID.Attacking);
 		chase.AddTransition(Transition.NoHealth, FSMStateID.Dead);

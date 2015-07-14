@@ -46,13 +46,19 @@ public class ChaseState : FSMState
 			npc.GetComponent<PlayerControler> ().PerformTransition (Transition.SawItem);
 
 			
-		} else
-			if (dist <= range) {
-			//npc.GetComponent<PlayerControler> ().targetObject.GetComponent<Flock> ().botScripts.Remove(npc.GetComponent<PlayerControler> ());
+		} 
+		else if (dist <= range) 
+		{
 			npc.GetComponent<PlayerControler> ().PerformTransition (Transition.ReachPlayer);
 			
 		}
+		else if (dist > 20) 
+		{
+			npc.GetComponent<PlayerControler> ().PerformTransition (Transition.NoTarget);
+			
+		}
 
+		
 			
 	}
 
