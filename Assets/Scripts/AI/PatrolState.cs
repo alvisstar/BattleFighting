@@ -139,7 +139,7 @@ public class PatrolState : FSMState
 		npc.GetComponent<PlayerControler> ().RotateByDirection (npc.forward);
 		npc.GetComponent<Animator> ().SetFloat ("Speed", 1);
 	
-		npc.GetComponent<Rigidbody> ().velocity = npc.forward * 0.15f*50;  
+		npc.GetComponent<Rigidbody> ().velocity = npc.forward * 0.15f*60;  
 		
 		
 	}

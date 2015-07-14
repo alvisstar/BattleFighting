@@ -54,7 +54,7 @@ public class AICharacterManager : MonoBehaviour {
 				
 				
 		}
-		{
+		/*{
 		
 			if(Vector3.Distance(npc.position,character.transform.position)<=20)
 			{
@@ -64,7 +64,7 @@ public class AICharacterManager : MonoBehaviour {
 			botScripts [0].needChangeTarget = false;
 			}
 
-		}
+		}*/
 		return list;
 	}
 	public List<GameObject> GetListNearItem(Transform npc)

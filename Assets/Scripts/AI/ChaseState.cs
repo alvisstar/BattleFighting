@@ -114,9 +114,9 @@ public class ChaseState : FSMState
 		// enforce minimum and maximum speeds for the boids      
 		float speed = npc.GetComponent<Rigidbody> ().velocity.magnitude;      
 		if (speed > flock.maxVelocity) {        
-			npc.GetComponent<Rigidbody> ().velocity = npc.GetComponent<Rigidbody> ().velocity.normalized * flock.maxVelocity;      
+			npc.GetComponent<Rigidbody> ().velocity = npc.GetComponent<Rigidbody> ().velocity.normalized * 0.15f* flock.maxVelocity;      
 		} else if (speed < flock.minVelocity) {        
-			npc.GetComponent<Rigidbody> ().velocity = npc.GetComponent<Rigidbody> ().velocity.normalized * flock.minVelocity;     
+			npc.GetComponent<Rigidbody> ().velocity = npc.GetComponent<Rigidbody> ().velocity.normalized * 0.15f* flock.minVelocity;     
 		}    
 		//} else {
 		//	npc.GetComponent<Animator> ().SetFloat ("Speed", 0);
