@@ -13,7 +13,10 @@ public class PickItemState : FSMState
 		//find next Waypoint position
 		
 	}
-	
+	public override void ReInit ()
+	{
+		hpDecrease = 0;
+	}
 	public override void Reason(Transform player, Transform npc)
 	{
 		//Check the distance with the player tank

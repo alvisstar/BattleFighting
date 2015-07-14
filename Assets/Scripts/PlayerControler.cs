@@ -579,8 +579,7 @@ public class PlayerControler : AdvancedFSM {
 			{			
 				SetAnimationAttack();
 				_animator.GetBehaviour<SwordAttackBehaviour>().player = this.gameObject;	
-				float a = GetComponent<Equipment>()._weapon.GetComponent<Weapon>().rangeAttack;
-				a =1;
+
 			}
 		}	
 		else if (GetComponent<Equipment> ()._weapon.name == "Hammer(Clone)") 

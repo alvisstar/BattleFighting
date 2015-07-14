@@ -15,7 +15,10 @@ public class EscapeState : FSMState
 		//find next Waypoint position
 		timeToChangeDirection = 0;
 	}
-	
+	public override void ReInit ()
+	{
+		hpDecrease = 0;
+	}
 	public override void Reason(Transform player, Transform npc)
 	{
 		//Set the target position as the player position
@@ -27,7 +30,7 @@ public class EscapeState : FSMState
 		float range = 3.5f;
 		if(npc.GetComponent<Equipment> ()._weapon !=null)
 		{
-			range=npc.GetComponent<Equipment> ()._weapon.GetComponent<Weapon>().rangeAttack;
+			//range=npc.GetComponent<Equipment> ()._weapon.GetComponent<Weapon>().rangeAttack;
 		}
 		List<GameObject> listItem = controller.GetListNearItem (npc);
 

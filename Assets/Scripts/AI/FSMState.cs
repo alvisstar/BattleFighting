@@ -99,7 +99,8 @@ public abstract class FSMState
 	/// NPC is a reference to the npc tha is controlled by this class
 	/// </summary>
 	public abstract void Reason(Transform player, Transform npc);
-	
+
+	public abstract void ReInit();
 	/// <summary>
 	/// This method controls the behavior of the NPC in the game World.
 	/// Every action, movement or communication the NPC does should be placed here

@@ -9,7 +9,8 @@ public class Mine : Weapon {
 	public Transform equipTransform;
 	void Start () {
 		numberOfWeapon = 5;
-		rangeAttack = 4;
+		maxRangeAttack = 10;
+		minRangeAttack = 10;
 		piority = 800;
 	}
 	public override void OnAttack()

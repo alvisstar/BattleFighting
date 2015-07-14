@@ -9,7 +9,8 @@ public class Hammer : Weapon {
 	public Transform equipTransform;
 	void Start () {
 		numberOfWeapon = -1;
-		rangeAttack = 4;
+		maxRangeAttack = 4;
+		minRangeAttack = 1;
 		piority = 400;
 	}
 	

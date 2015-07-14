@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class ChaseState : FSMState
 {
-
+	float timeToChase;
 	public ChaseState (AICharacterManager controller1)
 	{ 
 		controller = controller1;
@@ -16,18 +16,24 @@ public class ChaseState : FSMState
 		//find next Waypoint position
 	
 	}
-	
+	public override void ReInit ()
+	{
+		timeToChase = 2;
+		hpDecrease = 0;
+	}
 	public override void Reason (Transform player, Transform npc)
 	{
 		//Set the target position as the player position
 		destPos = player.position;
-		
+		timeToChase -= Time.deltaTime;
 		//Check the distance with player tank
 		//When the distance is near, transition to attack state
 		float dist = Vector3.Distance (npc.position, destPos);
-		float range = 3.5f;
+		float maxRange = 3.5f;
+		float minRange = 1f;
 		if (npc.GetComponent<Equipment> ()._weapon != null) {
-			range = npc.GetComponent<Equipment> ()._weapon.GetComponent<Weapon> ().rangeAttack;
+			maxRange = npc.GetComponent<Equipment> ()._weapon.GetComponent<Weapon> ().maxRangeAttack;
+			minRange = npc.GetComponent<Equipment> ()._weapon.GetComponent<Weapon> ().minRangeAttack;
 		}
 
 		List<GameObject> listItem = controller.GetListNearItem (npc);
@@ -47,9 +53,14 @@ public class ChaseState : FSMState
 
 			
 		} 
-		else if (dist <= range) 
+		else if (dist <= maxRange && dist >= minRange) 
 		{
 			npc.GetComponent<PlayerControler> ().PerformTransition (Transition.ReachPlayer);
+			
+		}
+		else if (dist < minRange) 
+		{
+			npc.GetComponent<PlayerControler> ().PerformTransition (Transition.NoTarget);
 			
 		}
 		else if (dist > 20) 
@@ -57,7 +68,11 @@ public class ChaseState : FSMState
 			npc.GetComponent<PlayerControler> ().PerformTransition (Transition.NoTarget);
 			
 		}
-
+		else if (timeToChase <=0) 
+		{
+			npc.GetComponent<PlayerControler> ().PerformTransition (Transition.NoTarget);
+			
+		}
 		
 			
 	}

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class AttackState : FSMState
 {
+	float timeToAttack;
 	public AttackState (AICharacterManager controller1)
 	{ 
 		controller = controller1;
@@ -14,14 +15,21 @@ public class AttackState : FSMState
 		//find next Waypoint position
 
 	}
-	
+	public override void ReInit ()
+	{
+		hpDecrease = 0;
+		timeToAttack = 2;
+	}
 	public override void Reason (Transform player, Transform npc)
 	{
 		//Check the distance with the player tank
+		timeToAttack -= Time.deltaTime;
 		float dist = Vector3.Distance (npc.position, player.position);
-		float range = 3.5f;
+		float maxRange = 3.5f;
+		float minRange = 1f;
 		if (npc.GetComponent<Equipment> ()._weapon != null) {
-			range = npc.GetComponent<Equipment> ()._weapon.GetComponent<Weapon> ().rangeAttack;
+			maxRange = npc.GetComponent<Equipment> ()._weapon.GetComponent<Weapon> ().maxRangeAttack;
+			minRange = npc.GetComponent<Equipment> ()._weapon.GetComponent<Weapon> ().minRangeAttack;
 		}
 		List<GameObject> listItem = controller.GetListNearItem (npc);
 		int index = checkBestItem (listItem, npc);
@@ -47,12 +55,14 @@ public class AttackState : FSMState
 			npc.GetComponent<PlayerControler> ().PerformTransition (Transition.SawItem);
 
 			
-		} else
-			if (dist > range) {
-			//Rotate to the target point
-
+		} else if (dist > maxRange) {
 			npc.GetComponent<PlayerControler> ().PerformTransition (Transition.SawPlayer);
+		} else if (dist < minRange) {
+			npc.GetComponent<PlayerControler> ().PerformTransition (Transition.SawPlayer);
+		} else if (timeToAttack <= 0) {
+			npc.GetComponent<PlayerControler> ().PerformTransition (Transition.NoTarget);
 		}
+
 
 	}
 

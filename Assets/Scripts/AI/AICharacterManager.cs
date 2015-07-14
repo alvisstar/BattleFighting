@@ -54,9 +54,9 @@ public class AICharacterManager : MonoBehaviour {
 				
 				
 		}
-		if (list.Count == 0) {
+		{
 		
-			if(Vector3.Distance(npc.position,character.transform.position)<=0)
+			if(Vector3.Distance(npc.position,character.transform.position)<=20)
 			{
 			list.Add(character.GetComponent<PlayerControler>());
 			botScripts [0].targetObject = character;
@@ -74,7 +74,7 @@ public class AICharacterManager : MonoBehaviour {
 		for (int i =0; i< gameObjetcs.Length; i++) 
 		{
 			float dist = Vector3.Distance(npc.position,gameObjetcs[i].transform.position);
-			if(dist <=0)
+			if(dist <=20)
 			{
 				list.Add(gameObjetcs[i]);
 			}

@@ -137,8 +137,9 @@ public class AdvancedFSM : FSM
 		{
 			if (state.ID == currentStateID)
 			{
-				currentState.hpDecrease =0;
+
 				currentState = state;
+				currentState.ReInit();
 				break;
 			}
 		}

@@ -21,13 +21,22 @@ public class PatrolState : FSMState
 		isBack = false;
 		map = GameObject.Find("Ground");
 	}
-	
+	public override void ReInit ()
+	{
+		hpDecrease = 0;
+	}
 	public override void Reason (Transform player, Transform npc)
 	{
 		List<PlayerControler> list = controller.GetListNearPlayer (npc);
 		List<GameObject> listItem = controller.GetListNearItem (npc);
-
+		float maxRange = 3.5f;
+		float minRange = 1f;
+		if (npc.GetComponent<Equipment> ()._weapon != null) {
+			maxRange = npc.GetComponent<Equipment> ()._weapon.GetComponent<Weapon> ().maxRangeAttack;
+			minRange = npc.GetComponent<Equipment> ()._weapon.GetComponent<Weapon> ().minRangeAttack;
+		}
 		int index = checkBestItem (listItem, npc);
+		int indexEnemy = checkWeakestEnemy (list, npc);
 		if (index != -1) {
 			npc.GetComponent<PlayerControler> ().focusItem = true;
 			npc.GetComponent<PlayerControler> ().itemToTake = listItem [index];
@@ -41,11 +50,17 @@ public class PatrolState : FSMState
 			npc.GetComponent<PlayerControler> ().PerformTransition (Transition.SawItem);
 
 			
-		} else
-			if (list.Count > 0) {
-			npc.GetComponent<PlayerControler> ().targetObject = list [0].gameObject;
-			list [0].GetComponent<Flock> ().botScripts.Add (npc.GetComponent<PlayerControler> ());
-			npc.GetComponent<PlayerControler> ().PerformTransition (Transition.SawPlayer);
+		} 
+		else if (indexEnemy!=-1) 
+		{
+			npc.GetComponent<PlayerControler> ().targetObject = list [indexEnemy].gameObject;
+			list [indexEnemy].GetComponent<Flock> ().botScripts.Add (npc.GetComponent<PlayerControler> ());
+			float dist= Vector3.Distance(npc.GetComponent<PlayerControler> ().targetObject.transform.position,npc.transform.position);
+			if (dist >= (maxRange +minRange)/2) 
+			{
+
+				npc.GetComponent<PlayerControler> ().PerformTransition (Transition.SawPlayer);
+			}
 
 		}
 		
@@ -53,7 +68,24 @@ public class PatrolState : FSMState
 
 		
 	}
+	int checkWeakestEnemy (List<PlayerControler> enemy, Transform npc)
+	{
+		int index = 0;
+		float min = 1000;
+		if (enemy.Count == 0)
+			return -1;
+		for (int i =0; i< enemy.Count; i++) {
+			if (enemy [i].hp <min) {
+				index = i;
+				min = enemy [i].hp;
+			}
+			
+		}
 
+		return index;
+		
+		
+	}
 	int checkBestItem (List<GameObject> item, Transform npc)
 	{
 		int index = 0;

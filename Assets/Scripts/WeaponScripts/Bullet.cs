@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour {
 			
 			
 			//other.gameObject.GetComponent<PlayerControler>().BeHitted();
-			Destroy(gameObject);
+			//Destroy(gameObject);
 		}
 	}
 

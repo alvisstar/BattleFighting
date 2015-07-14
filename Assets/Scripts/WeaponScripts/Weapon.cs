@@ -6,12 +6,13 @@ public class Weapon : MonoBehaviour {
 	public int numberOfWeapon = 5;
 	public float delayTime = 1;
 	private float currentTime;
-	public float rangeAttack;
+	public float maxRangeAttack;
+	public float minRangeAttack;
 	public int piority;
 	// Use this for initialization
 	void Start () {
 		currentTime = delayTime;
-		rangeAttack = 10;
+	
 	}
 	
 	// Update is called once per frame

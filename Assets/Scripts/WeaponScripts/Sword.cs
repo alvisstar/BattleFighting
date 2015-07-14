@@ -13,7 +13,8 @@ public class Sword : Weapon {
 		numberOfWeapon = -1;
 		delayTime = 0;
 		trail.Deactivate ();
-		rangeAttack = 4;
+		maxRangeAttack = 4;
+		minRangeAttack = 1;
 		piority = 1000;
 		//trail.Init ();
 

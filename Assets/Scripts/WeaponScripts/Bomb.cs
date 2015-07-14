@@ -8,7 +8,9 @@ public class Bomb : Weapon {
 	public Transform characterTransform;
 	public Transform equipTransform;
 	void Start () {
-		rangeAttack = 10;
+		delayTime = 0.3f;
+		maxRangeAttack = 12;
+		minRangeAttack = 8;
 		piority = 600;
 	}
 	public override void OnAttack()

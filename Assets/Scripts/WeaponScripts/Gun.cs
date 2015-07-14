@@ -10,7 +10,8 @@ public class Gun : Weapon {
 	void Start () {
 		numberOfWeapon = 30;
 		delayTime = 0.2f;
-		rangeAttack = 20;
+		maxRangeAttack = 17;
+		minRangeAttack = 5;
 		piority = 200;
 	}
 	
