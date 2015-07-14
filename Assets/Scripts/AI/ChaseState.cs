@@ -53,8 +53,15 @@ public class ChaseState : FSMState
 
 			
 		} 
+		else if (npc.GetComponent<PlayerControler> ()._playerSkill.GetComponent<Skill>().readyToSkill1()) 
+		{
+
+			   npc.GetComponent<PlayerControler> ().PerformTransition (Transition.ReadyToSkill);
+			   
+		}
 		else if (dist <= maxRange && dist >= minRange) 
 		{
+			
 			npc.GetComponent<PlayerControler> ().PerformTransition (Transition.ReachPlayer);
 			
 		}

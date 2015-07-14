@@ -7,20 +7,7 @@ public class SamuraiSkill : Skill
 {
 
 	// skill 1
-	private float currentTimeSkill1 = 0;
-	private bool isBeingActiveSkill1 = false;
-	private Vector3 startPos;
-	public float rangeOfSkill1 = 10;
-	public float timeOfSkill1 = 0.5f;
 
-	// skill 2
-	private float currentTimeSkill2 = 0;
-	private bool isBeingActiveSkill2 = false;
-	public float rangeOfSkill2 = 5;
-	public float timeOfSkill2 = 7.0f;
-	public GameObject prefabSkill2;
-	private GameObject skill2Object;
-	private float currentTimeAddForce = 0.0f;
 //	private List<int> hashOfEffectedBot;
 
 	// Use this for initialization
@@ -28,15 +15,36 @@ public class SamuraiSkill : Skill
 	{
 		_player = GetComponent<PlayerControler> ();	
 		_gameManager = GameObject.Find ("Game Manager").GetComponent<GameManager> ();
+		delayTimeSkill1 = 10f;
+		delayTimeSkill2 = 20f;
 		timeOfSkill2 = 5;
+		isUsedSkill1 = false;
+		isUsedSkill2 = false;
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
+		if (isUsedSkill1) {
+			delayTimeSkill1 -= Time.deltaTime;
+			if(delayTimeSkill1 <=0)
+			{
+				delayTimeSkill1 =10;
+				isUsedSkill1 = false;
+			}
+		}
+		if (isUsedSkill2) {
+			delayTimeSkill2 -= Time.deltaTime;
+			if(delayTimeSkill1 <=0)
+			{
+				delayTimeSkill1 =20;
+				isUsedSkill2 = false;
+			}
+		}
 
 		// skill 1
 		if (isBeingActiveSkill1) {
+
 			currentTimeSkill1 += Time.deltaTime;
 
 			if (Vector3.Distance (startPos, GetComponent<Rigidbody> ().position) >= rangeOfSkill1
@@ -105,7 +113,7 @@ public class SamuraiSkill : Skill
 			return;
 
 		base.activeSkill1 ();
-
+		isUsedSkill1 = true;
 		startPos = GetComponent<Rigidbody> ().position;
 		isBeingActiveSkill1 = true;
 		GetComponent<Rigidbody> ().AddForce (transform.forward * 400, ForceMode.Impulse);
@@ -118,11 +126,25 @@ public class SamuraiSkill : Skill
 			return;
 
 		base.activeSkill2 ();
+		isUsedSkill2 = true;
 		_player.setAllowControl (false);
 		_player._animator.SetTrigger (Animator.StringToHash("Skill2"));
 		_player._animator.SetBool ("IsSkill",true);
 		isBeingActiveSkill2 = true;
 		skill2Object = Instantiate (prefabSkill2);
+	}
+	public override bool readyToSkill1() {
+		if (delayTimeSkill1 == 10)
+			return true;
+		return false;
+
+		
+	}
+	public override bool readyToSkill2() {
+		
+		if (delayTimeSkill2 == 20)
+			return true;
+		return false;
 	}
 	public override void finishAnimation ()
 	{

@@ -125,6 +125,7 @@ public class PlayerControler : AdvancedFSM {
 		
 		ChaseState chase = new ChaseState(controller);
 		chase.AddTransition(Transition.NoTarget, FSMStateID.Patrolling);
+		chase.AddTransition(Transition.ReadyToSkill, FSMStateID.Skill);
 		chase.AddTransition(Transition.SawItem, FSMStateID.TakingItem);
 		chase.AddTransition(Transition.ReachPlayer, FSMStateID.Attacking);
 		chase.AddTransition(Transition.NoHealth, FSMStateID.Dead);
@@ -149,11 +150,17 @@ public class PlayerControler : AdvancedFSM {
 		escape.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
 		escape.AddTransition(Transition.NoHealth, FSMStateID.Dead);
 
+		SkillState skill = new SkillState(controller);
+		skill.AddTransition(Transition.NoTarget, FSMStateID.Patrolling);
+		skill.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
+		skill.AddTransition(Transition.NoHealth, FSMStateID.Dead);
+
 		AddFSMState(patrol);
 		AddFSMState(chase);
 		AddFSMState(attack);
 		AddFSMState(pickItem);
 		AddFSMState(escape);
+		AddFSMState(skill);
 		//AddFSMState(rounding);
 		//AddFSMState(chaseToAttack);
 	}
@@ -599,5 +606,8 @@ public class PlayerControler : AdvancedFSM {
 
 	public void setAllowControl (bool allowControl) {
 		_allowControl = allowControl;
+	}
+	public bool getAllowControl () {
+		return _allowControl ;
 	}
 }
