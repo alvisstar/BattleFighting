@@ -24,7 +24,7 @@ public class EscapeState : FSMState
 	public override void ReInit ()
 	{
 		hpDecrease = 0;
-		timeToEscape = 10.5f;
+		timeToEscape = 5.5f;
 		timeToChangeDirection = 2;
 		isBack = false;
 	}

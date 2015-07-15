@@ -34,11 +34,11 @@ public class AttackState : FSMState
 		List<GameObject> listItem = controller.GetListNearItem (npc);
 		int index = checkBestItem (listItem, npc);
 		if (npc.GetComponent<PlayerControler> ().targetObject == null) {
-			npc.GetComponent<PlayerControler> ().PerformTransition (Transition.NoTarget);
+			npc.GetComponent<PlayerControler> ().SetTransition (Transition.NoTarget);
 		} else
 		if (hpDecrease >= 5 && npc.GetComponent<PlayerControler> ().targetObject.GetComponent<PlayerControler> ().CurrentStateID == FSMStateID.Attacking) {
 			//npc.GetComponent<PlayerControler>().targetObject = null;
-			npc.GetComponent<PlayerControler> ().PerformTransition (Transition.LowHp);
+			npc.GetComponent<PlayerControler> ().SetTransition (Transition.LowHp);
 		} else
 		
 
@@ -60,7 +60,9 @@ public class AttackState : FSMState
 		} else if (dist < minRange) {
 			npc.GetComponent<PlayerControler> ().PerformTransition (Transition.SawPlayer);
 		} else if (timeToAttack <= 0) {
-			npc.GetComponent<PlayerControler> ().PerformTransition (Transition.NoTarget);
+			npc.GetComponent<PlayerControler> ().SetTransition (Transition.NoTarget);
+		}else if (npc.GetComponent<PlayerControler> ().targetObject ==null) {
+			npc.GetComponent<PlayerControler> ().SetTransition (Transition.NoTarget);
 		}
 
 

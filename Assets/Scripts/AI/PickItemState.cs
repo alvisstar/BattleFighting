@@ -22,7 +22,7 @@ public class PickItemState : FSMState
 		//Check the distance with the player tank
 		float dist = Vector3.Distance(npc.position, player.position);
 		if (npc.GetComponent<PlayerControler> ().focusItem == false)
-			npc.GetComponent<PlayerControler> ().PerformTransition (Transition.NoTarget);
+			npc.GetComponent<PlayerControler> ().SetTransition (Transition.NoTarget);
 		
 	}
 	
@@ -31,6 +31,8 @@ public class PickItemState : FSMState
 	{
 		//Rotate to the target point
 		//if (npc.GetComponent<PlayerControler> ().recoveryTime <= 0) {
+		if( npc.GetComponent<PlayerControler> ().targetObject !=null)
+		{
 		Flock flock = npc.GetComponent<PlayerControler> ().targetObject.GetComponent<Flock> ();
 		Vector3 relativePos = steer (npc) * Time.deltaTime;
 		
@@ -45,6 +47,7 @@ public class PickItemState : FSMState
 		} else if (speed < flock.minVelocity) {        
 			npc.GetComponent<Rigidbody> ().velocity = npc.GetComponent<Rigidbody> ().velocity.normalized * 0.15f* flock.minVelocity;     
 		}    
+		}
 		//} else {
 		//	npc.GetComponent<Animator> ().SetFloat ("Speed", 0);
 		//}
@@ -57,7 +60,7 @@ public class PickItemState : FSMState
 		Vector3 follow = npc.GetComponent<PlayerControler> ().targetObject.transform.localPosition -         npc.localPosition;  // follow leader
 		Vector3 separation = Vector3.zero;
 		foreach (PlayerControler player in flock.botScripts) {     
-			if (player != npc.GetComponent<PlayerControler>()) {        
+			if (player!=null&& player != npc.GetComponent<PlayerControler>()) {        
 				Vector3 relativePos = npc.localPosition -             player.transform.localPosition;
 				separation += relativePos / (relativePos.sqrMagnitude);    
 				

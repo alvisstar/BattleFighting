@@ -24,6 +24,7 @@ public class PatrolState : FSMState
 	public override void ReInit ()
 	{
 		hpDecrease = 0;
+
 	}
 	public override void Reason (Transform player, Transform npc)
 	{
@@ -53,12 +54,14 @@ public class PatrolState : FSMState
 		} 
 		else if (indexEnemy!=-1) 
 		{
-			npc.GetComponent<PlayerControler> ().targetObject = list [indexEnemy].gameObject;
-			list [indexEnemy].GetComponent<Flock> ().botScripts.Add (npc.GetComponent<PlayerControler> ());
-			float dist= Vector3.Distance(npc.GetComponent<PlayerControler> ().targetObject.transform.position,npc.transform.position);
+
+			//Flock flock = list [indexEnemy].GetComponent<Flock> ();
+
+			float dist= Vector3.Distance(list [indexEnemy].GetComponent<PlayerControler> ().transform.position,npc.transform.position);
 			if (dist >= (maxRange +minRange)/2) 
 			{
-
+				npc.GetComponent<PlayerControler> ().targetObject = list [indexEnemy].gameObject;
+				list [indexEnemy].GetComponent<Flock> ().botScripts.Add (npc.GetComponent<PlayerControler> ());
 				npc.GetComponent<PlayerControler> ().PerformTransition (Transition.SawPlayer);
 			}
 

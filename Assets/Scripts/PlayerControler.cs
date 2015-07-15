@@ -70,16 +70,16 @@ public class PlayerControler : AdvancedFSM {
 	public bool onTrigger;
 
 	private Vector3 oldForward;
-	private GameObject _targetObject;
+	//private GameObject _targetObject;
 
-	public GameObject targetObject {
-		get {
-			return _targetObject;
-		}
-		set {
-			_targetObject = value;
-		}
-	}
+	public GameObject targetObject; //{
+		//get {
+		//	return _targetObject;
+		//}
+		//set {
+			//_targetObject = value;
+		//}
+	//}
 	public AICharacterManager controller;
 	void Start () {
 		needChangeTarget = false;
@@ -165,6 +165,16 @@ public class PlayerControler : AdvancedFSM {
 		//AddFSMState(rounding);
 		//AddFSMState(chaseToAttack);
 	}
+	public void SetTransition(Transition t) 
+	{ 
+		PerformTransition(t); 
+		GetComponent<Flock> ().RemoveTarget ();
+		//targetObject = null;
+		//Hashtable hash = new Hashtable();
+		//hash.Add("Type", "None");
+		//NotificationCenter.DefaultCenter.PostNotification(this, "OnChangeTarget",hash);
+	}
+
 	public void ActiveTrail()
 	{
 

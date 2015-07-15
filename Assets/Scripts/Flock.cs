@@ -30,17 +30,34 @@ public class Flock : MonoBehaviour {
 	
 	void Start () {
 		
-
+		//NotificationCenter.DefaultCenter.AddObserver(this, "OnChangeTarget",this);
 		
 	}
 
 	// Update is called once per frame
+	void OnChangeTarget (NotificationCenter.Notification arg)
+	{
+		if(arg.sender ==GetComponent<PlayerControler>())
+		{
+			Hashtable hash = arg.data;
+			string name = (string)hash ["Type"];	
+		}
+	}
+	public void RemoveTarget()
+	{
+		for (int i =0 ;i< botScripts.Count;i++) 
+		{   
+			if(botScripts[i]!=null && botScripts[i].targetObject == GetComponent<PlayerControler>().gameObject)
+				botScripts.RemoveAt(i);
+
+		}
+	}
 	void FixedUpdate () {
 		
 	}
 	void Update () {
 		
-
+		//RemoveTarget ();
 		Vector3 center = Vector3.zero;    
 		Vector3 velocity = Vector3.zero;
 		for (int i =0 ;i< botScripts.Count;i++) 

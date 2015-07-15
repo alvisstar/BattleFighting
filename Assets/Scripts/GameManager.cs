@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour {
 	void SpawnWave()
 	{
 		//int n = Random (5, 6);
-		for (int i =0; i<6; i++) {
+		for (int i =0; i<8; i++) {
 			GameObject opponentChar = (Instantiate(characterPrefabs[0], new Vector3 (-1, 0, 0), Quaternion.identity) as GameObject);
 			PlayerControler opponentScript = opponentChar.GetComponent<PlayerControler>();
 			float x = Random.Range(-GameObject.Find ("Ground").GetComponent<Renderer>().bounds.size.x/2 + 2,GameObject.Find ("Ground").GetComponent<Renderer>().bounds.size.x/2 -2);

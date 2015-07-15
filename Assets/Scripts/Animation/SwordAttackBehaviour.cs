@@ -16,13 +16,15 @@ public class SwordAttackBehaviour : StateMachineBehaviour
 	// This will be called when the animator first transitions to this state.
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-		if(player !=null)
-		if (  player.GetComponent<PlayerControler> ().GetIsAttack ()) {
-
-			player.GetComponent<Equipment> ()._weapon.GetComponent<Sword> ().trail.Activate();
-			player.GetComponent<Equipment> ()._weapon.GetComponent<Sword> ().characterTransform = player.transform;
-			player.GetComponent<Equipment> ()._weapon.GetComponent<Sword> ().Attack ();	
-			player.GetComponent<PlayerControler> ().FinishAttack ();
+		if (player != null)
+		if (player.GetComponent<PlayerControler> ().GetIsAttack ()) {
+			if (player.GetComponent<Equipment> ()._weapon.GetComponent<Sword> () != null) {
+				player.GetComponent<Equipment> ()._weapon.GetComponent<Sword> ().trail.Activate ();
+				player.GetComponent<Equipment> ()._weapon.GetComponent<Sword> ().characterTransform = player.transform;
+				player.GetComponent<Equipment> ()._weapon.GetComponent<Sword> ().Attack ();	
+				player.GetComponent<PlayerControler> ().FinishAttack ();
+			}
+		
 		}
 		
 	}
@@ -49,8 +51,11 @@ public class SwordAttackBehaviour : StateMachineBehaviour
 		// When leaving the special move state, stop the particles.
 		if(player!=null)
 		{
-			player.GetComponent<Equipment> ()._weapon.GetComponent<Sword> ().trail.Deactivate();
-			player.GetComponent<PlayerControler> ().onTrigger = false;
+			if(player.GetComponent<Equipment> ()._weapon.GetComponent<Sword> ()!=null)
+			{
+				player.GetComponent<Equipment> ()._weapon.GetComponent<Sword> ().trail.Deactivate();
+				player.GetComponent<PlayerControler> ().onTrigger = false;
+			}
 		}
 	}
 	

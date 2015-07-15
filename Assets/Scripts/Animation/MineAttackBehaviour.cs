@@ -22,10 +22,13 @@ public class MineAttackBehaviour : StateMachineBehaviour
 	{
 		if(stateInfo.normalizedTime >0.3 && player.GetComponent<PlayerControler>().GetIsAttack())
 		{
+			if(player.GetComponent<Equipment> ()._weapon.GetComponent<Mine> ()!=null)
+			{
 			player.GetComponent<Equipment> ()._weapon.GetComponent<Mine> ().characterTransform = player.transform;
 			player.GetComponent<Equipment> ()._weapon.GetComponent<Mine> ().equipTransform = player.GetComponent<Equipment> ()._weapon.transform;
 			player.GetComponent<Equipment> ()._weapon.GetComponent<Mine> ().Attack ();	
 			player.GetComponent<PlayerControler>().FinishAttack();
+			}
 			
 			
 		}
