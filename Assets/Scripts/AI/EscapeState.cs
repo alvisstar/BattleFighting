@@ -3,7 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 public class EscapeState : FSMState
 {
+	float timeToEscape;
+	GameObject map;
+	bool isBack;
 	float timeToChangeDirection;
+	Vector3 direction;
 	public EscapeState(AICharacterManager controller1) 
 	{ 
 		controller = controller1;
@@ -13,11 +17,16 @@ public class EscapeState : FSMState
 		curSpeed = 100.0f;
 		hpDecrease = 0;
 		//find next Waypoint position
-		timeToChangeDirection = 0;
+		timeToEscape = 0;
+		map = GameObject.Find("Ground");
+
 	}
 	public override void ReInit ()
 	{
 		hpDecrease = 0;
+		timeToEscape = 10.5f;
+		timeToChangeDirection = 2;
+		isBack = false;
 	}
 	public override void Reason(Transform player, Transform npc)
 	{
@@ -27,10 +36,12 @@ public class EscapeState : FSMState
 		//Check the distance with player tank
 		//When the distance is near, transition to attack state
 		float dist = Vector3.Distance(npc.position, destPos);
-		float range = 3.5f;
+		float minRange = 3.5f;
+		float maxRange = 3.5f;
 		if(npc.GetComponent<Equipment> ()._weapon !=null)
 		{
-			//range=npc.GetComponent<Equipment> ()._weapon.GetComponent<Weapon>().rangeAttack;
+			minRange=npc.GetComponent<Equipment> ()._weapon.GetComponent<Weapon>().minRangeAttack;
+			maxRange=npc.GetComponent<Equipment> ()._weapon.GetComponent<Weapon>().maxRangeAttack;
 		}
 		List<GameObject> listItem = controller.GetListNearItem (npc);
 
@@ -53,10 +64,10 @@ public class EscapeState : FSMState
 		}
 		else
 
-		if (dist > 20)
+		if ( timeToEscape<=0)
 		{
 			//npc.GetComponent<PlayerControler> ().targetObject.GetComponent<Flock> ().botScripts.Remove(npc.GetComponent<PlayerControler> ());
-			npc.GetComponent<PlayerControler>().PerformTransition(Transition.SawPlayer);
+			npc.GetComponent<PlayerControler>().PerformTransition(Transition.NoTarget);
 			
 		}
 		
@@ -90,28 +101,35 @@ public class EscapeState : FSMState
 	public override void Act(Transform player, Transform npc)
 	{
 
-		float n = Random.Range (-1, 1);
-		Vector3 relativePos =new Vector3 (n , 0, n)+ npc.position ;
-		npc.GetComponent<PlayerControler> ().RotateByDirection (npc.forward);
-		npc.GetComponent<Animator> ().SetFloat ("Speed", 1);
-		timeToChangeDirection -= Time.deltaTime;
-		
-		if (timeToChangeDirection <= 0) {
-			ChangeDirection(npc);
+		if(!isBack)
+		{
+		direction = npc.position - player.position ;
+		direction.y = 0;
 		}
-
-
-		npc.GetComponent<Rigidbody> ().velocity  = npc.forward  * 0.15f*50;
+		if(npc.position.x< -map.GetComponent<Renderer>().bounds.size.x/2 +5
+		   ||npc.position.x>map.GetComponent<Renderer>().bounds.size.x/2 -5
+		   ||npc.transform.position.z< -map.GetComponent<Renderer>().bounds.size.z/2 +5
+		   ||npc.transform.position.z>map.GetComponent<Renderer>().bounds.size.z/2 -5)
+		{
+			if(!isBack)
+			{
+				direction = new Vector3 (Random.Range (-npc.position.x, npc.position.x+10), 0, Random.Range (- npc.position.z,  npc.position.z+10));
+				direction =direction - npc.position;
+				direction.y = 0;
+				isBack =true;
+				timeToChangeDirection = Random.Range(2f,3f);
+			}
+		}
+		if (isBack)
+			timeToChangeDirection -= Time.deltaTime;
+		if (timeToChangeDirection <= 0)
+			isBack = false;
+		npc.GetComponent<Animator> ().SetFloat ("Speed", 1);
+		npc.rotation = Quaternion.Slerp(npc.rotation, Quaternion.LookRotation(direction), 5 * Time.deltaTime);
+		npc.GetComponent<Rigidbody> ().velocity = direction.normalized * 60 * 0.15f;
+		timeToEscape -= Time.deltaTime;
 
 		
 	}
-	private void ChangeDirection(Transform npc) {
-		float angle = Random.Range(0f, 360f);
-		Quaternion quat = Quaternion.AngleAxis(angle, Vector3.one);
-		Vector3 newUp = quat * Vector3.forward;
-		newUp.y = 0;
-		newUp.Normalize();
-		npc.forward = newUp;
-		timeToChangeDirection = 1.5f;
-	}
+
 }

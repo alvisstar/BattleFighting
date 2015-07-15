@@ -147,6 +147,7 @@ public class PlayerControler : AdvancedFSM {
 
 		EscapeState escape = new EscapeState(controller);
 		escape.AddTransition(Transition.SawItem, FSMStateID.TakingItem);
+		escape.AddTransition(Transition.NoTarget, FSMStateID.Patrolling);
 		escape.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
 		escape.AddTransition(Transition.NoHealth, FSMStateID.Dead);
 

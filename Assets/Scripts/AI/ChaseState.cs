@@ -18,7 +18,7 @@ public class ChaseState : FSMState
 	}
 	public override void ReInit ()
 	{
-		timeToChase = 2;
+		timeToChase = 1.5f;
 		hpDecrease = 0;
 	}
 	public override void Reason (Transform player, Transform npc)

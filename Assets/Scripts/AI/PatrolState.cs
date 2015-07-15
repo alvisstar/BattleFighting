@@ -7,7 +7,7 @@ public class PatrolState : FSMState
 	float timeToChangeDirection;
 	bool isBack;
 	GameObject map;
-
+	Vector3 ds;
 	public PatrolState (AICharacterManager controller1)
 	{ 
 		controller = controller1;
@@ -127,32 +127,38 @@ public class PatrolState : FSMState
 			{
 				if(!isBack)
 				{
-					npc.forward=-npc.forward;
-					timeToChangeDirection =1.5f;
+					//Quaternion quat = Quaternion.AngleAxis (360, Vector3.back);
+					//Vector3 newUp = quat * Vector3.forward;
+					//newUp.y = 0;
+					//newUp.Normalize ();
+					//npc.forward = newUp;
+					//npc.forward=-npc.forward;
+					ds = new Vector3 (Random.Range (-npc.position.x, npc.position.x+10), 0, Random.Range (- npc.position.z,  npc.position.z+10));
+					ds =ds - npc.position;
+					ds.y = 0;
+					timeToChangeDirection = Random.Range(2f,5f);
 					isBack = true;
 				}
 
 
 			}
 		}
-
-		npc.GetComponent<PlayerControler> ().RotateByDirection (npc.forward);
 		npc.GetComponent<Animator> ().SetFloat ("Speed", 1);
-	
-		npc.GetComponent<Rigidbody> ().velocity = npc.forward * 0.15f*60;  
+		npc.rotation = Quaternion.Lerp (npc.rotation,  Quaternion.LookRotation(ds ), Time.deltaTime * 4);
+		npc.GetComponent<Rigidbody> ().velocity = (ds ).normalized * 0.15f*60;  
 		
 		
 	}
 
 	private void ChangeDirection (Transform npc)
 	{
-		float angle = Random.Range (0f, 360f);
-		Quaternion quat = Quaternion.AngleAxis (angle, Vector3.one);
-		Vector3 newUp = quat * Vector3.forward;
-		newUp.y = 0;
-		newUp.Normalize ();
-		npc.forward = newUp;
-		timeToChangeDirection = Random.Range(1.5f,3f);
+
+
+		ds = new Vector3 (Random.Range (-map.GetComponent<Renderer>().bounds.size.x/2 +5,map.GetComponent<Renderer>().bounds.size.x/2 -5)
+		                  , 0, Random.Range (-map.GetComponent<Renderer>().bounds.size.z/2 +5,map.GetComponent<Renderer>().bounds.size.z/2 -5));
+		ds =ds - npc.position;
+		ds.y = 0;
+		timeToChangeDirection = Random.Range(2f,5f);
 		isBack = false;
 
 	}
