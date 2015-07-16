@@ -19,10 +19,10 @@ public class ItemGenerator : MonoBehaviour {
 		time += Time.deltaTime;
 		if (time > 10) {
 			time = 0;
-			for (int i =0; i <4; i++) {
+			for (int i =0; i <3; i++) {
 				Vector3 sizeOfGround = GameObject.Find ("Ground").GetComponent<Renderer> ().bounds.size;
 				Vector3 posRandom = new Vector3 (Random.Range (-sizeOfGround.x / 2 + 2, sizeOfGround.x / 2 - 2), 0, Random.Range (-sizeOfGround.z / 2 + 2, sizeOfGround.z / 2 - 2));			
-				int random = Random.Range (1, 5);
+				int random = Random.Range (1, 6);
 				GameObject item = Instantiate (itemPrefabs, transform.position + posRandom, transform.rotation) as GameObject;
 				item.GetComponent<RandomItem> ().type = random;
 				switch (random) {

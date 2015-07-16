@@ -148,7 +148,7 @@ public class PatrolState : FSMState
 		}
 		npc.GetComponent<Animator> ().SetFloat ("Speed", 1);
 		npc.rotation = Quaternion.Lerp (npc.rotation,  Quaternion.LookRotation(ds ), Time.deltaTime * 4);
-		npc.GetComponent<Rigidbody> ().velocity = (ds ).normalized * 0.15f*60;  
+		npc.GetComponent<Rigidbody> ().velocity = (ds ).normalized * 0.15f*70;  
 		
 		
 	}

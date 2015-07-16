@@ -167,8 +167,16 @@ public class PlayerControler : AdvancedFSM {
 	}
 	public void SetTransition(Transition t) 
 	{ 
+		if (targetObject != null) {
+			for (int i =0; i < targetObject.GetComponent<Flock>().botScripts.Count; i++) {
+				if(targetObject.GetComponent<Flock>().botScripts[i] == this)
+					targetObject.GetComponent<Flock>().botScripts.RemoveAt(i);
+				
+			}
+		}
+		//targetObject = null;
 		PerformTransition(t); 
-		GetComponent<Flock> ().RemoveTarget ();
+
 		//targetObject = null;
 		//Hashtable hash = new Hashtable();
 		//hash.Add("Type", "None");
@@ -209,8 +217,7 @@ public class PlayerControler : AdvancedFSM {
 		if(arg.sender ==GetComponent<Equipment>()
 		   ||(GetComponent<Equipment>()._weapon!=null&& arg.sender ==GetComponent<Equipment>()._weapon.GetComponent<Weapon>()))
 		{
-		_isAttack = false;
-		_isRunningAnimation = false;
+			FinishAttack();
 		Hashtable hash = arg.data;
 		string name = (string)hash ["Type"];
 		if (name == "Longbow03(Clone)") {

@@ -25,6 +25,11 @@ public class Sword : Weapon {
 		
 
 	}
+	public override void RemoveEffect()
+	{
+		trail.Deactivate ();
+		
+	}
 
 	void OnCollisionEnter(Collision other) {
 		if(characterTransform!=null)

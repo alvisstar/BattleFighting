@@ -21,8 +21,10 @@ public class Equipment : MonoBehaviour {
 	public void EquipWeapon (GameObject prefabWeapon) {
 		_prefabWeapon = prefabWeapon;
 
-		if(_weapon != null)
-			Destroy(_weapon);
+		if (_weapon != null) {
+			_weapon.GetComponent<Weapon>().RemoveEffect();
+			Destroy (_weapon);
+		}
 
 		/*if(_prefabWeapon.name =="None")
 		{

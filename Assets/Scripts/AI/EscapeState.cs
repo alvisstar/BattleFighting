@@ -67,7 +67,7 @@ public class EscapeState : FSMState
 		if ( timeToEscape<=0)
 		{
 			//npc.GetComponent<PlayerControler> ().targetObject.GetComponent<Flock> ().botScripts.Remove(npc.GetComponent<PlayerControler> ());
-			npc.GetComponent<PlayerControler>().PerformTransition(Transition.NoTarget);
+			npc.GetComponent<PlayerControler>().SetTransition(Transition.NoTarget);
 			
 		}
 		
@@ -126,7 +126,7 @@ public class EscapeState : FSMState
 			isBack = false;
 		npc.GetComponent<Animator> ().SetFloat ("Speed", 1);
 		npc.rotation = Quaternion.Slerp(npc.rotation, Quaternion.LookRotation(direction), 5 * Time.deltaTime);
-		npc.GetComponent<Rigidbody> ().velocity = direction.normalized * 60 * 0.15f;
+		npc.GetComponent<Rigidbody> ().velocity = direction.normalized * 80 * 0.15f;
 		timeToEscape -= Time.deltaTime;
 
 		
